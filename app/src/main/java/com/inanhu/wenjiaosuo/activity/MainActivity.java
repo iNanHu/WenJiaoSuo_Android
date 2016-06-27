@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.fragment.ContactsFragment;
 import com.inanhu.wenjiaosuo.fragment.DiscoverFragment;
@@ -19,18 +19,24 @@ import com.inanhu.wenjiaosuo.widget.tabview.TabLayout;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements TabLayout.OnTabClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private TabLayout mTabLayout;
-    BaseFragment fragment;
+public class MainActivity extends BaseActivity implements TabLayout.OnTabClickListener {
+
+    @BindView(R.id.tab_layout)
+    TabLayout mTabLayout;
+    @BindView(R.id.viewpager)
     NoScrollViewPager mViewPager;
+    BaseFragment fragment;
     ArrayList<TabItem> tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
+//        initView();
+        ButterKnife.bind(this);
         initData();
     }
 
@@ -42,10 +48,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabCl
 
     private void initData() {
         tabs = new ArrayList<TabItem>();
-        tabs.add(new TabItem(R.drawable.selector_tab_msg, R.string.wechat, WechatFragment.class));
-        tabs.add(new TabItem(R.drawable.selector_tab_contact, R.string.contacts, ContactsFragment.class));
-        tabs.add(new TabItem(R.drawable.selector_tab_moments, R.string.discover, DiscoverFragment.class));
-        tabs.add(new TabItem(R.drawable.selector_tab_profile, R.string.me, ProfileFragment.class));
+        tabs.add(new TabItem(R.drawable.selector_tab_news, R.string.news, WechatFragment.class));
+        tabs.add(new TabItem(R.drawable.selector_tab_equity, R.string.equity, ContactsFragment.class));
+        tabs.add(new TabItem(R.drawable.selector_tab_account, R.string.account, DiscoverFragment.class));
+        tabs.add(new TabItem(R.drawable.selector_tab_mine, R.string.mine, ProfileFragment.class));
 
         mTabLayout.initData(tabs, this);
         mTabLayout.setCurrentTab(0);

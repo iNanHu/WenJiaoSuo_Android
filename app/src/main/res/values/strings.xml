@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">WenJiaoSuo</string>
-    <string name="wechat">微信</string>
-    <string name="contacts">联系人</string>
-    <string name="discover">发现</string>
-    <string name="me">我</string>
+
+    <!--TabBar-->
+    <string name="news">首页</string>
+    <string name="equity">行情</string>
+    <string name="account">一账通</string>
+    <string name="mine">我</string>
 </resources>

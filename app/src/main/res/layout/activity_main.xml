@@ -19,11 +19,16 @@
         android:layout_height="match_parent"
         android:layout_above="@id/tab_layout"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:background="@color/line_bj_color"/>
+
     <com.inanhu.wenjiaosuo.widget.tabview.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="#F0F0F0"
+        android:background="#FFFFFF"
         />
 </RelativeLayout>
