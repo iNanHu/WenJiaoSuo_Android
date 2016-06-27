@@ -1,13 +1,13 @@
-package com.inanhu.wenjiaosuo;
+package com.inanhu.wenjiaosuo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.inanhu.imageloader.ImageLoader;
-import com.squareup.picasso.Picasso;
+import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.util.log.Log;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,11 +26,15 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         tvMessage.setText("测试");
-        ImageLoader.with(this, "http://ww2.sinaimg.cn/large/610dc034jw1f52pe9xxn5j20dw0kidh6.jpg", ivAvatar);
+        Log.i("哈哈哈哈");
+        Log.i("哈哈哈哈");
+//        ImageLoader.with("http://ww2.sinaimg.cn/large/610dc034jw1f52pe9xxn5j20dw0kidh6.jpg", ivAvatar);
     }
 
     @OnClick(R.id.btnClick)
     public void onClick() {
-        Toast.makeText(this, tvMessage.getText().toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, tvMessage.getText().toString(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }
