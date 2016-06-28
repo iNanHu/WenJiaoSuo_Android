@@ -1,111 +1,308 @@
 package com.inanhu.wenjiaosuo.activity;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.base.BaseActivity;
-import com.inanhu.wenjiaosuo.base.BaseFragment;
-import com.inanhu.wenjiaosuo.fragment.ContactsFragment;
-import com.inanhu.wenjiaosuo.fragment.DiscoverFragment;
+import com.inanhu.wenjiaosuo.fragment.BlogFragment;
+import com.inanhu.wenjiaosuo.fragment.FocusFragment;
+import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
-import com.inanhu.wenjiaosuo.fragment.WechatFragment;
-import com.inanhu.wenjiaosuo.widget.noscrollviewpager.NoScrollViewPager;
-import com.inanhu.wenjiaosuo.widget.tabview.TabItem;
-import com.inanhu.wenjiaosuo.widget.tabview.TabLayout;
 
-import java.util.ArrayList;
+public class MainActivity extends Activity implements OnClickListener, AdapterView.OnItemClickListener {
+    private LinearLayout mTabNews;
+    private LinearLayout mTabBlog;
+    private LinearLayout mTabFocus;
+    private LinearLayout mTabProfile;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+    private ImageButton mImgNews;
+    private ImageButton mImgBlog;
+    private ImageButton mImgFocus;
+    private ImageButton mImgProfile;
 
-public class MainActivity extends BaseActivity implements TabLayout.OnTabClickListener {
+    private TextView mTextViewNews;
+    private TextView mTextViewBlog;
+    private TextView mTextViewFocus;
+    private TextView mTextViewProfile;
 
-    @BindView(R.id.tab_layout)
-    TabLayout mTabLayout;
-    @BindView(R.id.viewpager)
-    NoScrollViewPager mViewPager;
-    BaseFragment fragment;
-    ArrayList<TabItem> tabs;
+    private TextView mTextViewTopTitle;
+
+    private NewsFragment mFragmentNews;
+    private BlogFragment mFragmentBlog;
+    private FocusFragment mFragmentFocus;
+    private ProfileFragment mFragmentProfile;
+    private int currentFragment = 0; // 表示当前Fragment, 0-News/1-Blog/2-Focus/3-Profile
+
+//    private GroupAdapter groupAdapter;
+//    private ArrayList<String> groups = new ArrayList<String>();
+//    private PopupWindow mPopupWindow;
+    private View contentView;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-//        initView();
-        ButterKnife.bind(this);
-        initData();
+        initView();
+        initEvent();
+        setSelect(0); // 默认第一个
+    }
+
+    private void setSelect(int i) {
+        resetImgsandText();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        hideFragment(transaction);
+        switch (i) {
+            case 0:
+                // 显示对应的fragment
+                if (mFragmentNews == null) {
+                    mFragmentNews = new NewsFragment();
+                    transaction.add(R.id.id_content, mFragmentNews);
+                } else {
+                    transaction.show(mFragmentNews);
+                }
+                currentFragment = 0;
+                // 设置底部Tab图标和文字状态
+                mImgNews.setImageResource(R.drawable.tabbar_news_highlight);
+                mTextViewNews.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                // 设置顶部分组信息
+//                setTopTitleText(mFragmentNews.getmTopbarTitle());
+                mTextViewTopTitle.setClickable(true);
+//                groups.clear();
+//                groups.add(getString(R.string.n_news));
+//                groups.add(getString(R.string.n_mobile));
+//                groups.add(getString(R.string.n_cloud));
+//                groups.add(getString(R.string.n_develop));
+//                groups.add(getString(R.string.n_programmer));
+                break;
+            case 1:
+                // 显示对应的fragment
+                if (mFragmentBlog == null) {
+                    mFragmentBlog = new BlogFragment();
+                    transaction.add(R.id.id_content, mFragmentBlog);
+                } else {
+                    transaction.show(mFragmentBlog);
+                }
+                currentFragment = 1;
+                // 设置底部Tab图标和文字状态
+                mImgBlog.setImageResource(R.drawable.tabbar_equity_highlight);
+                mTextViewBlog.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                // 设置顶部分组信息
+//                setTopTitleText(mFragmentBlog.getmTopbarTitle());
+                mTextViewTopTitle.setClickable(true);
+//                groups.clear();
+//                groups.add(getString(R.string.b_mobile));
+//                groups.add(getString(R.string.b_web));
+//                groups.add(getString(R.string.b_enterprise));
+//                groups.add(getString(R.string.b_code));
+//                groups.add(getString(R.string.b_www));
+//                groups.add(getString(R.string.b_database));
+//                groups.add(getString(R.string.b_system));
+//                groups.add(getString(R.string.b_cloud));
+//                groups.add(getString(R.string.b_software));
+//                groups.add(getString(R.string.b_other));
+                break;
+            case 2:
+                // 显示对应的fragment
+                if (mFragmentFocus == null) {
+                    mFragmentFocus = new FocusFragment();
+                    transaction.add(R.id.id_content, mFragmentFocus);
+                } else {
+                    transaction.show(mFragmentFocus);
+                }
+                currentFragment = 2;
+                // 设置底部Tab图标和文字状态
+                mImgFocus.setImageResource(R.drawable.tabbar_account_highlight);
+                mTextViewFocus.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                // 设置顶部标题
+                mTextViewTopTitle.setText("博客圈");
+                mTextViewTopTitle.setClickable(false);
+                break;
+            case 3:
+                // 显示对应的fragment
+                if (mFragmentProfile == null) {
+                    mFragmentProfile = new ProfileFragment();
+                    transaction.add(R.id.id_content, mFragmentProfile);
+                } else {
+                    transaction.show(mFragmentProfile);
+                }
+                currentFragment = 3;
+                // 设置底部Tab图标和文字状态
+                mImgProfile.setImageResource(R.drawable.tabbar_mine_highlight);
+                mTextViewProfile.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                // 设置顶部标题
+                mTextViewTopTitle.setText("个人中心");
+                mTextViewTopTitle.setClickable(false);
+                break;
+            default:
+                break;
+        }
+        transaction.commit();
+    }
+
+    private void hideFragment(FragmentTransaction transaction) {
+        if (mFragmentNews != null) {
+            transaction.hide(mFragmentNews);
+        }
+        if (mFragmentBlog != null) {
+            transaction.hide(mFragmentBlog);
+        }
+        if (mFragmentFocus != null) {
+            transaction.hide(mFragmentFocus);
+        }
+        if (mFragmentProfile != null) {
+            transaction.hide(mFragmentProfile);
+        }
+    }
+
+    private void initEvent() {
+        mTabNews.setOnClickListener(this);
+        mTabBlog.setOnClickListener(this);
+        mTabFocus.setOnClickListener(this);
+        mTabProfile.setOnClickListener(this);
+        mTextViewTopTitle.setOnClickListener(this);
     }
 
     private void initView() {
-        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        mViewPager = (NoScrollViewPager) findViewById(R.id.viewpager);
+        mTabNews = (LinearLayout) findViewById(R.id.id_tab_news);
+        mTabBlog = (LinearLayout) findViewById(R.id.id_tab_blog);
+        mTabFocus = (LinearLayout) findViewById(R.id.id_tab_focus);
+        mTabProfile = (LinearLayout) findViewById(R.id.id_tab_profile);
 
-    }
+        mImgNews = (ImageButton) findViewById(R.id.id_tab_news_img);
+        mImgBlog = (ImageButton) findViewById(R.id.id_tab_blog_img);
+        mImgFocus = (ImageButton) findViewById(R.id.id_tab_focus_img);
+        mImgProfile = (ImageButton) findViewById(R.id.id_tab_profile_img);
 
-    private void initData() {
-        tabs = new ArrayList<TabItem>();
-        tabs.add(new TabItem(R.drawable.selector_tab_news, R.string.news, WechatFragment.class));
-        tabs.add(new TabItem(R.drawable.selector_tab_equity, R.string.equity, ContactsFragment.class));
-        tabs.add(new TabItem(R.drawable.selector_tab_account, R.string.account, DiscoverFragment.class));
-        tabs.add(new TabItem(R.drawable.selector_tab_mine, R.string.mine, ProfileFragment.class));
+        mTextViewNews = (TextView) findViewById(R.id.id_tab_news_tv);
+        mTextViewBlog = (TextView) findViewById(R.id.id_tab_blog_tv);
+        mTextViewFocus = (TextView) findViewById(R.id.id_tab_focus_tv);
+        mTextViewProfile = (TextView) findViewById(R.id.id_tab_profile_tv);
 
-        mTabLayout.initData(tabs, this);
-        mTabLayout.setCurrentTab(0);
-
-        FragAdapter adapter = new FragAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(adapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mTabLayout.setCurrentTab(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+        mTextViewTopTitle = (TextView) findViewById(R.id.id_topbar_title);
     }
 
     @Override
-    public void onTabClick(TabItem tabItem) {
-        mViewPager.setCurrentItem(tabs.indexOf(tabItem));
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.id_tab_news:
+                setSelect(0);
+                break;
+            case R.id.id_tab_blog:
+                setSelect(1);
+                break;
+            case R.id.id_tab_focus:
+                setSelect(2);
+                break;
+            case R.id.id_tab_profile:
+                setSelect(3);
+                break;
+            case R.id.id_topbar_title:
+//                showPopwindow(v);
+            default:
+                break;
+        }
     }
 
+//    private void showPopwindow(View parent) {
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        int screenWidth = dm.widthPixels;
+//        int screenHeight = dm.heightPixels;
+//        Log.e("TAG", String.valueOf(screenWidth) + "*" + String.valueOf(screenHeight));
+//        if (mPopupWindow == null) {
+//            LayoutInflater mLayoutInflater = LayoutInflater.from(this);
+//            contentView = mLayoutInflater.inflate(R.layout.group_list, null);
+//            listView = (ListView) contentView.findViewById(R.id.lv_group);
+//            groupAdapter = new GroupAdapter(this, groups);
+//            listView.setAdapter(groupAdapter);
+//            mPopupWindow = new PopupWindow(contentView, screenWidth / 2, screenHeight / 3);
+//        }
+//        // 使其聚集
+//        mPopupWindow.setFocusable(true);
+//        // 设置允许在外点击消失
+//        mPopupWindow.setOutsideTouchable(true);
+//        // 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
+//        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap)null));
+//        // showAsDropDown的偏移量参考的是anchor(依靠)控件底部左边(bottom-left corner of the anchor view)
+//        mPopupWindow.showAsDropDown(parent, mTextViewTopTitle.getWidth() / 2 - mPopupWindow.getWidth() / 2, 0);
+//        listView.setOnItemClickListener(this);
+//    }
 
-    public class FragAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        String title = groups.get(position);
+//        setTopTitleText(title);
+//        switch (currentFragment){
+//            case 0:
+//                mFragmentNews.setmTopbarTitle(title);
+//                break;
+//            case 1:
+//                mFragmentBlog.setmTopbarTitle(title);
+//                break;
+//            case 2:
+//            case 3:
+//                break;
+//        }
+//        if (mPopupWindow != null) {
+//            mPopupWindow.dismiss();
+//        }
+    }
 
-        public FragAdapter(FragmentManager fm) {
-            super(fm);
+    public int getCurrentFragment() {
+        return currentFragment;
+    }
+
+    public void setTopTitleText(String str){
+        mTextViewTopTitle.setText(str);
+    }
+
+    /**
+     * 切换图片和文字为默认状态
+     */
+    private void resetImgsandText() {
+        mImgNews.setImageResource(R.drawable.tabbar_news);
+        mImgBlog.setImageResource(R.drawable.tabbar_equity);
+        mImgFocus.setImageResource(R.drawable.tabbar_account);
+        mImgProfile.setImageResource(R.drawable.tabbar_mine);
+
+        mTextViewNews.setTextColor(getResources().getColor(R.color.tabbar_text_default));
+        mTextViewBlog.setTextColor(getResources().getColor(R.color.tabbar_text_default));
+        mTextViewFocus.setTextColor(getResources().getColor(R.color.tabbar_text_default));
+        mTextViewProfile.setTextColor(getResources().getColor(R.color.tabbar_text_default));
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (KeyEvent.KEYCODE_BACK == keyCode) {
+            new AlertView("退出CSDN阅读器？", null, "取消", new String[]{"退出"}, null, MainActivity.this, AlertView.Style.Alert,
+                    new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Object o, int position) {
+                            if (position == 0) { // 退出
+                                MainActivity.this.finish();
+                            }
+                        }
+                    }
+            ).show();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
         }
-
-        @Override
-        public Fragment getItem(int arg0) {
-            try {
-                return tabs.get(arg0).tagFragmentClz.newInstance();
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            return fragment;
-        }
-
-        @Override
-        public int getCount() {
-            return tabs.size();
-        }
-
     }
 }

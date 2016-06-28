@@ -4,4 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="line_bj_color">#FFE7E7E7</color>
+    <color name="tabbar_text_default">#808080</color>
+    <color name="tabbar_text_selected">#3F51B5</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="item_clicked">#BFBFBF</color>
+    <color name="btn_clicked">#BFEFFF</color>
+    <color name="tab_top_text_1">#AAAAAA</color>
+    <color name="tab_top_text_2">#000000</color>
 </resources>

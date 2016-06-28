@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#FFFAF0"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/id_tab_news"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/id_tab_news_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:clickable="false"
+            android:src="@drawable/tabbar_news"/>
+
+        <TextView
+            android:id="@+id/id_tab_news_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资讯"
+            android:textColor="@color/tabbar_text_default"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_tab_blog"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/id_tab_blog_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:clickable="false"
+            android:src="@drawable/tabbar_equity"/>
+
+        <TextView
+            android:id="@+id/id_tab_blog_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="博客"
+            android:textColor="@color/tabbar_text_default"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_tab_focus"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/id_tab_focus_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:clickable="false"
+            android:src="@drawable/tabbar_account"/>
+
+        <TextView
+            android:id="@+id/id_tab_focus_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注"
+            android:textColor="@color/tabbar_text_default"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_tab_profile"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/id_tab_profile_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:clickable="false"
+            android:src="@drawable/tabbar_mine"/>
+
+        <TextView
+            android:id="@+id/id_tab_profile_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我"
+            android:textColor="@color/tabbar_text_default"/>
+    </LinearLayout>
+
+</LinearLayout>

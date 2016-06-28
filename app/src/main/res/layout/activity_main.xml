@@ -1,34 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".activity.MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/id_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        layout="@layout/top" />
+
+    <include
+        android:id="@+id/id_bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/bottom" />
 
     <FrameLayout
-        android:id="@+id/fragment"
+        android:id="@+id/id_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tab_layout"
-        android:visibility="gone"
-        />
+        android:layout_above="@id/id_bottombar"
+        android:layout_below="@id/id_topbar" />
 
-    <com.inanhu.wenjiaosuo.widget.noscrollviewpager.NoScrollViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/tab_layout"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.0px"
-        android:background="@color/line_bj_color"/>
-
-    <com.inanhu.wenjiaosuo.widget.tabview.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
-        />
 </RelativeLayout>
