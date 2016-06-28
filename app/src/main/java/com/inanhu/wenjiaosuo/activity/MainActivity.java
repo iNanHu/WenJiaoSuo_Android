@@ -40,6 +40,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
     private TextView mTextViewProfile;
 
     private TextView mTextViewTopTitle;
+    private LinearLayout mTopBar;
 
     private NewsFragment mFragmentNews;
     private BlogFragment mFragmentBlog;
@@ -81,9 +82,11 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 // 设置底部Tab图标和文字状态
                 mImgNews.setImageResource(R.drawable.tabbar_news_highlight);
                 mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                setTopTitleText("首页");
+
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentNews.getmTopbarTitle());
-                mTextViewTopTitle.setClickable(true);
+//                mTextViewTopTitle.setClickable(true);
 //                groups.clear();
 //                groups.add(getString(R.string.n_news));
 //                groups.add(getString(R.string.n_mobile));
@@ -103,9 +106,11 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 // 设置底部Tab图标和文字状态
                 mImgBlog.setImageResource(R.drawable.tabbar_equity_highlight);
                 mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                setTopTitleText("行情");
+
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentBlog.getmTopbarTitle());
-                mTextViewTopTitle.setClickable(true);
+//                mTextViewTopTitle.setClickable(true);
 //                groups.clear();
 //                groups.add(getString(R.string.b_mobile));
 //                groups.add(getString(R.string.b_web));
@@ -131,8 +136,9 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 mImgFocus.setImageResource(R.drawable.tabbar_account_highlight);
                 mTextViewFocus.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
-                mTextViewTopTitle.setText("博客圈");
-                mTextViewTopTitle.setClickable(false);
+//                mTextViewTopTitle.setText("博客圈");
+//                mTextViewTopTitle.setClickable(false);
+                setTopTitleText("一账通");
                 break;
             case 3:
                 // 显示对应的fragment
@@ -147,8 +153,10 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 mImgProfile.setImageResource(R.drawable.tabbar_mine_highlight);
                 mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
-                mTextViewTopTitle.setText("个人中心");
-                mTextViewTopTitle.setClickable(false);
+//                mTextViewTopTitle.setText("个人中心");
+//                mTextViewTopTitle.setClickable(false);
+//                mTopBar.setVisibility(View.INVISIBLE);
+                setTopTitleText("个人中心");
                 break;
             default:
                 break;
@@ -196,6 +204,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
         mTextViewProfile = (TextView) findViewById(R.id.id_tab_profile_tv);
 
         mTextViewTopTitle = (TextView) findViewById(R.id.id_topbar_title);
+        mTopBar = (LinearLayout) findViewById(R.id.id_topbar);
     }
 
     @Override
