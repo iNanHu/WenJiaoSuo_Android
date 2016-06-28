@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFAF0"
+    android:background="@color/topbar_bg"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -14,9 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:singleLine="true"
-        android:text="资讯"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:text="@string/news"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 currentFragment = 0;
                 // 设置底部Tab图标和文字状态
                 mImgNews.setImageResource(R.drawable.tabbar_news_highlight);
-                mTextViewNews.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentNews.getmTopbarTitle());
                 mTextViewTopTitle.setClickable(true);
@@ -101,7 +102,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 currentFragment = 1;
                 // 设置底部Tab图标和文字状态
                 mImgBlog.setImageResource(R.drawable.tabbar_equity_highlight);
-                mTextViewBlog.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentBlog.getmTopbarTitle());
                 mTextViewTopTitle.setClickable(true);
@@ -128,7 +129,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 currentFragment = 2;
                 // 设置底部Tab图标和文字状态
                 mImgFocus.setImageResource(R.drawable.tabbar_account_highlight);
-                mTextViewFocus.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                mTextViewFocus.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
                 mTextViewTopTitle.setText("博客圈");
                 mTextViewTopTitle.setClickable(false);
@@ -144,7 +145,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 currentFragment = 3;
                 // 设置底部Tab图标和文字状态
                 mImgProfile.setImageResource(R.drawable.tabbar_mine_highlight);
-                mTextViewProfile.setTextColor(getResources().getColor(R.color.tabbar_text_selected));
+                mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
                 mTextViewTopTitle.setText("个人中心");
                 mTextViewTopTitle.setClickable(false);
@@ -281,16 +282,16 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
         mImgFocus.setImageResource(R.drawable.tabbar_account);
         mImgProfile.setImageResource(R.drawable.tabbar_mine);
 
-        mTextViewNews.setTextColor(getResources().getColor(R.color.tabbar_text_default));
-        mTextViewBlog.setTextColor(getResources().getColor(R.color.tabbar_text_default));
-        mTextViewFocus.setTextColor(getResources().getColor(R.color.tabbar_text_default));
-        mTextViewProfile.setTextColor(getResources().getColor(R.color.tabbar_text_default));
+        mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
+        mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
+        mTextViewFocus.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
+        mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
-            new AlertView("退出CSDN阅读器？", null, "取消", new String[]{"退出"}, null, MainActivity.this, AlertView.Style.Alert,
+            new AlertView("退出文民一账通？", null, "取消", new String[]{"退出"}, null, MainActivity.this, AlertView.Style.Alert,
                     new OnItemClickListener() {
                         @Override
                         public void onItemClick(Object o, int position) {
