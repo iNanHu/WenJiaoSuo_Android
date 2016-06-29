@@ -1,4 +1,4 @@
-package com.inanhu.wenjiaosuo.util.imageloader;
+package com.inanhu.wenjiaosuo.util;
 
 import android.content.Context;
 import android.widget.ImageView;

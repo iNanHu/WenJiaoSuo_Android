@@ -1,6 +1,5 @@
 package com.inanhu.wenjiaosuo.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,12 +16,14 @@ import android.widget.TextView;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.fragment.BlogFragment;
 import com.inanhu.wenjiaosuo.fragment.FocusFragment;
 import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
+import com.inanhu.wenjiaosuo.util.ToastUtil;
 
-public class MainActivity extends Activity implements OnClickListener, AdapterView.OnItemClickListener {
+public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
     private LinearLayout mTabBlog;
     private LinearLayout mTabFocus;
@@ -39,8 +39,6 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
     private TextView mTextViewFocus;
     private TextView mTextViewProfile;
 
-    private TextView mTextViewTopTitle;
-    private LinearLayout mTopBar;
 
     private NewsFragment mFragmentNews;
     private BlogFragment mFragmentBlog;
@@ -48,7 +46,7 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
     private ProfileFragment mFragmentProfile;
     private int currentFragment = 0; // 表示当前Fragment, 0-News/1-Blog/2-Focus/3-Profile
 
-//    private GroupAdapter groupAdapter;
+    //    private GroupAdapter groupAdapter;
 //    private ArrayList<String> groups = new ArrayList<String>();
 //    private PopupWindow mPopupWindow;
     private View contentView;
@@ -57,8 +55,8 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        showTopBarBack(false);
         initView();
         initEvent();
         setSelect(0); // 默认第一个
@@ -80,9 +78,9 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 }
                 currentFragment = 0;
                 // 设置底部Tab图标和文字状态
-                mImgNews.setImageResource(R.drawable.tabbar_news_highlight);
+                mImgNews.setImageResource(R.mipmap.tabbar_news_highlight);
                 mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
-                setTopTitleText("首页");
+                setTopBarTitle(R.string.news);
 
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentNews.getmTopbarTitle());
@@ -104,9 +102,9 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 }
                 currentFragment = 1;
                 // 设置底部Tab图标和文字状态
-                mImgBlog.setImageResource(R.drawable.tabbar_equity_highlight);
+                mImgBlog.setImageResource(R.mipmap.tabbar_equity_highlight);
                 mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
-                setTopTitleText("行情");
+                setTopBarTitle(R.string.equity);
 
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentBlog.getmTopbarTitle());
@@ -133,12 +131,12 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 }
                 currentFragment = 2;
                 // 设置底部Tab图标和文字状态
-                mImgFocus.setImageResource(R.drawable.tabbar_account_highlight);
+                mImgFocus.setImageResource(R.mipmap.tabbar_account_highlight);
                 mTextViewFocus.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
 //                mTextViewTopTitle.setText("博客圈");
 //                mTextViewTopTitle.setClickable(false);
-                setTopTitleText("一账通");
+                setTopBarTitle(R.string.account);
                 break;
             case 3:
                 // 显示对应的fragment
@@ -150,13 +148,13 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
                 }
                 currentFragment = 3;
                 // 设置底部Tab图标和文字状态
-                mImgProfile.setImageResource(R.drawable.tabbar_mine_highlight);
+                mImgProfile.setImageResource(R.mipmap.tabbar_mine_highlight);
                 mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
 //                mTextViewTopTitle.setText("个人中心");
 //                mTextViewTopTitle.setClickable(false);
 //                mTopBar.setVisibility(View.INVISIBLE);
-                setTopTitleText("个人中心");
+                setTopBarTitle(R.string.mine);
                 break;
             default:
                 break;
@@ -184,7 +182,6 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
         mTabBlog.setOnClickListener(this);
         mTabFocus.setOnClickListener(this);
         mTabProfile.setOnClickListener(this);
-        mTextViewTopTitle.setOnClickListener(this);
     }
 
     private void initView() {
@@ -202,9 +199,6 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
         mTextViewBlog = (TextView) findViewById(R.id.id_tab_blog_tv);
         mTextViewFocus = (TextView) findViewById(R.id.id_tab_focus_tv);
         mTextViewProfile = (TextView) findViewById(R.id.id_tab_profile_tv);
-
-        mTextViewTopTitle = (TextView) findViewById(R.id.id_topbar_title);
-        mTopBar = (LinearLayout) findViewById(R.id.id_topbar);
     }
 
     @Override
@@ -278,18 +272,15 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
         return currentFragment;
     }
 
-    public void setTopTitleText(String str){
-        mTextViewTopTitle.setText(str);
-    }
 
     /**
      * 切换图片和文字为默认状态
      */
     private void resetImgsandText() {
-        mImgNews.setImageResource(R.drawable.tabbar_news);
-        mImgBlog.setImageResource(R.drawable.tabbar_equity);
-        mImgFocus.setImageResource(R.drawable.tabbar_account);
-        mImgProfile.setImageResource(R.drawable.tabbar_mine);
+        mImgNews.setImageResource(R.mipmap.tabbar_news);
+        mImgBlog.setImageResource(R.mipmap.tabbar_equity);
+        mImgFocus.setImageResource(R.mipmap.tabbar_account);
+        mImgProfile.setImageResource(R.mipmap.tabbar_mine);
 
         mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
         mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
@@ -297,22 +288,20 @@ public class MainActivity extends Activity implements OnClickListener, AdapterVi
         mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
     }
 
+    private long firstTime = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (KeyEvent.KEYCODE_BACK == keyCode) {
-            new AlertView("退出文民一账通？", null, "取消", new String[]{"退出"}, null, MainActivity.this, AlertView.Style.Alert,
-                    new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(Object o, int position) {
-                            if (position == 0) { // 退出
-                                MainActivity.this.finish();
-                            }
-                        }
-                    }
-            ).show();
+        long secondTime = System.currentTimeMillis();
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (secondTime - firstTime < 2000) {
+                System.exit(0);
+            } else {
+                ToastUtil.showToast("再按一次退出程序");
+                firstTime = System.currentTimeMillis();
+            }
             return true;
-        } else {
-            return super.onKeyDown(keyCode, event);
         }
+        return super.onKeyDown(keyCode, event);
     }
 }

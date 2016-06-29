@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:clickable="false"
-            android:src="@drawable/tabbar_news"/>
+            android:src="@mipmap/tabbar_news"/>
 
         <TextView
             android:id="@+id/id_tab_news_tv"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:clickable="false"
-            android:src="@drawable/tabbar_equity"/>
+            android:src="@mipmap/tabbar_equity"/>
 
         <TextView
             android:id="@+id/id_tab_blog_tv"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:clickable="false"
-            android:src="@drawable/tabbar_account"/>
+            android:src="@mipmap/tabbar_account"/>
 
         <TextView
             android:id="@+id/id_tab_focus_tv"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:clickable="false"
-            android:src="@drawable/tabbar_mine"/>
+            android:src="@mipmap/tabbar_mine"/>
 
         <TextView
             android:id="@+id/id_tab_profile_tv"

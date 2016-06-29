@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inanhu.wenjiaosuo.util.log.Log;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+
 
 /**
  * 资讯Fragment
@@ -31,7 +32,7 @@ public class NewsFragment extends Fragment/* implements BGARefreshLayout.BGARefr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("NewsFragment", "===onCreate===");
+        LogUtil.e("NewsFragment", "===onCreate===");
     }
 
     @Override
@@ -41,7 +42,7 @@ public class NewsFragment extends Fragment/* implements BGARefreshLayout.BGARefr
 //        initRefreshLayout();
 //        initRecyclerView();
 //        beginRefreshing();
-        Log.e("NewsFragment", "===onCreateView===");
+        LogUtil.e("NewsFragment", "===onCreateView===");
         return view;
     }
 //

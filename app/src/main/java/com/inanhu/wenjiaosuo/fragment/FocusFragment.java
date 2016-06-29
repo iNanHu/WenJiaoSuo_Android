@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inanhu.wenjiaosuo.util.log.Log;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+
 
 /**
  * 关注Fragment
@@ -18,12 +19,12 @@ public class FocusFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("FocusFragment", "===onCreate===");
+        LogUtil.e("FocusFragment", "===onCreate===");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.e("FocusFragment", "===onCreateView===");
+        LogUtil.e("FocusFragment", "===onCreateView===");
         return null;
     }
 }

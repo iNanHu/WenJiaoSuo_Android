@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inanhu.wenjiaosuo.util.log.Log;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+
 
 /**
  * 博客Fragment
@@ -28,7 +29,7 @@ public class BlogFragment extends Fragment/* implements BGARefreshLayout.BGARefr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("BlogFragment", "===onCreate===");
+        LogUtil.e("BlogFragment", "===onCreate===");
     }
 
     @Override
@@ -37,7 +38,7 @@ public class BlogFragment extends Fragment/* implements BGARefreshLayout.BGARefr
 //        initRefreshLayout();
 //        initRecyclerView();
 //        beginRefreshing();
-        Log.e("BlogFragment", "===onCreateView===");
+        LogUtil.e("BlogFragment", "===onCreateView===");
         return view;
     }
 //

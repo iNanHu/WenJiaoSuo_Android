@@ -1,4 +1,4 @@
-package com.inanhu.wenjiaosuo.util.log;
+package com.inanhu.wenjiaosuo.util;
 
 /*
  * Copyright (C) 2013 litesuits.com
@@ -22,7 +22,7 @@ package com.inanhu.wenjiaosuo.util.log;
  * @author MaTianyu
  *         2014-1-1下午4:05:39
  */
-public final class Log {
+public final class LogUtil {
 
     /**
      * isPrint: print switch, true will print. false not print
@@ -30,7 +30,7 @@ public final class Log {
     private static boolean isPrint = true;
     private static String defaultTag = "Log";
 
-    private Log() {
+    private LogUtil() {
     }
 
     public static void setPrintable(boolean printable) {

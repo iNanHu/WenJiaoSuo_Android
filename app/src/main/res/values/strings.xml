@@ -6,4 +6,13 @@
     <string name="equity">行情</string>
     <string name="account">一账通</string>
     <string name="mine">我</string>
+
+    <!--登录/注册/找回密码-->
+    <string name="hint_input_phone">请输入手机号</string>
+    <string name="hint_input_pwd">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="register">账号注册</string>
+    <string name="forget_pwd">忘记密码？</string>
+    <string name="back">返回</string>
+
 </resources>

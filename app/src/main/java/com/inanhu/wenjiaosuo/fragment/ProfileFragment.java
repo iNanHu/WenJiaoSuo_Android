@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inanhu.wenjiaosuo.util.log.Log;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+
 
 /**
  * 个人中心Fragment
@@ -27,7 +28,7 @@ public class ProfileFragment extends Fragment /*implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("ProfileFragment", "===onCreate===");
+        LogUtil.e("ProfileFragment", "===onCreate===");
     }
 
     @Override
@@ -36,7 +37,7 @@ public class ProfileFragment extends Fragment /*implements View.OnClickListener 
 //        initView();
 //        initEvent();
 //        initData();
-        Log.e("ProfileFragment", "===onCreateView===");
+        LogUtil.e("ProfileFragment", "===onCreateView===");
         return view;
     }
 //

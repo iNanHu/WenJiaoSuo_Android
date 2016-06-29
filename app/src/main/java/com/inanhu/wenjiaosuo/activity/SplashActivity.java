@@ -2,7 +2,6 @@ package com.inanhu.wenjiaosuo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -10,12 +9,12 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.util.log.Log;
+import com.inanhu.wenjiaosuo.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     public static final String TAG = SplashActivity.class.getSimpleName();
 
@@ -25,8 +24,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 取消标题
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 取消状态栏
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
