@@ -1,12 +1,21 @@
 package com.inanhu.wenjiaosuo.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.activity.LoginActivity;
+import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -14,8 +23,16 @@ import com.inanhu.wenjiaosuo.util.LogUtil;
  * <p/>
  * Created by zzmiao on 2015/9/23.
  */
-public class ProfileFragment extends Fragment /*implements View.OnClickListener */{
+public class ProfileFragment extends Fragment /*implements View.OnClickListener */ {
     private View view;
+    @BindView(R.id.civ_avatar)
+    CircleImageView civAvatar;
+
+    @OnClick(R.id.civ_avatar)
+    public void toLogin() {
+        startActivity(new Intent(getActivity(), LoginActivity.class));
+    }
+
 //    private CircleImageView civProfile;
 //    private TextView tvNickName;
 //    private TextView tvIntro;
@@ -33,7 +50,9 @@ public class ProfileFragment extends Fragment /*implements View.OnClickListener 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_mine, container, false);
+        ButterKnife.bind(this, view);
+        ImageLoader.with(R.mipmap.ic_launcher ,"https://avatars1.githubusercontent.com/u/5058324?v=3&u=06df9935b0f3e13c28f000fafd7ca59bdef2594d&s=140", civAvatar);
 //        initView();
 //        initEvent();
 //        initData();

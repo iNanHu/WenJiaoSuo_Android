@@ -6,6 +6,7 @@
               android:orientation="vertical">
 
     <include
+        android:id="@+id/id_topbar"
         layout="@layout/top"
         android:layout_width="match_parent"
         android:layout_height="45dp"/>

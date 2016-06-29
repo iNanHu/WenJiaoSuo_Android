@@ -56,7 +56,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        showTopBarBack(false);
         initView();
         initEvent();
         setSelect(0); // 默认第一个
@@ -80,7 +79,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 // 设置底部Tab图标和文字状态
                 mImgNews.setImageResource(R.mipmap.tabbar_news_highlight);
                 mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                showTopBar(true);
                 setTopBarTitle(R.string.news);
+                showTopBarBack(false);
 
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentNews.getmTopbarTitle());
@@ -104,7 +105,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 // 设置底部Tab图标和文字状态
                 mImgBlog.setImageResource(R.mipmap.tabbar_equity_highlight);
                 mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                showTopBar(true);
                 setTopBarTitle(R.string.equity);
+                showTopBarBack(false);
 
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentBlog.getmTopbarTitle());
@@ -136,7 +139,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 // 设置顶部标题
 //                mTextViewTopTitle.setText("博客圈");
 //                mTextViewTopTitle.setClickable(false);
+                showTopBar(true);
                 setTopBarTitle(R.string.account);
+                showTopBarBack(false);
                 break;
             case 3:
                 // 显示对应的fragment
@@ -154,7 +159,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
 //                mTextViewTopTitle.setText("个人中心");
 //                mTextViewTopTitle.setClickable(false);
 //                mTopBar.setVisibility(View.INVISIBLE);
-                setTopBarTitle(R.string.mine);
+                showTopBar(false);
                 break;
             default:
                 break;

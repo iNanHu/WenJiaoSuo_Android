@@ -65,4 +65,8 @@ dependencies {
      * 引用saiwu-bigkoo的开源对话框
      */
     compile 'com.bigkoo:alertview:1.0.2'
+    /**
+     * 引用hdodenhof的CircleImageview
+     */
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

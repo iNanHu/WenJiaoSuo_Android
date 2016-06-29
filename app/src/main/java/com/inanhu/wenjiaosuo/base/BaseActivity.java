@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
@@ -21,8 +22,6 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // 取消标题栏
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         TAG = this.getClass().getSimpleName();
         application = WJSApplication.getInstance();
 
@@ -31,6 +30,7 @@ public class BaseActivity extends Activity {
 
     /**
      * 标题栏是否显示返回键
+     *
      * @param isNeedToShow
      */
     protected void showTopBarBack(boolean isNeedToShow) {
@@ -49,10 +49,24 @@ public class BaseActivity extends Activity {
     }
 
     /**
+     * 是否显示标题栏
+     * @param isNeedToShow
+     */
+    protected void showTopBar(boolean isNeedToShow) {
+        RelativeLayout rlTopBar = (RelativeLayout) findViewById(R.id.id_topbar);
+        if (isNeedToShow) {
+            rlTopBar.setVisibility(View.VISIBLE);
+        } else {
+            rlTopBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
      * 设置标题栏标题
+     *
      * @param resId
      */
-    protected void setTopBarTitle(int resId){
+    protected void setTopBarTitle(int resId) {
         TextView tvTopBarTitle = (TextView) findViewById(R.id.id_topbar_title);
         tvTopBarTitle.setText(resId);
     }

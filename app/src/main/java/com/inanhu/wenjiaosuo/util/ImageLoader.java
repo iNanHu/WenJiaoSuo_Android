@@ -3,6 +3,7 @@ package com.inanhu.wenjiaosuo.util;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.inanhu.wenjiaosuo.R;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -19,10 +20,11 @@ public class ImageLoader {
     }
 
     public static void with(String imageUrl, ImageView imageView) {
-        with(context, imageUrl, imageView);
-    }
-
-    public static void with(Context context, String imageUrl, ImageView imageView) {
         Picasso.with(context).load(imageUrl).into(imageView);
     }
+
+    public static void with(int palceHolderId, String imageUrl, ImageView imageView) {
+        Picasso.with(context).load(imageUrl).placeholder(palceHolderId).into(imageView);
+    }
+
 }
