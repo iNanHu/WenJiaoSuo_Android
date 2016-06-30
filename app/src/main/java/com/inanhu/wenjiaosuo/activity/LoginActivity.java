@@ -40,7 +40,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.tv_forget_password)
     public void toFindPwd() {
-        HttpEngine.doGet("http:www.baidu.com", new StringCallback() {
+        HttpEngine.doGet("http://www.youbicard.com/plus/data/excList.php?action=zhongshuju", new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 

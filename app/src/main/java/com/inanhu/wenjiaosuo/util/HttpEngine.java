@@ -76,7 +76,7 @@ public class HttpEngine {
         }
         if (files != null){
             for (String key : files.keySet()){
-                builder.addFile(key, "", files.get(key));
+                builder.addFile(key, files.get(key).getName(), files.get(key)); //??上传的第二个参数是文件名吗??
             }
         }
         builder.build().execute(callback);
