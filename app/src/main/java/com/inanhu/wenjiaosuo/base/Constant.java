@@ -6,4 +6,5 @@ package com.inanhu.wenjiaosuo.base;
 public class Constant {
 
 
+
 }

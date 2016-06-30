@@ -2,9 +2,15 @@ package com.inanhu.wenjiaosuo;
 
 import android.app.Application;
 
+import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 
 /**
@@ -30,6 +36,8 @@ public class WJSApplication extends Application {
         // Toast工具初始化
         ToastUtil.init(this);
 
+        // 初始化网络请求框架
+        HttpEngine.init();
     }
 
     public static WJSApplication getInstance() {
