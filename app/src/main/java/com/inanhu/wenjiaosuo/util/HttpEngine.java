@@ -50,7 +50,6 @@ public class HttpEngine {
      * @param callback 异步回调
      */
     public static void doGet(String url, Map<String, String> params, Callback callback) {
-//        OkHttpUtils.get().url(url).build().execute(callback);
         GetBuilder builder = OkHttpUtils.get().url(url);
         if (params != null) {
             builder.params(params);

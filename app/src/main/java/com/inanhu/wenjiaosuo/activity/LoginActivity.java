@@ -7,13 +7,18 @@ import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
+import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.MD5Util;
 import com.inanhu.wenjiaosuo.util.RegexUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.inanhu.wenjiaosuo.util.URLUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +72,20 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         ToastUtil.showToast(MD5Util.getMD5String("abc123"));
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.Key.USERNAME, userPhone);
+        params.put(Constant.Key.PASSWORD, MD5Util.getMD5String(userPwd));
+        HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+
+            }
+        });
     }
 
     @Override

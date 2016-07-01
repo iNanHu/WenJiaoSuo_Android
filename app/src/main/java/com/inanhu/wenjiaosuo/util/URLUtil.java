@@ -17,6 +17,7 @@ public class URLUtil {
     public static final class UserApi {
         public static final String USER = APP_SERVER + "/user";
         public static final String REGISTER = USER + "/register";
+        public static final String LOGIN = USER + "/login";
         public static final String COMPLETE = USER + "/complete";
         public static final String INFO = USER + "/info";
         public static final String APPLY_WJS = USER + "/apply_wjs";
