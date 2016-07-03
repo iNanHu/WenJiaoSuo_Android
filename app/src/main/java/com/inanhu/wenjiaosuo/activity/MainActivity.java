@@ -13,36 +13,34 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bigkoo.alertview.AlertView;
-import com.bigkoo.alertview.OnItemClickListener;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
-import com.inanhu.wenjiaosuo.fragment.BlogFragment;
-import com.inanhu.wenjiaosuo.fragment.FocusFragment;
+import com.inanhu.wenjiaosuo.fragment.EquityFragment;
+import com.inanhu.wenjiaosuo.fragment.AccountFragment;
 import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 
 public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
-    private LinearLayout mTabBlog;
-    private LinearLayout mTabFocus;
+    private LinearLayout mTabEquity;
+    private LinearLayout mTabAccount;
     private LinearLayout mTabProfile;
 
     private ImageButton mImgNews;
-    private ImageButton mImgBlog;
-    private ImageButton mImgFocus;
+    private ImageButton mImgEquity;
+    private ImageButton mImgAccount;
     private ImageButton mImgProfile;
 
     private TextView mTextViewNews;
-    private TextView mTextViewBlog;
-    private TextView mTextViewFocus;
+    private TextView mTextViewEquity;
+    private TextView mTextViewAccount;
     private TextView mTextViewProfile;
 
 
     private NewsFragment mFragmentNews;
-    private BlogFragment mFragmentBlog;
-    private FocusFragment mFragmentFocus;
+    private EquityFragment mFragmentEquity;
+    private AccountFragment mFragmentAccount;
     private ProfileFragment mFragmentProfile;
     private int currentFragment = 0; // 表示当前Fragment, 0-News/1-Blog/2-Focus/3-Profile
 
@@ -95,16 +93,16 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 break;
             case 1:
                 // 显示对应的fragment
-                if (mFragmentBlog == null) {
-                    mFragmentBlog = new BlogFragment();
-                    transaction.add(R.id.id_content, mFragmentBlog);
+                if (mFragmentEquity == null) {
+                    mFragmentEquity = new EquityFragment();
+                    transaction.add(R.id.id_content, mFragmentEquity);
                 } else {
-                    transaction.show(mFragmentBlog);
+                    transaction.show(mFragmentEquity);
                 }
                 currentFragment = 1;
                 // 设置底部Tab图标和文字状态
-                mImgBlog.setImageResource(R.mipmap.tabbar_equity_highlight);
-                mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                mImgEquity.setImageResource(R.mipmap.tabbar_equity_highlight);
+                mTextViewEquity.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 showTopBar(true);
                 setTopBarTitle(R.string.equity);
                 showTopBarBack(false);
@@ -126,16 +124,16 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 break;
             case 2:
                 // 显示对应的fragment
-                if (mFragmentFocus == null) {
-                    mFragmentFocus = new FocusFragment();
-                    transaction.add(R.id.id_content, mFragmentFocus);
+                if (mFragmentAccount == null) {
+                    mFragmentAccount = new AccountFragment();
+                    transaction.add(R.id.id_content, mFragmentAccount);
                 } else {
-                    transaction.show(mFragmentFocus);
+                    transaction.show(mFragmentAccount);
                 }
                 currentFragment = 2;
                 // 设置底部Tab图标和文字状态
-                mImgFocus.setImageResource(R.mipmap.tabbar_account_highlight);
-                mTextViewFocus.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                mImgAccount.setImageResource(R.mipmap.tabbar_account_highlight);
+                mTextViewAccount.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
                 // 设置顶部标题
 //                mTextViewTopTitle.setText("博客圈");
 //                mTextViewTopTitle.setClickable(false);
@@ -171,11 +169,11 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
         if (mFragmentNews != null) {
             transaction.hide(mFragmentNews);
         }
-        if (mFragmentBlog != null) {
-            transaction.hide(mFragmentBlog);
+        if (mFragmentEquity != null) {
+            transaction.hide(mFragmentEquity);
         }
-        if (mFragmentFocus != null) {
-            transaction.hide(mFragmentFocus);
+        if (mFragmentAccount != null) {
+            transaction.hide(mFragmentAccount);
         }
         if (mFragmentProfile != null) {
             transaction.hide(mFragmentProfile);
@@ -184,25 +182,25 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
 
     private void initEvent() {
         mTabNews.setOnClickListener(this);
-        mTabBlog.setOnClickListener(this);
-        mTabFocus.setOnClickListener(this);
+        mTabEquity.setOnClickListener(this);
+        mTabAccount.setOnClickListener(this);
         mTabProfile.setOnClickListener(this);
     }
 
     private void initView() {
         mTabNews = (LinearLayout) findViewById(R.id.id_tab_news);
-        mTabBlog = (LinearLayout) findViewById(R.id.id_tab_blog);
-        mTabFocus = (LinearLayout) findViewById(R.id.id_tab_focus);
+        mTabEquity = (LinearLayout) findViewById(R.id.id_tab_blog);
+        mTabAccount = (LinearLayout) findViewById(R.id.id_tab_focus);
         mTabProfile = (LinearLayout) findViewById(R.id.id_tab_profile);
 
         mImgNews = (ImageButton) findViewById(R.id.id_tab_news_img);
-        mImgBlog = (ImageButton) findViewById(R.id.id_tab_blog_img);
-        mImgFocus = (ImageButton) findViewById(R.id.id_tab_focus_img);
+        mImgEquity = (ImageButton) findViewById(R.id.id_tab_blog_img);
+        mImgAccount = (ImageButton) findViewById(R.id.id_tab_focus_img);
         mImgProfile = (ImageButton) findViewById(R.id.id_tab_profile_img);
 
         mTextViewNews = (TextView) findViewById(R.id.id_tab_news_tv);
-        mTextViewBlog = (TextView) findViewById(R.id.id_tab_blog_tv);
-        mTextViewFocus = (TextView) findViewById(R.id.id_tab_focus_tv);
+        mTextViewEquity = (TextView) findViewById(R.id.id_tab_blog_tv);
+        mTextViewAccount = (TextView) findViewById(R.id.id_tab_focus_tv);
         mTextViewProfile = (TextView) findViewById(R.id.id_tab_profile_tv);
     }
 
@@ -283,13 +281,13 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
      */
     private void resetImgsandText() {
         mImgNews.setImageResource(R.mipmap.tabbar_news);
-        mImgBlog.setImageResource(R.mipmap.tabbar_equity);
-        mImgFocus.setImageResource(R.mipmap.tabbar_account);
+        mImgEquity.setImageResource(R.mipmap.tabbar_equity);
+        mImgAccount.setImageResource(R.mipmap.tabbar_account);
         mImgProfile.setImageResource(R.mipmap.tabbar_mine);
 
         mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
-        mTextViewBlog.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
-        mTextViewFocus.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
+        mTextViewEquity.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
+        mTextViewAccount.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
         mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_default));
     }
 

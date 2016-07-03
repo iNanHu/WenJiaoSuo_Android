@@ -10,11 +10,11 @@ import com.inanhu.wenjiaosuo.util.LogUtil;
 
 
 /**
- * 博客Fragment
+ * 行情界面
  * <p/>
  * Created by zzmiao on 2015/9/23.
  */
-public class BlogFragment extends Fragment/* implements BGARefreshLayout.BGARefreshLayoutDelegate, BGAOnRVItemClickListener */{
+public class EquityFragment extends Fragment/* implements BGARefreshLayout.BGARefreshLayoutDelegate, BGAOnRVItemClickListener */{
 //    private static final String TAG = NewsFragment.class.getSimpleName();
 //    private String mTopbarTitle = "博客广场";
 //    private int blog_type = Constant.BLOG_TYPE.MOBILE; // 博客类型默认为移动
@@ -29,7 +29,7 @@ public class BlogFragment extends Fragment/* implements BGARefreshLayout.BGARefr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtil.e("BlogFragment", "===onCreate===");
+        LogUtil.e("EquityFragment", "===onCreate===");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class BlogFragment extends Fragment/* implements BGARefreshLayout.BGARefr
 //        initRefreshLayout();
 //        initRecyclerView();
 //        beginRefreshing();
-        LogUtil.e("BlogFragment", "===onCreateView===");
+        LogUtil.e("EquityFragment", "===onCreateView===");
         return view;
     }
 //

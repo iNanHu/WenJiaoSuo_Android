@@ -1,12 +1,14 @@
 package com.inanhu.wenjiaosuo.base;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 /**
  * Created by yx on 16/4/3.
  */
 public abstract class BaseFragment extends Fragment {
+
+    protected String TAG;
 
     protected boolean isViewInitiated;
     protected boolean isVisibleToUser;
@@ -15,6 +17,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TAG = this.getClass().getSimpleName();
     }
 
     @Override
@@ -45,7 +48,5 @@ public abstract class BaseFragment extends Fragment {
         }
         return false;
     }
-
-
 
 }

@@ -19,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
- * 个人中心Fragment
+ * 个人中心界面
  * <p/>
  * Created by zzmiao on 2015/9/23.
  */

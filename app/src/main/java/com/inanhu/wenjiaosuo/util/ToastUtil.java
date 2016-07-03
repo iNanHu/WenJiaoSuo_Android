@@ -23,4 +23,13 @@ public class ToastUtil {
         }
         toast.show();
     }
+
+    public static void showToast(int id) {
+        if (toast == null) {
+            toast = Toast.makeText(context, id, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(id);
+        }
+        toast.show();
+    }
 }

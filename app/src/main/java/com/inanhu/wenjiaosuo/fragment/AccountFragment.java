@@ -10,21 +10,19 @@ import com.inanhu.wenjiaosuo.util.LogUtil;
 
 
 /**
- * 关注Fragment
+ * 一账通界面
  *
  * Created by zzmiao on 2015/9/23.
  */
-public class FocusFragment extends Fragment {
+public class AccountFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtil.e("FocusFragment", "===onCreate===");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        LogUtil.e("FocusFragment", "===onCreateView===");
         return null;
     }
 }

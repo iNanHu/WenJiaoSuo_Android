@@ -1,7 +1,6 @@
 package com.inanhu.wenjiaosuo.activity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.inanhu.wenjiaosuo.R;
@@ -23,54 +22,34 @@ import butterknife.OnClick;
 import okhttp3.Call;
 
 /**
- * Created by Jason on 2016/6/29.
+ * 找回密码界面
+ * <p/>
+ * Created by iNanHu on 2016/7/3.
  */
-public class RegisterActivity extends BaseActivity {
+public class FindPwdActivity extends BaseActivity {
 
     @BindView(R.id.et_user_phone)
     EditText etUserPhone;
-    @BindView(R.id.et_user_pwd)
-    EditText etUserPwd;
-    @BindView(R.id.et_user_pwd_check)
-    EditText etUserPwdCheck;
     @BindView(R.id.et_user_email)
     EditText etUserEmail;
-    @BindView(R.id.et_user_invite)
-    EditText etUserInvite;
 
-    @OnClick(R.id.btn_register)
-    public void toRegister() {
+    @OnClick(R.id.btn_find_pwd)
+    public void toFindPwd() {
         String userPhone = etUserPhone.getText().toString().trim();
-        String userPwd = etUserPwd.getText().toString().trim();
-        String userPwdCheck = etUserPwdCheck.getText().toString().trim();
         String userEmail = etUserEmail.getText().toString().trim();
-        String userInvite = etUserInvite.getText().toString().trim();
-        if (!RegexUtil.checkMobile(userPhone)){
+        if (!RegexUtil.checkMobile(userPhone)) {
             ToastUtil.showToast("手机号输入有误");
             return;
         }
-        if (!RegexUtil.checkPassword(userPwd)){
-            ToastUtil.showToast("密码为6-15位字母加数字");
-            return;
-        }
-        if (!userPwd.equals(userPwdCheck)){
-            ToastUtil.showToast("两次输入密码不一致");
-            return;
-        }
-        if (!RegexUtil.checkEmail(userEmail)){
+        if (!RegexUtil.checkEmail(userEmail)) {
             ToastUtil.showToast("邮箱输入有误");
             return;
         }
-        ToastUtil.showToast("注册成功：" + userPhone + "/" + userPwd + "/" + userEmail);
         Map<String, String> params = new HashMap<>();
         params.put(Constant.Key.USERNAME, userPhone);
-        params.put(Constant.Key.PASSWORD, MD5Util.getMD5String(userPwd));
-        params.put(Constant.Key.EMAIL, userEmail);
-        if (!TextUtils.isEmpty(userInvite)){
-            params.put(Constant.Key.INVITE, userInvite);
-        }
-        if (isNetConnected()){
-            HttpEngine.doPost(URLUtil.UserApi.REGISTER, params, new StringCallback() {
+        params.put(Constant.Key.PASSWORD, userEmail);
+        if (isNetConnected()) {
+            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
 
@@ -86,13 +65,12 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_find_pwd);
         ButterKnife.bind(this);
         showTopBarBack(true);
-        setTopBarTitle(R.string.register_);
+        setTopBarTitle(R.string.find_pwd);
     }
 }

@@ -1,6 +1,7 @@
 package com.inanhu.wenjiaosuo.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.WJSApplication;
+import com.inanhu.wenjiaosuo.util.NetUtil;
 
 import butterknife.OnClick;
 
@@ -50,6 +52,7 @@ public class BaseActivity extends Activity {
 
     /**
      * 是否显示标题栏
+     *
      * @param isNeedToShow
      */
     protected void showTopBar(boolean isNeedToShow) {
@@ -69,6 +72,24 @@ public class BaseActivity extends Activity {
     protected void setTopBarTitle(int resId) {
         TextView tvTopBarTitle = (TextView) findViewById(R.id.id_topbar_title);
         tvTopBarTitle.setText(resId);
+    }
+
+    /**
+     * 判断网络是否连接
+     *
+     * @return
+     */
+    protected boolean isNetConnected() {
+        return NetUtil.isConnected(this);
+    }
+
+    /**
+     * 判断是否为WiFi连接
+     *
+     * @return
+     */
+    protected boolean isNetWifi() {
+        return NetUtil.isWifi(this);
     }
 
 }

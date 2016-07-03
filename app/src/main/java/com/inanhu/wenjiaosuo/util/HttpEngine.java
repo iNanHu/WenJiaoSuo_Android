@@ -2,11 +2,8 @@ package com.inanhu.wenjiaosuo.util;
 
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
-import com.zhy.http.okhttp.builder.OkHttpRequestBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.Callback;
-import com.zhy.http.okhttp.request.RequestCall;
-
 
 import java.io.File;
 import java.util.Map;

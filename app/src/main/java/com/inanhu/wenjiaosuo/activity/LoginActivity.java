@@ -34,8 +34,6 @@ public class LoginActivity extends BaseActivity {
     EditText etUserPhone;
     @BindView(R.id.et_user_pwd)
     EditText etUserPwd;
-    @BindView(R.id.tv_test)
-    TextView tvTest;
 
     @OnClick(R.id.text_login_register)
     public void toRegister() {
@@ -45,22 +43,11 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.tv_forget_password)
     public void toFindPwd() {
-        HttpEngine.doGet("http://www.youbicard.com/plus/data/excList.php?action=zhongshuju", new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                tvTest.setText(response);
-            }
-        });
+        startActivity(new Intent(LoginActivity.this, FindPwdActivity.class));
     }
 
     @OnClick(R.id.btn_login)
     public void toLogin() {
-//        ToastUtil.showToast("登录成功");
         String userPhone = etUserPhone.getText().toString().trim();
         String userPwd = etUserPwd.getText().toString().trim();
         if (!RegexUtil.checkMobile(userPhone)) {
@@ -71,21 +58,25 @@ public class LoginActivity extends BaseActivity {
             ToastUtil.showToast("密码为6-15位字母加数字");
             return;
         }
-        ToastUtil.showToast(MD5Util.getMD5String("abc123"));
+//        ToastUtil.showToast(MD5Util.getMD5String("abc123"));
         Map<String, String> params = new HashMap<>();
         params.put(Constant.Key.USERNAME, userPhone);
         params.put(Constant.Key.PASSWORD, MD5Util.getMD5String(userPwd));
-        HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
+        if (isNetConnected()){
+            HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
 
-            }
+                }
 
-            @Override
-            public void onResponse(String response, int id) {
+                @Override
+                public void onResponse(String response, int id) {
 
-            }
-        });
+                }
+            });
+        } else {
+            ToastUtil.showToast(R.string.toast_network_unconnceted);
+        }
     }
 
     @Override
