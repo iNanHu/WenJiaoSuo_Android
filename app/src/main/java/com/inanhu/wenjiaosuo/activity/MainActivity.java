@@ -1,8 +1,8 @@
 package com.inanhu.wenjiaosuo.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
 
     private void setSelect(int i) {
         resetImgsandText();
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragment(transaction);
         switch (i) {
@@ -300,7 +300,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
             if (secondTime - firstTime < 2000) {
                 System.exit(0);
             } else {
-                ToastUtil.showToast("再按一次退出程序");
+                ToastUtil.showToast("再按一次退出文民一账通");
                 firstTime = System.currentTimeMillis();
             }
             return true;

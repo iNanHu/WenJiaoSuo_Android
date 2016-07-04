@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
+import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * <p/>
  * Created by zzmiao on 2015/9/23.
  */
-public class ProfileFragment extends Fragment /*implements View.OnClickListener */ {
+public class ProfileFragment extends BaseFragment /*implements View.OnClickListener */ {
     private View view;
     @BindView(R.id.civ_avatar)
     CircleImageView civAvatar;
@@ -46,6 +47,11 @@ public class ProfileFragment extends Fragment /*implements View.OnClickListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.e("ProfileFragment", "===onCreate===");
+    }
+
+    @Override
+    public void fetchData() {
+
     }
 
     @Override

@@ -9,6 +9,10 @@ public class URLUtil {
      * APP服务器地址
      */
     public static final String APP_SERVER = "http://wmyzt.applinzi.com/api";
+    /**
+     * 邮币卡之家获取行情数据接口
+     */
+    public static final String EQUITY_FROM_YOUBICARD = "http://www.youbicard.com/plus/data/excList.php?action=zhongshuju";
 
 
     /**

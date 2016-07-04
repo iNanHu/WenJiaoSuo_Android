@@ -1,7 +1,7 @@
 package com.inanhu.wenjiaosuo.base;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by yx on 16/4/3.
@@ -26,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
         isViewInitiated = true;
         prepareFetchData();
     }
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

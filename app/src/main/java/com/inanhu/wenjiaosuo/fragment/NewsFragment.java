@@ -3,6 +3,8 @@ package com.inanhu.wenjiaosuo.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,10 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
+import com.inanhu.wenjiaosuo.fragment.adapter.NewsListAdapter;
+import com.inanhu.wenjiaosuo.model.NewsItem;
 import com.inanhu.wenjiaosuo.util.LogUtil;
+import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.widget.convenientbanner.NetworkImageHolderView;
 import com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh;
 import com.inanhu.wenjiaosuo.widget.scrollviewwithlistview.ScrollViewWithListView;
@@ -25,10 +30,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
- * 首页咨询界面
+ * 首页资讯界面
  * <p/>
  * Created by zzmiao on 2015/9/23.
  */
@@ -36,21 +42,29 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @BindView(R.id.swipe_news_container)
     CustomSwipeToRefresh mRereshLayout;
-    @BindView(R.id.rv_news)
-    ScrollViewWithListView listView;
+    //    @BindView(R.id.rv_news)
+//    RecyclerView recyclerViewNews;
     @BindView(R.id.cb_news_ad)
     ConvenientBanner convenientBanner;
     @BindView(R.id.sv_news_container)
     ScrollView scrollviewContent;
 
+    @OnClick(R.id.rl_news_center)
+    public void toNewsCenter() {
+        ToastUtil.showToast("去新闻中心啦");
+    }
+
     // 网络加载banner图片资源
     private List<String> networkImages;
+    private List<NewsItem> newsItems = new ArrayList<>();
+    private NewsListAdapter mAdapter;
 
     private ArrayList<String> list = new ArrayList<>(Arrays.asList("Java", "Swift", "Node.js", "Python", "Kotlin", "Java", "Swift", "Node.js", "Python", "Kotlin"));
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
     }
 
     @Override
@@ -64,8 +78,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         LogUtil.e(TAG, "===onCreateView===");
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
-        // 第一次进入界面时动态加载listview的items后页面会跳转到listview的第一个子项
-        scrollviewContent.smoothScrollTo(0, 0);
         initBanner();
         initRefreshLayout();
         initRecyclerView();
@@ -99,7 +111,11 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
     private void initRecyclerView() {
-        listView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list));
+//        listView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list));
+//        recyclerViewNews.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mAdapter = new NewsListAdapter(recyclerViewNews);
+//        recyclerViewNews.setAdapter(mAdapter);
+//        mAdapter.addNewDatas(newsItems);
     }
 
     @Override
@@ -110,6 +126,15 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 mRereshLayout.setRefreshing(false);
             }
         }, 5000);
+    }
+
+    private void getData() {
+        String avatarUrl = "https://avatars1.githubusercontent.com/u/5058324?v=3&u=06df9935b0f3e13c28f000fafd7ca59bdef2594d&s=140";
+        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
     }
 }
 
