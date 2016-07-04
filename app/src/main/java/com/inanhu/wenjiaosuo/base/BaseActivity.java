@@ -10,12 +10,14 @@ import android.widget.TextView;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.WJSApplication;
 import com.inanhu.wenjiaosuo.util.NetUtil;
+import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;
 
 /**
  * Created by iNanHu on 2016/6/27.
  */
 public class BaseActivity extends AppCompatActivity {
     protected String TAG;
+    protected CustomProgress dialog;
     protected WJSApplication application;
 
     @Override
@@ -86,6 +88,25 @@ public class BaseActivity extends AppCompatActivity {
      */
     protected boolean isNetWifi() {
         return NetUtil.isWifi(this);
+    }
+
+    /**
+     * 显示进度条
+     *
+     * @param message
+     */
+    protected void showProgressDialog(String message) {
+        dialog = CustomProgress.show(this, message, true, null);
+    }
+
+    /**
+     * 关闭进度条
+     */
+    protected void closeProgressDialog() {
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
+        }
     }
 
 }

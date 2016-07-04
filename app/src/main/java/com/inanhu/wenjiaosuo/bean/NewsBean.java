@@ -1,13 +1,11 @@
-package com.inanhu.wenjiaosuo.model;
-
-import android.util.Log;
+package com.inanhu.wenjiaosuo.bean;
 
 import java.io.Serializable;
 
 /**
  * Created by zzmiao on 2015/10/23.
  */
-public class NewsItem implements Serializable {
+public class NewsBean implements Serializable {
     /**
      * 资讯图片地址
      */
@@ -37,11 +35,11 @@ public class NewsItem implements Serializable {
      */
     private String link;
 
-    public NewsItem() {
+    public NewsBean() {
 
     }
 
-    public NewsItem(String pic, String title, String intro, String date, String readtimes, String comments) {
+    public NewsBean(String pic, String title, String intro, String date, String readtimes, String comments) {
         this.pic = pic;
         this.title = title;
         this.intro = intro;

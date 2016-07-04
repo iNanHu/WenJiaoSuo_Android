@@ -3,13 +3,9 @@ package com.inanhu.wenjiaosuo.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -17,12 +13,11 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.fragment.adapter.NewsListAdapter;
-import com.inanhu.wenjiaosuo.model.NewsItem;
+import com.inanhu.wenjiaosuo.bean.NewsBean;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.widget.convenientbanner.NetworkImageHolderView;
 import com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh;
-import com.inanhu.wenjiaosuo.widget.scrollviewwithlistview.ScrollViewWithListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,10 +51,8 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     // 网络加载banner图片资源
     private List<String> networkImages;
-    private List<NewsItem> newsItems = new ArrayList<>();
+    private List<NewsBean> newsBeen = new ArrayList<>();
     private NewsListAdapter mAdapter;
-
-    private ArrayList<String> list = new ArrayList<>(Arrays.asList("Java", "Swift", "Node.js", "Python", "Kotlin", "Java", "Swift", "Node.js", "Python", "Kotlin"));
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,7 +108,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 //        recyclerViewNews.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        mAdapter = new NewsListAdapter(recyclerViewNews);
 //        recyclerViewNews.setAdapter(mAdapter);
-//        mAdapter.addNewDatas(newsItems);
     }
 
     @Override
@@ -130,11 +122,11 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private void getData() {
         String avatarUrl = "https://avatars1.githubusercontent.com/u/5058324?v=3&u=06df9935b0f3e13c28f000fafd7ca59bdef2594d&s=140";
-        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsItems.add(new NewsItem(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
     }
 }
 

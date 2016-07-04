@@ -1,11 +1,11 @@
-package com.inanhu.wenjiaosuo.model;
+package com.inanhu.wenjiaosuo.bean;
 
 import java.io.Serializable;
 
 /**
  * Created by Jason on 2016/7/4.
  */
-public class EquityDataModel implements Serializable {
+public class EquityDataBean implements Serializable {
 
     /**
      * total : 152
