@@ -128,5 +128,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
         newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
     }
+
 }
 

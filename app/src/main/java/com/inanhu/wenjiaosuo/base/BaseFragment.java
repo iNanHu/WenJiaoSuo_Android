@@ -1,7 +1,7 @@
 package com.inanhu.wenjiaosuo.base;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.inanhu.wenjiaosuo.util.NetUtil;
 import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;

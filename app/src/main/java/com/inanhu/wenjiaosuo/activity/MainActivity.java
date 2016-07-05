@@ -1,8 +1,8 @@
 package com.inanhu.wenjiaosuo.activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
-import com.inanhu.wenjiaosuo.fragment.EquityFragment;
 import com.inanhu.wenjiaosuo.fragment.AccountFragment;
+import com.inanhu.wenjiaosuo.fragment.EquityFragment;
 import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
@@ -59,9 +59,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
         setSelect(0); // 默认第一个
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+    }
+
     private void setSelect(int i) {
         resetImgsandText();
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragment(transaction);
         switch (i) {

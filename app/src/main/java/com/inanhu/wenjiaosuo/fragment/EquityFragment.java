@@ -35,7 +35,7 @@ import okhttp3.Call;
  * <p/>
  * Created by zzmiao on 2015/9/23.
  */
-public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_equity_list)
     RecyclerView recyclerView;
@@ -68,8 +68,8 @@ public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.O
         return view;
     }
 
-    private void refreshData(){
-        if (isNetConnected()){
+    private void refreshData() {
+        if (isNetConnected()) {
             HttpEngine.doGet(URLUtil.EQUITY_FROM_YOUBICARD, new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
@@ -80,11 +80,13 @@ public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.O
                 public void onResponse(String response, int id) {
                     closeProgressDialog();
                     LogUtil.e(TAG, response);
-                    equityDatas = new Gson().fromJson(response, new TypeToken<List<EquityDataBean>>(){}.getType());
+                    equityDatas = new Gson().fromJson(response, new TypeToken<List<EquityDataBean>>() {
+                    }.getType());
                     LogUtil.e(TAG, equityDatas.size());
-                    ToastUtil.showToast(equityDatas.get(0).getRate() + "/" + equityDatas.get(0).getCount());
                     mAdapter.setDatas(equityDatas);
-
+                    if (mRereshLayout.isRefreshing()) {
+                        mRereshLayout.setRefreshing(false);
+                    }
                 }
             });
         } else {
@@ -109,11 +111,7 @@ public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mRereshLayout.setRefreshing(false);
-            }
-        }, 5000);
+        refreshData();
     }
+
 }
