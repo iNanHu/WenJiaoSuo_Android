@@ -58,7 +58,7 @@ public class BaseActivity extends AppCompatActivity {
         if (isNeedToShow) {
             rlTopBar.setVisibility(View.VISIBLE);
         } else {
-            rlTopBar.setVisibility(View.INVISIBLE);
+            rlTopBar.setVisibility(View.GONE);
         }
     }
 
