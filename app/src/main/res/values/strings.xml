@@ -10,7 +10,7 @@
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
 
-    <!--登录/注册/找回密码-->
+    <!--登录/注册/找回密码/完善用户资料-->
     <string name="hint_input_phone">请输入手机号</string>
     <string name="hint_input_pwd">请输入密码</string>
     <string name="hint_input_pwd_check">请再次输入密码</string>
@@ -24,6 +24,9 @@
     <string name="find_pwd">找回密码</string>
     <string name="back">返回</string>
     <string name="sure">确定</string>
+    <string name="profile_complete">提交详细资料</string>
+    <string name="next_step">下一步</string>
+    <string name="commit">提交</string>
 
     <!--首页菜单-->
     <string name="news_menu_dzp">电子盘</string>

@@ -11,7 +11,9 @@ import android.widget.ScrollView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.activity.MainActivity;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.fragment.adapter.NewsListAdapter;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
 import com.inanhu.wenjiaosuo.util.LogUtil;
@@ -58,6 +60,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getData();
+        GlobalValue.getInstance().saveGlobal("ABC", "haha");
     }
 
     @Override

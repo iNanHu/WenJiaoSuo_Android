@@ -77,7 +77,7 @@ public abstract class BaseFragment extends Fragment {
      * @param message
      */
     protected void showProgressDialog(String message) {
-        dialog = CustomProgress.show(getActivity(), message, false, null);
+        dialog = CustomProgress.show(getActivity(), message, true, null);
     }
 
     /**

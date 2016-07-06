@@ -1,6 +1,5 @@
 package com.inanhu.wenjiaosuo.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
+import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
@@ -25,9 +25,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by zzmiao on 2015/9/23.
  */
 public class ProfileFragment extends BaseFragment /*implements View.OnClickListener */ {
-    private View view;
+
     @BindView(R.id.civ_avatar)
     CircleImageView civAvatar;
+    @OnClick(R.id.guanzhu_teacher_btn)
+    public void toGuanzhuTeacher(){
+        startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
+    }
 
     @OnClick(R.id.civ_avatar)
     public void toLogin() {
@@ -56,7 +60,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_mine, container, false);
+        View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
         ImageLoader.with(R.mipmap.ic_launcher ,"https://avatars1.githubusercontent.com/u/5058324?v=3&u=06df9935b0f3e13c28f000fafd7ca59bdef2594d&s=140", civAvatar);
 //        initView();

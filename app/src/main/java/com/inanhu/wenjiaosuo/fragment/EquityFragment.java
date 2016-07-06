@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.bean.EquityDataBean;
 import com.inanhu.wenjiaosuo.fragment.adapter.EquityListAdapter;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
@@ -49,6 +50,7 @@ public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.e(TAG, "===onCreate===");
+        ToastUtil.showToast((String) GlobalValue.getInstance().getGlobal("ABC"));
     }
 
     @Override

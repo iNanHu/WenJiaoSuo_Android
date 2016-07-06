@@ -21,6 +21,9 @@ import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
     private LinearLayout mTabEquity;
@@ -36,7 +39,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
     private TextView mTextViewEquity;
     private TextView mTextViewAccount;
     private TextView mTextViewProfile;
-
 
     private NewsFragment mFragmentNews;
     private EquityFragment mFragmentEquity;
