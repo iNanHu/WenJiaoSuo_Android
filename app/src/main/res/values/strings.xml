@@ -27,6 +27,21 @@
     <string name="profile_complete">提交详细资料</string>
     <string name="next_step">下一步</string>
     <string name="commit">提交</string>
+    <string name="realname">真实姓名:</string>
+    <string name="gender">性别:</string>
+    <string name="certificate_type">证件类型:</string>
+    <string name="certificate_number">证件编号:</string>
+    <string name="telphone">手机号码:</string>
+    <string name="address">联系地址:</string>
+    <string name="bank">出金银行:</string>
+    <string name="account_number">银行账号:</string>
+    <string name="bank_location">银行所在地:</string>
+    <string name="branch_name">支行名称:</string>
+    <string name="certificate_front_image">证件正面照</string>
+    <string name="certificate_back_image">证件反面照</string>
+    <string name="bank_card_image">银行卡正面照</string>
+    <string name="tip_upload_certificate_image">请依次拍摄证件照正面，证件照反面，银行卡正面照上传</string>
+    
 
     <!--首页菜单-->
     <string name="news_menu_dzp">电子盘</string>

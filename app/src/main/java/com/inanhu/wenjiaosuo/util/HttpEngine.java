@@ -1,15 +1,10 @@
 package com.inanhu.wenjiaosuo.util;
 
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.builder.GetBuilder;
-import com.zhy.http.okhttp.builder.PostFormBuilder;
-import com.zhy.http.okhttp.callback.Callback;
-
-import java.io.File;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.HttpRequest;
+import cn.finalteam.okhttpfinal.OkHttpFinal;
+import cn.finalteam.okhttpfinal.OkHttpFinalConfiguration;
+import cn.finalteam.okhttpfinal.RequestParams;
 
 /**
  * 封装网络请求框架
@@ -19,14 +14,8 @@ import okhttp3.OkHttpClient;
 public class HttpEngine {
 
     public static void init() {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(new LoggerInterceptor("TAG"))
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                //其他配置
-                .build();
-
-        OkHttpUtils.initClient(okHttpClient);
+        OkHttpFinalConfiguration.Builder builder = new OkHttpFinalConfiguration.Builder();
+        OkHttpFinal.getInstance().init(builder.build());
     }
 
     /**
@@ -35,7 +24,7 @@ public class HttpEngine {
      * @param url      请求地址
      * @param callback 异步回调
      */
-    public static void doGet(String url, Callback callback) {
+    public static void doGet(String url, BaseHttpRequestCallback callback) {
         doGet(url, null, callback);
     }
 
@@ -46,12 +35,12 @@ public class HttpEngine {
      * @param params   请求参数
      * @param callback 异步回调
      */
-    public static void doGet(String url, Map<String, String> params, Callback callback) {
-        GetBuilder builder = OkHttpUtils.get().url(url);
-        if (params != null) {
-            builder.params(params);
+    public static void doGet(String url, RequestParams params, BaseHttpRequestCallback callback) {
+        if (params == null) {
+            HttpRequest.get(url, callback);
+        } else {
+            HttpRequest.get(url, params, callback);
         }
-        builder.build().execute(callback);
     }
 
     /**
@@ -61,20 +50,8 @@ public class HttpEngine {
      * @param params
      * @param callback
      */
-    public static void doPost(String url, Map<String, String> params, Callback callback) {
-        doPost(url, params, null, callback);
+    public static void doPost(String url, RequestParams params, BaseHttpRequestCallback callback) {
+        HttpRequest.post(url, params, callback);
     }
 
-    public static void doPost(String url, Map<String, String> params, Map<String, File> files, Callback callback) {
-        PostFormBuilder builder = OkHttpUtils.post().url(url);
-        if (params != null){
-            builder.params(params);
-        }
-        if (files != null){
-            for (String key : files.keySet()){
-                builder.addFile(key, files.get(key).getName(), files.get(key)); //??上传的第二个参数是文件名吗??
-            }
-        }
-        builder.build().execute(callback);
-    }
 }

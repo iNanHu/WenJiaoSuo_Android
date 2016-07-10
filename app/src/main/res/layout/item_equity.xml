@@ -28,7 +28,9 @@
             android:layout_toRightOf="@id/iv_wjs_logo"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
-            android:text="南京文交所"/>
+            android:text="南京文交所"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -53,16 +55,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="5404.80"
-            android:textColor="@color/green"/>
+            android:text="5404.80"/>
 
         <TextView
             android:id="@+id/tv_wjs_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="-8.44%"
-            android:textColor="@color/green"/>
+            android:text="-8.44%"/>
     </LinearLayout>
 
     <LinearLayout
@@ -92,8 +92,7 @@
                     android:id="@+id/tv_wjs_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="28只"
-                    android:textColor="@color/red"/>
+                    android:text="28只"/>
             </LinearLayout>
 
             <LinearLayout
@@ -152,8 +151,7 @@
                     android:id="@+id/tv_wjs_flat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0只"
-                    android:textColor="@color/red"/>
+                    android:text="0只"/>
             </LinearLayout>
 
             <LinearLayout
@@ -212,8 +210,7 @@
                     android:id="@+id/tv_wjs_down"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="39只"
-                    android:textColor="@color/green"/>
+                    android:text="39只"/>
             </LinearLayout>
 
             <LinearLayout

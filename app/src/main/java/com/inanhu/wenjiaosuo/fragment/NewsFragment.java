@@ -60,7 +60,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getData();
-        GlobalValue.getInstance().saveGlobal("ABC", "haha");
     }
 
     @Override

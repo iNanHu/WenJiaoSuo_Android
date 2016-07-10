@@ -6,12 +6,8 @@ import android.widget.EditText;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
-import com.inanhu.wenjiaosuo.util.HttpEngine;
-import com.inanhu.wenjiaosuo.util.MD5Util;
 import com.inanhu.wenjiaosuo.util.RegexUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
-import com.inanhu.wenjiaosuo.util.URLUtil;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +15,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
 
 /**
  * 找回密码界面
@@ -47,22 +42,22 @@ public class FindPwdActivity extends BaseActivity {
         }
         Map<String, String> params = new HashMap<>();
         params.put(Constant.Key.USERNAME, userPhone);
-        params.put(Constant.Key.PASSWORD, userEmail);
-        if (isNetConnected()) {
-            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new StringCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-
-                }
-
-                @Override
-                public void onResponse(String response, int id) {
-
-                }
-            });
-        } else {
-            ToastUtil.showToast(R.string.toast_network_unconnceted);
-        }
+        params.put(Constant.Key.EMAIL, userEmail);
+//        if (isNetConnected()) {
+//            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new StringCallback() {
+//                @Override
+//                public void onError(Call call, Exception e, int id) {
+//
+//                }
+//
+//                @Override
+//                public void onResponse(String response, int id) {
+//
+//                }
+//            });
+//        } else {
+//            ToastUtil.showToast(R.string.toast_network_unconnceted);
+//        }
     }
 
     @Override

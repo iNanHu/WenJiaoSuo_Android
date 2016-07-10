@@ -194,4 +194,14 @@ public final class RegexUtil {
         return  Pattern.matches(regex, password);
     }
 
+    /**
+     * 判断字符串是否为数字
+     * @param number
+     * @return
+     */
+    public static boolean checkNumber(String number) {
+        String regex = "^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$";
+        return  Pattern.matches(regex, number);
+    }
+
 }

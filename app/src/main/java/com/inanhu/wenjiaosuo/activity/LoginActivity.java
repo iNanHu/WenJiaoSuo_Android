@@ -3,9 +3,10 @@ package com.inanhu.wenjiaosuo.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
@@ -14,16 +15,14 @@ import com.inanhu.wenjiaosuo.util.MD5Util;
 import com.inanhu.wenjiaosuo.util.RegexUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.RequestParams;
+import okhttp3.Headers;
+import okhttp3.Response;
 
 /**
  * Created by Jason on 2016/6/29.
@@ -58,20 +57,27 @@ public class LoginActivity extends BaseActivity {
             ToastUtil.showToast("密码为6-15位字母加数字");
             return;
         }
-//        ToastUtil.showToast(MD5Util.getMD5String("abc123"));
-        Map<String, String> params = new HashMap<>();
-        params.put(Constant.Key.USERNAME, userPhone);
-        params.put(Constant.Key.PASSWORD, MD5Util.getMD5String(userPwd));
+        RequestParams params = new RequestParams(this);
+        params.addFormDataPart(Constant.Key.NAME, userPhone);
+        params.addFormDataPart(Constant.Key.LOGIN_PASSWORD, MD5Util.getMD5String(userPwd));
         if (isNetConnected()){
-            HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new StringCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
+            HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new BaseHttpRequestCallback(){
 
+                @Override
+                public void onResponse(Response httpResponse, String response, Headers headers) {
+                    ApiResponse rsp = new Gson().fromJson(response, ApiResponse.class);
+                    LogUtil.e(TAG, response);
+                    LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
                 }
 
                 @Override
-                public void onResponse(String response, int id) {
+                public void onStart() {
+                    LogUtil.e(TAG, "onStart");
+                }
 
+                @Override
+                public void onFinish() {
+                    LogUtil.e(TAG, "onFinish");
                 }
             });
         } else {

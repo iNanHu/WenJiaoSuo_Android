@@ -1,5 +1,6 @@
 package com.inanhu.wenjiaosuo.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -9,16 +10,19 @@ import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.WJSApplication;
+import com.inanhu.wenjiaosuo.util.MyHttpCycleContext;
 import com.inanhu.wenjiaosuo.util.NetUtil;
 import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;
 
 /**
  * Created by iNanHu on 2016/6/27.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements MyHttpCycleContext{
     protected String TAG;
     protected CustomProgress dialog;
     protected WJSApplication application;
+
+    protected final String HTTP_TASK_KEY = "HttpTaskKey_" + hashCode();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,4 +113,13 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public String getHttpTaskKey() {
+        return HTTP_TASK_KEY;
+    }
 }
