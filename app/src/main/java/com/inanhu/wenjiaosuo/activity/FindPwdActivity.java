@@ -6,8 +6,11 @@ import android.widget.EditText;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.util.HttpEngine;
+import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.RegexUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.inanhu.wenjiaosuo.util.URLUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +18,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.RequestParams;
+import okhttp3.Headers;
 
 /**
  * 找回密码界面
@@ -40,24 +46,19 @@ public class FindPwdActivity extends BaseActivity {
             ToastUtil.showToast("邮箱输入有误");
             return;
         }
-        Map<String, String> params = new HashMap<>();
-        params.put(Constant.Key.USERNAME, userPhone);
-        params.put(Constant.Key.EMAIL, userEmail);
-//        if (isNetConnected()) {
-//            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new StringCallback() {
-//                @Override
-//                public void onError(Call call, Exception e, int id) {
-//
-//                }
-//
-//                @Override
-//                public void onResponse(String response, int id) {
-//
-//                }
-//            });
-//        } else {
-//            ToastUtil.showToast(R.string.toast_network_unconnceted);
-//        }
+        RequestParams params = new RequestParams(this);
+//        params.addFormDataPart(Constant.Key.USERNAME, userPhone);
+        params.addFormDataPart(Constant.Key.EMAIL, userEmail);
+        if (isNetConnected()) {
+            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new BaseHttpRequestCallback(){
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    super.onResponse(response, headers);
+                }
+            });
+        } else {
+            ToastUtil.showToast(R.string.toast_network_unconnceted);
+        }
     }
 
     @Override

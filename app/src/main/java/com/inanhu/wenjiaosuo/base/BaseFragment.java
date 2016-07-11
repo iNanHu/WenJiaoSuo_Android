@@ -1,15 +1,19 @@
 package com.inanhu.wenjiaosuo.base;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 
+import com.inanhu.wenjiaosuo.util.MyHttpCycleContext;
 import com.inanhu.wenjiaosuo.util.NetUtil;
 import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;
+
+import cn.finalteam.okhttpfinal.HttpTaskHandler;
 
 /**
  * Created by yx on 16/4/3.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements MyHttpCycleContext{
 
     protected String TAG;
     protected CustomProgress dialog;
@@ -17,6 +21,8 @@ public abstract class BaseFragment extends Fragment {
     protected boolean isViewInitiated;
     protected boolean isVisibleToUser;
     protected boolean isDataInitiated;
+
+    protected final String HTTP_TASK_KEY = "HttpTaskKey_" + hashCode();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,4 +96,19 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    @Override
+    public String getHttpTaskKey() {
+        return HTTP_TASK_KEY;
+    }
+
+    @Override
+    public Context getContext() {
+        return getActivity();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        HttpTaskHandler.getInstance().removeTask(HTTP_TASK_KEY);
+    }
 }

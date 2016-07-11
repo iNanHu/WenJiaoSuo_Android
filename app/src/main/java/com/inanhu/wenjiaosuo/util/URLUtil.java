@@ -5,10 +5,11 @@ package com.inanhu.wenjiaosuo.util;
  */
 public class URLUtil {
 
+    public static final String APP_SERVER = "http://wmyzt.applinzi.com";
     /**
      * APP服务器地址
      */
-    public static final String APP_SERVER = "http://wmyzt.applinzi.com/api";
+    public static final String API_SERVER = APP_SERVER + "/api";
     /**
      * 邮币卡之家
      */
@@ -32,7 +33,7 @@ public class URLUtil {
      * 用户相关接口
      */
     public static final class UserApi {
-        public static final String USER = APP_SERVER + "/user";
+        public static final String USER = API_SERVER + "/user";
         public static final String REGISTER = USER + "/register";
         public static final String LOGIN = USER + "/login";
         public static final String COMPLETE = USER + "/complete";
@@ -47,7 +48,7 @@ public class URLUtil {
      * 新闻接口
      */
     public static final class NewsApi {
-        public static final String NEWS = APP_SERVER + "/news";
+        public static final String NEWS = API_SERVER + "/news";
         public static final String GETLIST = NEWS + "/getlist";
         public static final String DETAIL = NEWS + "/detail";
         public static final String GETCATEGORY = NEWS + "/getcategory";
@@ -58,7 +59,7 @@ public class URLUtil {
      * 共用接口
      */
     public static final class CommonApi{
-        public static final String COMMON = APP_SERVER + "/common";
+        public static final String COMMON = API_SERVER + "/common";
         public static final String UPFILE = COMMON + "/upfile";
     }
 

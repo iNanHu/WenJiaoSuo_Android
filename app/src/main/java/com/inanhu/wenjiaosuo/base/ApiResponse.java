@@ -3,12 +3,12 @@ package com.inanhu.wenjiaosuo.base;
 /**
  * Created by iNanHu on 2016/7/10.
  */
-public class ApiResponse {
+public class ApiResponse<T> {
 
     private String msg; // 返回码信息：success-成功，error-失败
-    private String data; // 返回内容
+    private T data; // 返回内容
 
-    public ApiResponse(String msg, String data) {
+    public ApiResponse(String msg, T data) {
         this.msg = msg;
         this.data = data;
     }
@@ -30,11 +30,11 @@ public class ApiResponse {
         this.msg = msg;
     }
 
-    public String getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

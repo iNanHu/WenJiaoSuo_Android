@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.bean.NewsBean;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.MD5Util;
@@ -60,13 +62,13 @@ public class LoginActivity extends BaseActivity {
         RequestParams params = new RequestParams(this);
         params.addFormDataPart(Constant.Key.NAME, userPhone);
         params.addFormDataPart(Constant.Key.LOGIN_PASSWORD, MD5Util.getMD5String(userPwd));
-        if (isNetConnected()){
-            HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new BaseHttpRequestCallback(){
+        if (isNetConnected()) {
+            HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new BaseHttpRequestCallback() {
 
                 @Override
-                public void onResponse(Response httpResponse, String response, Headers headers) {
-                    ApiResponse rsp = new Gson().fromJson(response, ApiResponse.class);
-                    LogUtil.e(TAG, response);
+                public void onResponse(String response, Headers headers) {
+                    ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
+                    }.getType());
                     LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
                 }
 

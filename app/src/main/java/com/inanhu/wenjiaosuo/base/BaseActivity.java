@@ -14,6 +14,8 @@ import com.inanhu.wenjiaosuo.util.MyHttpCycleContext;
 import com.inanhu.wenjiaosuo.util.NetUtil;
 import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;
 
+import cn.finalteam.okhttpfinal.HttpTaskHandler;
+
 /**
  * Created by iNanHu on 2016/6/27.
  */
@@ -121,5 +123,11 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
     @Override
     public String getHttpTaskKey() {
         return HTTP_TASK_KEY;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        HttpTaskHandler.getInstance().removeTask(HTTP_TASK_KEY);
     }
 }

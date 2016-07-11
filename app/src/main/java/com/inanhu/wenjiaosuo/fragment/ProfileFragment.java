@@ -112,7 +112,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
-        ImageLoader.with(R.mipmap.ic_launcher, "https://avatars1.githubusercontent.com/u/5058324?v=3&u=06df9935b0f3e13c28f000fafd7ca59bdef2594d&s=140", civAvatar);
+        ImageLoader.with(R.mipmap.ic_launcher, "http://www.baidu.com/img/bd_logo1.png", civAvatar);
 //        initView();
 //        initEvent();
 //        initData();

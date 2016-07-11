@@ -10,17 +10,24 @@ import android.widget.ScrollView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.activity.MainActivity;
+import com.inanhu.wenjiaosuo.base.ApiResponse;
+import com.inanhu.wenjiaosuo.base.Banner;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.fragment.adapter.NewsListAdapter;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
+import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.inanhu.wenjiaosuo.util.URLUtil;
 import com.inanhu.wenjiaosuo.widget.convenientbanner.NetworkImageHolderView;
 import com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +35,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import okhttp3.Headers;
 
 
 /**
@@ -52,7 +61,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
     // 网络加载banner图片资源
-    private List<String> networkImages;
+    private List<String> networkImages = new ArrayList<>();
     private List<NewsBean> newsBeen = new ArrayList<>();
     private NewsListAdapter mAdapter;
 
@@ -79,21 +88,33 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         return view;
     }
 
+    ArrayList<Banner> banners = new ArrayList<>();
+
     /**
      * 配置banner
      */
     private void initBanner() {
-        networkImages = Arrays.asList("http://ww2.sinaimg.cn/large/610dc034jw1f5aqgzu2oej20rt15owo7.jpg", "http://ww3.sinaimg.cn/large/610dc034gw1f59lsn7wjnj20du0ku40c.jpg", "http://ww1.sinaimg.cn/large/610dc034jw1f566a296rpj20lc0sggoj.jpg");
-        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+        HttpEngine.doGet(URLUtil.NewsApi.GETBANNER, new BaseHttpRequestCallback() {
             @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView();
+            public void onResponse(String response, Headers headers) {
+                ApiResponse<ArrayList<Banner>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<Banner>>>() {
+                }.getType());
+                banners = rsp.getData();
+                LogUtil.e(TAG, banners.get(0).getImage() + "/" + banners.get(0).getLink());
+                ToastUtil.showToast(banners.get(0).getImage() + "/" + banners.get(0).getLink());
+                networkImages.add(URLUtil.APP_SERVER + banners.get(0).getImage());
+                convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+                    @Override
+                    public NetworkImageHolderView createHolder() {
+                        return new NetworkImageHolderView();
+                    }
+                }, networkImages)
+                        //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                        .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused});
+                // 开启自动翻页
+                convenientBanner.startTurning(3000);
             }
-        }, networkImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused});
-        // 开启自动翻页
-        convenientBanner.startTurning(3000);
+        });
     }
 
     /**
