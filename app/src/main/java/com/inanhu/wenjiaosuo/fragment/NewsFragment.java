@@ -61,7 +61,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
     // 网络加载banner图片资源
-    private List<String> networkImages = new ArrayList<>();
+    List<Banner> banners = new ArrayList<>();
     private List<NewsBean> newsBeen = new ArrayList<>();
     private NewsListAdapter mAdapter;
 
@@ -74,7 +74,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void fetchData() {
         LogUtil.e(TAG, "===fetchData===");
-        networkImages = Arrays.asList("http://ww2.sinaimg.cn/large/610dc034jw1f5aqgzu2oej20rt15owo7.jpg", "http://ww3.sinaimg.cn/large/610dc034gw1f59lsn7wjnj20du0ku40c.jpg", "http://ww1.sinaimg.cn/large/610dc034jw1f566a296rpj20lc0sggoj.jpg");
     }
 
     @Override
@@ -88,7 +87,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         return view;
     }
 
-    ArrayList<Banner> banners = new ArrayList<>();
 
     /**
      * 配置banner
@@ -100,15 +98,12 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 ApiResponse<ArrayList<Banner>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<Banner>>>() {
                 }.getType());
                 banners = rsp.getData();
-                LogUtil.e(TAG, banners.get(0).getImage() + "/" + banners.get(0).getLink());
-                ToastUtil.showToast(banners.get(0).getImage() + "/" + banners.get(0).getLink());
-                networkImages.add(URLUtil.APP_SERVER + banners.get(0).getImage());
                 convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
                     @Override
                     public NetworkImageHolderView createHolder() {
                         return new NetworkImageHolderView();
                     }
-                }, networkImages)
+                }, banners)
                         //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
                         .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused});
                 // 开启自动翻页

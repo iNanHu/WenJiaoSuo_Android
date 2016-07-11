@@ -48,7 +48,7 @@ public class FindPwdActivity extends BaseActivity {
         }
         RequestParams params = new RequestParams(this);
 //        params.addFormDataPart(Constant.Key.USERNAME, userPhone);
-        params.addFormDataPart(Constant.Key.EMAIL, userEmail);
+        params.addFormDataPart(Constant.RequestKey.EMAIL, userEmail);
         if (isNetConnected()) {
             HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new BaseHttpRequestCallback(){
                 @Override

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WenJiaoSuo</string>
+    <string name="app_name">文龙一账通</string>
 
     <!--TabBar-->
     <string name="news">首页</string>

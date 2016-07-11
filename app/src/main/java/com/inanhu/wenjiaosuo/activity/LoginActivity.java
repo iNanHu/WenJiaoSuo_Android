@@ -2,6 +2,7 @@ package com.inanhu.wenjiaosuo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -10,6 +11,7 @@ import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
@@ -60,8 +62,8 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         RequestParams params = new RequestParams(this);
-        params.addFormDataPart(Constant.Key.NAME, userPhone);
-        params.addFormDataPart(Constant.Key.LOGIN_PASSWORD, MD5Util.getMD5String(userPwd));
+        params.addFormDataPart(Constant.RequestKey.NAME, userPhone);
+        params.addFormDataPart(Constant.RequestKey.LOGIN_PASSWORD, MD5Util.getMD5String(userPwd));
         if (isNetConnected()) {
             HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new BaseHttpRequestCallback() {
 
@@ -70,6 +72,10 @@ public class LoginActivity extends BaseActivity {
                     ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
                     }.getType());
                     LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
+                    String token = rsp.getData();
+                    if (rsp.isSuccess() && !TextUtils.isEmpty(token)) { // 登录成功，保存token
+                        GlobalValue.getInstance().saveGlobal(Constant.RequestKey.ACCESS_TOKEN, token);
+                    }
                 }
 
                 @Override

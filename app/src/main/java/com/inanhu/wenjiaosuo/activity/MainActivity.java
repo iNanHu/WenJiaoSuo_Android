@@ -307,7 +307,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
             if (secondTime - firstTime < 2000) {
                 System.exit(0);
             } else {
-                ToastUtil.showToast("再按一次退出文民一账通");
+                ToastUtil.showToast("再按一次 退出文龙一账通");
                 firstTime = System.currentTimeMillis();
             }
             return true;

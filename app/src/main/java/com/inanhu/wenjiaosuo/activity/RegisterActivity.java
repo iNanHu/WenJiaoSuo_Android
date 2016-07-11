@@ -67,11 +67,11 @@ public class RegisterActivity extends BaseActivity {
             return;
         }
         RequestParams params = new RequestParams(this);
-        params.addFormDataPart(Constant.Key.USERNAME, userPhone);
-        params.addFormDataPart(Constant.Key.REGISTER_PASSWORD, MD5Util.getMD5String(userPwd));
-        params.addFormDataPart(Constant.Key.EMAIL, userEmail);
+        params.addFormDataPart(Constant.RequestKey.USERNAME, userPhone);
+        params.addFormDataPart(Constant.RequestKey.REGISTER_PASSWORD, MD5Util.getMD5String(userPwd));
+        params.addFormDataPart(Constant.RequestKey.EMAIL, userEmail);
         if (!TextUtils.isEmpty(userInvite)) {
-            params.addFormDataPart(Constant.Key.INVITE, userInvite);
+            params.addFormDataPart(Constant.RequestKey.INVITE, userInvite);
         }
         if (isNetConnected()) {
             HttpEngine.doPost(URLUtil.UserApi.REGISTER, params, new BaseHttpRequestCallback() {
