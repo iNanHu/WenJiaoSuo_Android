@@ -4,22 +4,33 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <include
+        android:id="@+id/id_topbar"
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:padding="20dp"
-        android:background="@color/title_bar_bg_color">
+        android:padding="20dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_avatar"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <ImageView
+            android:id="@+id/iv_app_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:onClick="toLogin"
-            android:src="@mipmap/ic_launcher"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp"/>
+            android:src="@mipmap/app_icon"/>
+
+        <TextView
+            android:id="@+id/tv_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_app_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="文龙一账通1.0.0版"
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <ScrollView
@@ -36,21 +47,19 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/guanzhu_teacher_btn"
+                android:id="@+id/rl_app_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
-                android:onClick="toGuanzhuTeacher"
+                android:onClick="toAppIntro"
                 android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/attention_teacher"
-                    android:drawablePadding="5.0dip"
-                    android:text="我关注的讲师"
+                    android:text="@string/about_us_intro"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 
@@ -64,56 +73,19 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/push_msg_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/push_remind"
-                    android:drawablePadding="5.0dip"
-                    android:text="推送消息提醒"
-                    android:textColor="@color/seting_text_color"
-                    android:textSize="14sp"/>
-
-                <CheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:button="@drawable/push_msg_control_selector"
-                    android:checked="true"/>
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1.0px"
-                android:layout_marginBottom="10dp"
-                android:background="@color/line_bj_color"/>
-
-            <include layout="@layout/hline_view"/>
-
-            <RelativeLayout
-                android:id="@+id/feed_back_btn"
+                android:id="@+id/rl_app_cooperate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
+                android:onClick="toAppCooperate"
                 android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/feedback"
-                    android:drawablePadding="5.0dip"
-                    android:text="意见反馈"
+                    android:text="@string/about_us_cooperate"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 
@@ -127,46 +99,19 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/seting_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/list_item_selector"
-                android:padding="15dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="账户设置"
-                    android:textColor="@color/seting_text_color"
-                    android:textSize="14sp"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/common_arrow"/>
-            </RelativeLayout>
-
-            <include layout="@layout/hline_view"/>
-
-            <RelativeLayout
-                android:id="@+id/abouts_us_btn"
+                android:id="@+id/rl_app_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
-                android:onClick="toAboutUs"
+                android:onClick="toAppHelp"
                 android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/about_us"
-                    android:drawablePadding="5.0dip"
-                    android:text="关于我们"
+                    android:text="@string/about_us_help"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 
@@ -180,21 +125,19 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/check_app_version"
+                android:id="@+id/rl_app_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
-                android:onClick="toCheckAppVersion"
+                android:onClick="toAppContact"
                 android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/check_version"
-                    android:drawablePadding="5.0dip"
-                    android:text="版本检测"
+                    android:text="@string/about_us_contact"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 
@@ -208,49 +151,19 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/to_share"
+                android:id="@+id/rl_app_rule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
-                android:onClick="toShare"
+                android:onClick="toAppRule"
                 android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/share"
-                    android:drawablePadding="5.0dip"
-                    android:text="我要分享"
-                    android:textColor="@color/seting_text_color"
-                    android:textSize="14sp"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/common_arrow"/>
-            </RelativeLayout>
-
-            <include layout="@layout/hline_view"/>
-
-            <RelativeLayout
-                android:id="@+id/to_evaluate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/list_item_selector"
-                android:clickable="true"
-                android:padding="15dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/evaluate"
-                    android:drawablePadding="5.0dip"
-                    android:text="给评分"
+                    android:text="@string/about_us_rule"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 

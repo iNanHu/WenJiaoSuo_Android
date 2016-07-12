@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.WJSApplication;
+import com.inanhu.wenjiaosuo.util.ActivityManagerUtil;
+import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.MyHttpCycleContext;
 import com.inanhu.wenjiaosuo.util.NetUtil;
 import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;
@@ -19,10 +23,11 @@ import cn.finalteam.okhttpfinal.HttpTaskHandler;
 /**
  * Created by iNanHu on 2016/6/27.
  */
-public class BaseActivity extends AppCompatActivity implements MyHttpCycleContext{
+public class BaseActivity extends AppCompatActivity implements MyHttpCycleContext {
     protected String TAG;
     protected CustomProgress dialog;
     protected WJSApplication application;
+    public ActivityManagerUtil activityManagerUtil;
 
     protected final String HTTP_TASK_KEY = "HttpTaskKey_" + hashCode();
 
@@ -32,6 +37,8 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
         application = WJSApplication.getInstance();
 
         super.onCreate(savedInstanceState);
+        activityManagerUtil = ActivityManagerUtil.getInstance();
+        activityManagerUtil.pushOneActivity(this);
     }
 
     /**
@@ -55,6 +62,36 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
     }
 
     /**
+     * Webview标题栏显示返回键
+     */
+    protected void showWebviewTopBarBack() {
+        findViewById(R.id.toolbar_back_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    /**
+     * 设置Webview标题栏标题
+     *
+     * @param title
+     */
+    protected void setWebviewTopBarTitle(String title) {
+        ((TextView) findViewById(R.id.activity_title)).setText(title);
+    }
+
+    /**
+     * 设置Webview标题栏标题
+     *
+     * @param resId
+     */
+    protected void setWebviewTopBarTitle(int resId) {
+        ((TextView) findViewById(R.id.activity_title)).setText(resId);
+    }
+
+    /**
      * 是否显示标题栏
      *
      * @param isNeedToShow
@@ -71,12 +108,21 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
     /**
      * 设置标题栏标题
      *
+     * @param title
+     */
+    protected void setTopBarTitle(String title) {
+        ((TextView) findViewById(R.id.id_topbar_title)).setText(title);
+    }
+
+    /**
+     * 设置标题栏标题
+     *
      * @param resId
      */
     protected void setTopBarTitle(int resId) {
-        TextView tvTopBarTitle = (TextView) findViewById(R.id.id_topbar_title);
-        tvTopBarTitle.setText(resId);
+        ((TextView) findViewById(R.id.id_topbar_title)).setText(resId);
     }
+
 
     /**
      * 判断网络是否连接
@@ -129,5 +175,8 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
     protected void onDestroy() {
         super.onDestroy();
         HttpTaskHandler.getInstance().removeTask(HTTP_TASK_KEY);
+        //结束Activity&从栈中移除该Activity
+        activityManagerUtil.popOneActivity(this);
     }
+
 }

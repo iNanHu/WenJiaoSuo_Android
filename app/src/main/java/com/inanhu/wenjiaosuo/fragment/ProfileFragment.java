@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.activity.AboutUsActivity;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
 import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
 import com.inanhu.wenjiaosuo.activity.ProfileCompleteTwoActivity;
@@ -17,7 +19,6 @@ import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.editorpage.ShareActivity;
 import com.umeng.socialize.media.UMImage;
 
 import butterknife.BindView;
@@ -38,7 +39,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 
     @OnClick(R.id.guanzhu_teacher_btn)
     public void toGuanzhuTeacher() {
-        startActivity(new Intent(getActivity(), ProfileCompleteTwoActivity.class));
+        startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
     }
 
     @OnClick(R.id.civ_avatar)
@@ -46,6 +47,15 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
         startActivity(new Intent(getActivity(), LoginActivity.class));
     }
 
+    @OnClick(R.id.abouts_us_btn)
+    public void toAboutUs() {
+        startActivity(new Intent(getActivity(), AboutUsActivity.class));
+    }
+
+    @OnClick(R.id.check_app_version)
+    public void toCheckAppVersion() {
+        ToastUtil.showToast("已经是最新版本啦");
+    }
 
     UMImage image = new UMImage(getActivity(), "http://www.umeng.com/images/pic/social/integrated_3.png");
     String url = "http://www.umeng.com";
@@ -118,6 +128,13 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 //        initData();
         LogUtil.e("ProfileFragment", "===onCreateView===");
         return view;
+    }
+
+    @OnClick(R.id.checkbox)
+    public void onClick(CheckBox checkBox) {
+        if (!checkBox.isChecked()) {
+            ToastUtil.showToast("您关闭了消息提醒");
+        }
     }
 //
 //    private void initData() {

@@ -6,6 +6,7 @@
     <string name="equity">行情</string>
     <string name="account">一账通</string>
     <string name="mine">我的</string>
+    <string name="about_us">关于我们</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
@@ -54,5 +55,11 @@
     <string name="news_menu_xh">现货</string>
 
     <string name="news_center">新闻中心</string>
-
+    
+    <!-- 关于我们 -->
+    <string name="about_us_intro">产品介绍</string>
+    <string name="about_us_cooperate">商务合作</string>
+    <string name="about_us_help">使用帮助</string>
+    <string name="about_us_contact">联系我们</string>
+    <string name="about_us_rule">免责声明</string>
 </resources>

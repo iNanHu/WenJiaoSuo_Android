@@ -305,7 +305,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
         long secondTime = System.currentTimeMillis();
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (secondTime - firstTime < 2000) {
-                System.exit(0);
+                activityManagerUtil.appExit();
             } else {
                 ToastUtil.showToast("再按一次 退出文龙一账通");
                 firstTime = System.currentTimeMillis();

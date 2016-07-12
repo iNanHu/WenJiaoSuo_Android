@@ -227,6 +227,16 @@
             android:name=".activity.ProfileCompleteTwoActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.AboutUsWebviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

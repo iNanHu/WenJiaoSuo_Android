@@ -2,6 +2,7 @@ package com.inanhu.wenjiaosuo;
 
 import android.app.Application;
 
+import com.inanhu.wenjiaosuo.util.CrashHandlerUtil;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
@@ -27,6 +28,7 @@ public class WJSApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initApplication();
+        initCrashHandler();
     }
 
     private void initApplication() {
@@ -50,6 +52,15 @@ public class WJSApplication extends Application {
 
         // 初始化友盟分享
         initShareSDK();
+    }
+
+    /**
+     * 崩溃处理
+     */
+    private void initCrashHandler() {
+        CrashHandlerUtil crashHandlerUtil = CrashHandlerUtil.getInstance();
+        crashHandlerUtil.init(this);
+        crashHandlerUtil.setCrashTip("很抱歉，程序出现异常，即将退出！");
     }
 
 

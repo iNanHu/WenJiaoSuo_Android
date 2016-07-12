@@ -15,7 +15,10 @@ import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.base.Upfile;
+import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.ImageUtil;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
@@ -135,34 +138,34 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
      */
     private void commit(){
         ToastUtil.showToast("提交啦");
-//        RequestParams params = new RequestParams(this);
-//        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
+        RequestParams params = new RequestParams(this);
+        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
 //        params.addFormDataPart(Constant.RequestKey.UID, );
-//        params.addFormDataPart(Constant.RequestKey.REALNAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.REALNAME));
-//        params.addFormDataPart(Constant.RequestKey.SEX, (int) GlobalValue.getInstance().getGlobal(MessageFlag.GENDER));
-//        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_TYPE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_TYPE));
-//        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_NUMBER));
-//        params.addFormDataPart(Constant.RequestKey.TELPHONE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.TELPHONE));
-//        params.addFormDataPart(Constant.RequestKey.ADDRESS, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ADDRESS));
-//        params.addFormDataPart(Constant.RequestKey.BANK, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK));
-//        params.addFormDataPart(Constant.RequestKey.ACCOUNT_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ACCOUNT_NUMBER));
-//        params.addFormDataPart(Constant.RequestKey.BANK_LOCATION, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK_LOCATION));
-//        params.addFormDataPart(Constant.RequestKey.BRANCH_NAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BRANCH_NAME));
-//        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_FRONT_IMAGE, imageUrls.get(Constant.RequestKey.CERTIFICATE_FRONT));
-//        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_BACK_IMAGE, imageUrls.get(Constant.RequestKey.CERTIFICATE_BACK));
-//        params.addFormDataPart(Constant.RequestKey.BANK_CARD_IMAGE, imageUrls.get(Constant.RequestKey.BANK_CARD));
-//        HttpEngine.doPost(URLUtil.UserApi.COMPLETE, params, new BaseHttpRequestCallback(){
-//            @Override
-//            public void onStart() {
-//                showProgressDialog("完整资料上传中");
-//            }
-//
-//            @Override
-//            public void onResponse(String response, Headers headers) {
-//                closeProgressDialog();
-//                LogUtil.e(TAG, response);
-//            }
-//        });
+        params.addFormDataPart(Constant.RequestKey.REALNAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.REALNAME));
+        params.addFormDataPart(Constant.RequestKey.SEX, (int) GlobalValue.getInstance().getGlobal(MessageFlag.GENDER));
+        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_TYPE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_TYPE));
+        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_NUMBER));
+        params.addFormDataPart(Constant.RequestKey.TELPHONE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.TELPHONE));
+        params.addFormDataPart(Constant.RequestKey.ADDRESS, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ADDRESS));
+        params.addFormDataPart(Constant.RequestKey.BANK, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK));
+        params.addFormDataPart(Constant.RequestKey.ACCOUNT_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ACCOUNT_NUMBER));
+        params.addFormDataPart(Constant.RequestKey.BANK_LOCATION, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK_LOCATION));
+        params.addFormDataPart(Constant.RequestKey.BRANCH_NAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BRANCH_NAME));
+        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_FRONT_IMAGE, imageUrls.get(Constant.RequestKey.CERTIFICATE_FRONT));
+        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_BACK_IMAGE, imageUrls.get(Constant.RequestKey.CERTIFICATE_BACK));
+        params.addFormDataPart(Constant.RequestKey.BANK_CARD_IMAGE, imageUrls.get(Constant.RequestKey.BANK_CARD));
+        HttpEngine.doPost(URLUtil.UserApi.COMPLETE, params, new BaseHttpRequestCallback(){
+            @Override
+            public void onStart() {
+                showProgressDialog("完整资料上传中");
+            }
+
+            @Override
+            public void onResponse(String response, Headers headers) {
+                closeProgressDialog();
+                LogUtil.e(TAG, response);
+            }
+        });
     }
 
     @Override
