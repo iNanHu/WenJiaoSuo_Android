@@ -1,13 +1,11 @@
-package com.inanhu.wenjiaosuo.fragment.adapter;
+package com.inanhu.wenjiaosuo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.Spanned;
-import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.bean.EquityDataBean;
 import com.inanhu.wenjiaosuo.bean.WJSLogo;
@@ -21,12 +19,10 @@ import com.inanhu.wenjiaosuo.util.URLUtil;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
-import cn.finalteam.toolsfinal.StringUtils;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**

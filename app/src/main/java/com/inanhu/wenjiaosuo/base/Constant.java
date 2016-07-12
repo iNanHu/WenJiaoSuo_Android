@@ -39,6 +39,17 @@ public class Constant {
         public static final String CERTIFICATE_BACK_IMAGE = "certificate_back_image";
         public static final String BANK_CARD_IMAGE = "bank_card_image";
 
+        // 获取新闻列表
+        public static final String CID = "cid"; // 分类id
+        public static final String ORDER = "order"; // 排序方式
+        public static final String PAGE = "page"; // 页码
+        public static final String PAGESIZE = "pagesize"; // 每页显示条数
+
+
+//        public static final String USERNAME = "";
+//        public static final String USERNAME = "";
+//        public static final String USERNAME = "";
+
 
 //        public static final String USERNAME = "";
 //        public static final String USERNAME = "";

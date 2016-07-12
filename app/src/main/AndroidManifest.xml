@@ -234,7 +234,12 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.AboutUsWebviewActivity"
+            android:name=".activity.WebviewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.NewsCenterActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
     </application>

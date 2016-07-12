@@ -1,41 +1,46 @@
 package com.inanhu.wenjiaosuo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.activity.MainActivity;
+import com.inanhu.wenjiaosuo.activity.WebviewActivity;
+import com.inanhu.wenjiaosuo.activity.NewsCenterActivity;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.Banner;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
-import com.inanhu.wenjiaosuo.base.GlobalValue;
-import com.inanhu.wenjiaosuo.fragment.adapter.NewsListAdapter;
+import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
+import com.inanhu.wenjiaosuo.util.DateUtil;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
+import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
-import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
 import com.inanhu.wenjiaosuo.widget.convenientbanner.NetworkImageHolderView;
 import com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.RequestParams;
 import okhttp3.Headers;
 
 
@@ -48,22 +53,48 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @BindView(R.id.swipe_news_container)
     CustomSwipeToRefresh mRereshLayout;
-    //    @BindView(R.id.rv_news)
-//    RecyclerView recyclerViewNews;
     @BindView(R.id.cb_news_ad)
     ConvenientBanner convenientBanner;
     @BindView(R.id.sv_news_container)
     ScrollView scrollviewContent;
 
+    /**
+     * 新闻模块
+     */
+    @BindView(R.id.iv_news_pic)
+    ImageView ivNewsPic;
+    @BindView(R.id.tv_news_title)
+    TextView tvNewsTitle;
+    @BindView(R.id.tv_news_intro)
+    TextView tvNewsIntro;
+    @BindView(R.id.tv_news_date)
+    TextView tvNewsDate;
+    @BindView(R.id.tv_news_readtimes)
+    TextView tvNewsReadtimes;
+    @BindView(R.id.iv_news_pic1)
+    ImageView ivNewsPic1;
+    @BindView(R.id.tv_news_title1)
+    TextView tvNewsTitle1;
+    @BindView(R.id.tv_news_intro1)
+    TextView tvNewsIntro1;
+    @BindView(R.id.tv_news_date1)
+    TextView tvNewsDate1;
+    @BindView(R.id.tv_news_readtimes1)
+    TextView tvNewsReadtimes1;
+    @BindView(R.id.tv_news_copyfrom)
+    TextView tvNewsCopyfrom;
+    @BindView(R.id.tv_news_copyfrom1)
+    TextView tvNewsCopyfrom1;
+
     @OnClick(R.id.rl_news_center)
     public void toNewsCenter() {
-        ToastUtil.showToast("去新闻中心啦");
+        startActivity(new Intent(getActivity(), NewsCenterActivity.class));
     }
 
     // 网络加载banner图片资源
-    List<Banner> banners = new ArrayList<>();
-    private List<NewsBean> newsBeen = new ArrayList<>();
-    private NewsListAdapter mAdapter;
+    private List<Banner> banners = new ArrayList<>();
+    private NewsBean newsBean, newsBean1;
+    private List<NewsBean> news = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +114,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         ButterKnife.bind(this, view);
         initBanner();
         initRefreshLayout();
-        initRecyclerView();
         return view;
     }
 
@@ -97,17 +127,19 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onResponse(String response, Headers headers) {
                 ApiResponse<ArrayList<Banner>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<Banner>>>() {
                 }.getType());
-                banners = rsp.getData();
-                convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-                    @Override
-                    public NetworkImageHolderView createHolder() {
-                        return new NetworkImageHolderView();
-                    }
-                }, banners)
-                        //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                        .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused});
-                // 开启自动翻页
-                convenientBanner.startTurning(3000);
+                if (rsp != null) {
+                    banners = rsp.getData();
+                    convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+                        @Override
+                        public NetworkImageHolderView createHolder() {
+                            return new NetworkImageHolderView();
+                        }
+                    }, banners)
+                            //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                            .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused});
+                    // 开启自动翻页
+                    convenientBanner.startTurning(3000);
+                }
             }
         });
     }
@@ -121,13 +153,6 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
-    private void initRecyclerView() {
-//        listView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list));
-//        recyclerViewNews.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        mAdapter = new NewsListAdapter(recyclerViewNews);
-//        recyclerViewNews.setAdapter(mAdapter);
-    }
-
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
@@ -139,13 +164,74 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
 
     private void getData() {
-        String avatarUrl = "https://avatars1.githubusercontent.com/u/5058324?v=3&u=06df9935b0f3e13c28f000fafd7ca59bdef2594d&s=140";
-        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
-        newsBeen.add(new NewsBean(avatarUrl, "文民一账通", "文民一账通", "2016-7-4", "100", "12"));
+        // 加载新闻（2条）
+        RequestParams params = new RequestParams(this);
+//        params.addFormDataPart(Constant.RequestKey.CID, "2"); // 不传分类列表就获取全类别的
+        params.addFormDataPart(Constant.RequestKey.ORDER, "time"); // 排序，方式有time/views/rec
+        params.addFormDataPart(Constant.RequestKey.PAGESIZE, "2");
+        params.addFormDataPart(Constant.RequestKey.PAGE, "1");
+        HttpEngine.doGet(URLUtil.NewsApi.GETLIST, params, new BaseHttpRequestCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onResponse(String response, Headers headers) {
+                ApiResponse<ArrayList<NewsBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<NewsBean>>>() {
+                }.getType());
+                if (rsp != null) {
+                    news = rsp.getData();
+                    setNews();
+                }
+            }
+        });
     }
 
+    private void setNews() {
+        if (news != null) {
+            // 设置第一条新闻
+            newsBean = news.get(0);
+            ImageLoader.with(R.mipmap.app_icon, newsBean.getImage(), ivNewsPic);
+            tvNewsTitle.setText(newsBean.getTitle());
+            tvNewsIntro.setText(newsBean.getDescription());
+            tvNewsDate.setText(DateUtil.timeStamp2Date(newsBean.getTime(), null));
+            tvNewsReadtimes.setText("阅读：" + newsBean.getViews());
+            tvNewsCopyfrom.setText(newsBean.getCopyfrom());
+
+            // 设置第二条新闻
+            newsBean1 = news.get(1);
+            ImageLoader.with(R.mipmap.app_icon, newsBean1.getImage(), ivNewsPic1);
+            tvNewsTitle1.setText(newsBean1.getTitle());
+            tvNewsIntro1.setText(newsBean1.getDescription());
+            tvNewsDate1.setText(DateUtil.timeStamp2Date(newsBean1.getTime(), null));
+            tvNewsReadtimes1.setText("阅读：" + newsBean1.getViews());
+            tvNewsCopyfrom1.setText(newsBean1.getCopyfrom());
+        }
+    }
+
+    @OnClick({R.id.ll_news, R.id.ll_news1})
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        switch (view.getId()) {
+            case R.id.ll_news:
+                if (newsBean != null) {
+                    if (!TextUtils.isEmpty(newsBean.getAurl())) {
+                        intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, newsBean.getAurl());
+                    }
+                }
+                break;
+            case R.id.ll_news1:
+                if (newsBean1 != null) {
+                    if (!TextUtils.isEmpty(newsBean1.getAurl())) {
+                        intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, newsBean1.getAurl());
+                    }
+                }
+                break;
+        }
+        intent.setClass(getActivity(), WebviewActivity.class);
+        intent.putExtra(MessageFlag.IS_SHOW_TOPBAR_SHARE, true);
+        startActivity(intent);
+    }
 }
 

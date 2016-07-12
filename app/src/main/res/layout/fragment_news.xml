@@ -106,7 +106,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_news"
+                        android:id="@+id/ll_news_center"
                         android:layout_width="0.0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="1.0"
@@ -276,6 +276,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/ll_news"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="@drawable/list_item_selector"
@@ -324,6 +325,15 @@
                             android:text="这是测试文章的内容"
                             android:textSize="12sp"/>
 
+                        <TextView
+                            android:id="@+id/tv_news_copyfrom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:text="本站"
+                            android:textSize="10sp"/>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -342,16 +352,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="阅读(450)"
+                                android:text="阅读：450"
                                 android:textSize="10sp"/>
 
-                            <TextView
-                                android:id="@+id/tv_news_comments"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="评论(230)"
-                                android:textSize="10sp"/>
                         </LinearLayout>
 
 
@@ -365,6 +368,7 @@
                     android:background="@color/divider_line"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_news1"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="@drawable/list_item_selector"
@@ -413,6 +417,15 @@
                             android:text="这是测试文章的内容"
                             android:textSize="12sp"/>
 
+                        <TextView
+                            android:id="@+id/tv_news_copyfrom1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:text="本站"
+                            android:textSize="10sp"/>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -431,16 +444,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="阅读(450)"
+                                android:text="阅读：450"
                                 android:textSize="10sp"/>
 
-                            <TextView
-                                android:id="@+id/tv_news_comments1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="评论(230)"
-                                android:textSize="10sp"/>
                         </LinearLayout>
 
 
@@ -452,108 +458,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="@color/divider_line"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="@drawable/list_item_selector"
-                    android:clickable="true"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:id="@+id/iv_news_pic2"
-                            android:layout_width="120dp"
-                            android:layout_height="80dp"
-                            android:layout_centerInParent="true"
-                            android:layout_margin="6dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"/>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:padding="6dp">
-
-                        <TextView
-                            android:id="@+id/tv_news_title2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:maxLines="2"
-                            android:text="这是标题"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/tv_news_intro2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_news_title2"
-                            android:maxLines="2"
-                            android:text="这是测试文章的内容"
-                            android:textSize="12sp"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentRight="true">
-
-                            <TextView
-                                android:id="@+id/tv_news_date2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="2015-10-22 17:58"
-                                android:textSize="10sp"/>
-
-                            <TextView
-                                android:id="@+id/tv_news_readtimes2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="阅读(450)"
-                                android:textSize="10sp"/>
-
-                            <TextView
-                                android:id="@+id/tv_news_comments2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="评论(230)"
-                                android:textSize="10sp"/>
-                        </LinearLayout>
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/divider_line"/>
-
             </LinearLayout>
-
-
-            <!--<com.inanhu.wenjiaosuo.widget.scrollviewwithlistview.ScrollViewWithListView
-                android:id="@+id/rv_news"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>-->
-
-            <!--<android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_news"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"/>-->
         </LinearLayout>
     </ScrollView>
 

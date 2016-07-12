@@ -126,7 +126,7 @@
 
             <include layout="@layout/hline_view"/>
 
-            <RelativeLayout
+            <!--<RelativeLayout
                 android:id="@+id/seting_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                     android:src="@mipmap/common_arrow"/>
             </RelativeLayout>
 
-            <include layout="@layout/hline_view"/>
+            <include layout="@layout/hline_view"/>-->
 
             <RelativeLayout
                 android:id="@+id/abouts_us_btn"

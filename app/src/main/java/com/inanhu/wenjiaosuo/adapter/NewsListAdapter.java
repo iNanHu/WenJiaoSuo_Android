@@ -1,10 +1,11 @@
-package com.inanhu.wenjiaosuo.fragment.adapter;
+package com.inanhu.wenjiaosuo.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
+import com.inanhu.wenjiaosuo.util.DateUtil;
 import com.inanhu.wenjiaosuo.util.ImageLoader;
 
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
@@ -21,7 +22,7 @@ public class NewsListAdapter extends BGARecyclerViewAdapter<NewsBean> {
 
     @Override
     protected void fillData(BGAViewHolderHelper bgaViewHolderHelper, int i, NewsBean newsBean) {
-        ImageLoader.with(R.mipmap.ic_launcher, newsBean.getPic(), (ImageView) bgaViewHolderHelper.getView(R.id.iv_news_pic));
-        bgaViewHolderHelper.setText(R.id.tv_news_title, newsBean.getTitle()).setText(R.id.tv_news_intro, newsBean.getIntro()).setText(R.id.tv_news_date, newsBean.getDate()).setText(R.id.tv_news_readtimes, newsBean.getReadtimes()).setText(R.id.tv_news_comments, newsBean.getComments());
+        ImageLoader.with(R.mipmap.ic_launcher, newsBean.getImage(), (ImageView) bgaViewHolderHelper.getView(R.id.iv_news_pic));
+        bgaViewHolderHelper.setText(R.id.tv_news_title, newsBean.getTitle()).setText(R.id.tv_news_intro, newsBean.getDescription()).setText(R.id.tv_news_date, DateUtil.timeStamp2Date(newsBean.getTime(), null)).setText(R.id.tv_news_readtimes, "阅读：" + newsBean.getViews());
     }
 }

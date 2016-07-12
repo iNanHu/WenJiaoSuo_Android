@@ -15,4 +15,5 @@
         android:fadingEdge="none"
         android:layerType="software"
         android:scrollbars="none"/>
+
 </LinearLayout>

@@ -61,35 +61,6 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
         }
     }
 
-    /**
-     * Webview标题栏显示返回键
-     */
-    protected void showWebviewTopBarBack() {
-        findViewById(R.id.toolbar_back_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    /**
-     * 设置Webview标题栏标题
-     *
-     * @param title
-     */
-    protected void setWebviewTopBarTitle(String title) {
-        ((TextView) findViewById(R.id.activity_title)).setText(title);
-    }
-
-    /**
-     * 设置Webview标题栏标题
-     *
-     * @param resId
-     */
-    protected void setWebviewTopBarTitle(int resId) {
-        ((TextView) findViewById(R.id.activity_title)).setText(resId);
-    }
 
     /**
      * 是否显示标题栏

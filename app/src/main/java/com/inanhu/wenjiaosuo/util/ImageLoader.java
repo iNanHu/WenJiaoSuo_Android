@@ -24,7 +24,7 @@ public class ImageLoader {
     }
 
     public static void with(int palceHolderId, String imageUrl, ImageView imageView) {
-        Picasso.with(context).load(imageUrl).placeholder(palceHolderId).error(R.mipmap.ic_launcher).into(imageView);
+        Picasso.with(context).load(imageUrl).placeholder(palceHolderId).error(R.mipmap.app_icon).into(imageView);
     }
 
 }

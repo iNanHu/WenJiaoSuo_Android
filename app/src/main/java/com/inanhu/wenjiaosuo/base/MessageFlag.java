@@ -23,7 +23,8 @@ public class MessageFlag {
      * Webview相关
      */
     public static final String WEBVIEW_TOPBAR_TITLE = "webview_topbar_title";
-    public static final String WEBVIEW_LOAD_URL = "webview_load_url";;
+    public static final String WEBVIEW_LOAD_URL = "webview_load_url"; //
+    public static final String IS_SHOW_TOPBAR_SHARE = "is_show_topbar_share"; // 是否显示分享按钮
 
 
 //    public static final String a = "";

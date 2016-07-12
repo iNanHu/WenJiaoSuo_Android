@@ -40,9 +40,9 @@ public class AboutUsActivity extends BaseActivity {
     @OnClick({R.id.rl_app_intro, R.id.rl_app_cooperate, R.id.rl_app_help, R.id.rl_app_contact, R.id.rl_app_rule})
     public void onClick(View view) {
         Intent intent = new Intent();
-        intent.setClass(AboutUsActivity.this, AboutUsWebviewActivity.class);
+        intent.setClass(AboutUsActivity.this, WebviewActivity.class);
         String title = "";
-        String url = "http://www.baidu.com";
+        String url = "http://wmyzt.applinzi.com/article/4.html";
         switch (view.getId()) {
             case R.id.rl_app_intro:
                 title = getResources().getString(R.string.about_us_intro);

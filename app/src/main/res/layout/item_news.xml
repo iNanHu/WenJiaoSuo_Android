@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/list_item_selector">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -14,8 +15,8 @@
             android:id="@+id/iv_news_pic"
             android:layout_width="120dp"
             android:layout_height="80dp"
-            android:layout_margin="6dp"
             android:layout_centerInParent="true"
+            android:layout_margin="6dp"
             android:scaleType="fitXY"/>
 
     </RelativeLayout>
@@ -32,10 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:maxLines="2"
-            android:text="这是标题"
+            android:text="文章标题"
+            android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_news_intro"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_news_title"
             android:maxLines="2"
-            android:text="这是测试文章的内容"
+            android:text="内容描述"
             android:textSize="12sp"/>
 
         <LinearLayout
@@ -64,16 +65,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="阅读(450)"
+                android:text="阅读：450"
                 android:textSize="10sp"/>
 
-            <TextView
-                android:id="@+id/tv_news_comments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="评论(230)"
-                android:textSize="10sp"/>
         </LinearLayout>
 
 
