@@ -42,22 +42,27 @@ public class AboutUsActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.setClass(AboutUsActivity.this, WebviewActivity.class);
         String title = "";
-        String url = "http://wmyzt.applinzi.com/article/4.html";
+        String url = "";
         switch (view.getId()) {
             case R.id.rl_app_intro:
                 title = getResources().getString(R.string.about_us_intro);
+                url = "http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=5";
                 break;
             case R.id.rl_app_cooperate:
                 title = getResources().getString(R.string.about_us_cooperate);
+                url = "http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=7";
                 break;
             case R.id.rl_app_help:
                 title = getResources().getString(R.string.about_us_help);
+                url = "http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=8";
                 break;
             case R.id.rl_app_contact:
                 title = getResources().getString(R.string.about_us_contact);
+                url = "http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=9";
                 break;
             case R.id.rl_app_rule:
                 title = getResources().getString(R.string.about_us_rule);
+                url = "http://wmyzt.applinzi.com/admin.php?r=page/Category/index&class_id=10";
                 break;
         }
         intent.putExtra(MessageFlag.WEBVIEW_TOPBAR_TITLE, title);
