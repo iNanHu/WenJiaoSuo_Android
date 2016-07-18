@@ -107,7 +107,7 @@ public class ProfileCompleteOneActivity extends BaseActivity {
         }
         // 保存用户信息
         GlobalValue.getInstance().saveGlobal(MessageFlag.REALNAME, realname);
-        GlobalValue.getInstance().saveGlobal(MessageFlag.GENDER, rbCompleteMan.isChecked() ? 0 : 1);
+        GlobalValue.getInstance().saveGlobal(MessageFlag.GENDER, rbCompleteMan.isChecked() ? 1 : 2);
         GlobalValue.getInstance().saveGlobal(MessageFlag.CERTIFICATE_TYPE, certificateType);
         GlobalValue.getInstance().saveGlobal(MessageFlag.CERTIFICATE_NUMBER, certificateNumber);
         GlobalValue.getInstance().saveGlobal(MessageFlag.TELPHONE, telphone);
