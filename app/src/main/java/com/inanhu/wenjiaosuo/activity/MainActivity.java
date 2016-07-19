@@ -21,9 +21,6 @@ import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
     private LinearLayout mTabEquity;
@@ -56,6 +53,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initView();
         initEvent();
         setSelect(0); // 默认第一个

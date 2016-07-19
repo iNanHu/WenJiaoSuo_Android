@@ -2,18 +2,14 @@ package com.inanhu.wenjiaosuo.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.WJSApplication;
 import com.inanhu.wenjiaosuo.util.ActivityManagerUtil;
-import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.MyHttpCycleContext;
 import com.inanhu.wenjiaosuo.util.NetUtil;
 import com.inanhu.wenjiaosuo.widget.customprogressdialog.CustomProgress;

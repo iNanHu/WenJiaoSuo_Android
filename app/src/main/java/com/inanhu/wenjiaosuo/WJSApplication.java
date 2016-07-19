@@ -71,8 +71,8 @@ public class WJSApplication extends Application {
     }
 
     private void initJPush() {
-//        JPushInterface.setDebugMode(true);
-//        JPushInterface.init(this);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     private void initGalleryFinal() {

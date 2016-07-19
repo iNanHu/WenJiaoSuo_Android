@@ -13,6 +13,7 @@ import com.inanhu.wenjiaosuo.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 
 public class SplashActivity extends BaseActivity {
 
@@ -47,6 +48,18 @@ public class SplashActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
     }
 
     private void enterHomeActivity() {
