@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_topbar"
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/share_banner"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/wexinChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_selector"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="shareToWechat"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="35.0dip"
+                android:layout_height="35.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:src="@drawable/umeng_socialize_wechat"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5.0dip"
+                android:layout_toRightOf="@id/icon"
+                android:text="分享至微信好友"
+                android:textSize="14.0sp"/>
+        </RelativeLayout>
+
+        <include layout="@layout/hline_view"/>
+
+        <RelativeLayout
+            android:id="@+id/wexinCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_selector"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="shareToWXCircle"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/icon1"
+                android:layout_width="35.0dip"
+                android:layout_height="35.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:src="@drawable/umeng_socialize_wxcircle"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5.0dip"
+                android:layout_toRightOf="@id/icon1"
+                android:text="分享至微信朋友圈"
+                android:textSize="14.0sp"/>
+        </RelativeLayout>
+
+        <include layout="@layout/hline_view"/>
+
+        <RelativeLayout
+            android:id="@+id/qqFrinds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_selector"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="shareToQQ"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="35.0dip"
+                android:layout_height="35.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:src="@drawable/umeng_socialize_qq_on"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5.0dip"
+                android:layout_toRightOf="@id/icon2"
+                android:text="分享至QQ好友"
+                android:textSize="14.0sp"/>
+        </RelativeLayout>
+
+        <include layout="@layout/hline_view"/>
+
+        <RelativeLayout
+            android:id="@+id/qqZone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_selector"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="shareToQZone"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="35.0dip"
+                android:layout_height="35.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:src="@drawable/umeng_socialize_qzone_on"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5.0dip"
+                android:layout_toRightOf="@id/icon3"
+                android:text="分享至QQ空间"
+                android:textSize="14.0sp"/>
+        </RelativeLayout>
+
+        <include layout="@layout/hline_view"/>
+
+    </LinearLayout>
+
+</LinearLayout>

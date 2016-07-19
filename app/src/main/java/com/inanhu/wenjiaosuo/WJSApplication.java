@@ -65,7 +65,7 @@ public class WJSApplication extends Application {
 
 
     private void initShareSDK() {
-//        PlatformConfig.setWeixin();
+        PlatformConfig.setWeixin("wxe4083fddc9a7277b", "42f3ca39d8a2d2228a90eb4ed7a76522");
         PlatformConfig.setQQZone("1105530752", "NfPhWr0MKs4lrKwm");
 //        PlatformConfig.setSinaWeibo();
     }

@@ -7,6 +7,7 @@
     <string name="account">一账通</string>
     <string name="mine">我的</string>
     <string name="about_us">关于我们</string>
+    <string name="social_share">我要分享</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
