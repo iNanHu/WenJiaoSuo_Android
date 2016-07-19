@@ -14,6 +14,9 @@ import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,8 +96,32 @@ public class WebviewActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_share_btn:
-                ToastUtil.showToast("分享啦：" + url);
+                final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]{SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE};
+                new ShareAction(this).setDisplayList(displaylist)
+                        .withTargetUrl(url)
+                        .setListenerList(umShareListener)
+                        .open();
                 break;
         }
     }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            ToastUtil.showToast("分享成功啦");
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            ToastUtil.showToast("分享失败啦");
+            if (t != null) {
+                LogUtil.d("throw", "throw:" + t.getMessage());
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            ToastUtil.showToast("分享取消了");
+        }
+    };
 }
