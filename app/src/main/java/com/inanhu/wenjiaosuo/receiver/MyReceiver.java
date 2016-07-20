@@ -4,7 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+
+import com.inanhu.wenjiaosuo.activity.WebviewActivity;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
+import com.inanhu.wenjiaosuo.util.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +31,7 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
+        String url = null;
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -36,6 +42,13 @@ public class MyReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
 //            processCustomMessage(context, bundle);
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            try {
+                JSONObject jsonObject = new JSONObject(extra);
+                url = jsonObject.getString("url");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
@@ -44,6 +57,13 @@ public class MyReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
+            if (!TextUtils.isEmpty(url)) {
+                Intent intent1 = new Intent();
+                intent1.setClass(context, WebviewActivity.class);
+                intent1.putExtra(MessageFlag.WEBVIEW_LOAD_URL, url);
+                intent1.putExtra(MessageFlag.IS_SHOW_TOPBAR_SHARE, true);
+                context.startActivity(intent1);
+            }
 
 //            //打开自定义的Activity
 //            Intent i = new Intent(context, TestActivity.class);
