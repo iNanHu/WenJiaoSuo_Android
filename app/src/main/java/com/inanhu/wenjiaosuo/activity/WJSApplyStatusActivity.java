@@ -14,7 +14,10 @@ import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.bean.WJSStatusBean;
+import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
 import com.inanhu.wenjiaosuo.widget.DividerItemDecoration;
 import com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh;
@@ -52,6 +55,8 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
         showTopBarRight(false);
         setTopBarTitle(R.string.proccess_search);
 
+        ToastUtil.showToast("登录状态：" + AccountUtil.isLogin());
+
         // 初始化下拉刷新
         initRefreshLayout();
         // 初始化RecylerView
@@ -62,17 +67,18 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
     private void getData() {
         RequestParams params = new RequestParams(this);
         params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
-        HttpEngine.doGet(URLUtil.UserApi.GET_APPLY_STATUS, params, new BaseHttpRequestCallback() {
+        HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
             @Override
             public void onResponse(String response, Headers headers) {
-                ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
-                }.getType());
-                if (rsp != null && rsp.isSuccess()) {
-                    wjsStatusBeanList = rsp.getData();
-                    if (wjsStatusBeanList != null) {
-                        mAdapter.setDatas(wjsStatusBeanList);
-                    }
-                }
+                LogUtil.e(TAG, response);
+//                ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
+//                }.getType());
+//                if (rsp != null && rsp.isSuccess()) {
+//                    wjsStatusBeanList = rsp.getData();
+//                    if (wjsStatusBeanList != null) {
+//                        mAdapter.setDatas(wjsStatusBeanList);
+//                    }
+//                }
             }
 
         });

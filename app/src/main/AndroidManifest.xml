@@ -260,12 +260,19 @@
             android:name=".activity.NewsCenterActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.ShareActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.WJSApplyStatusActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.UserInfoDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
     </application>

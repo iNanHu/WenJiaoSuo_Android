@@ -1,26 +1,28 @@
 package com.inanhu.wenjiaosuo.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.activity.AboutUsActivity;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
 import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
-import com.inanhu.wenjiaosuo.activity.ProfileCompleteTwoActivity;
 import com.inanhu.wenjiaosuo.activity.ShareActivity;
+import com.inanhu.wenjiaosuo.activity.UserInfoDetailActivity;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
-import com.inanhu.wenjiaosuo.util.ImageLoader;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
+import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +39,8 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 
     @BindView(R.id.civ_avatar)
     CircleImageView civAvatar;
+    @BindView(R.id.tv_login_now)
+    TextView tvLoginNow;
 
     @OnClick(R.id.guanzhu_teacher_btn)
     public void toGuanzhuTeacher() {
@@ -45,7 +49,11 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 
     @OnClick(R.id.civ_avatar)
     public void toLogin() {
-        startActivity(new Intent(getActivity(), LoginActivity.class));
+        if (AccountUtil.isLogin()) { // 登录用户点击跳转展示基本信息界面
+            startActivity(new Intent(getActivity(), UserInfoDetailActivity.class));
+        } else { // 未登录则跳转到登录界面
+            startActivityForResult(new Intent(getActivity(), LoginActivity.class), Activity.RESULT_FIRST_USER);
+        }
     }
 
     @OnClick(R.id.abouts_us_btn)
@@ -58,51 +66,16 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
         ToastUtil.showToast("已经是最新版本啦");
     }
 
-    UMImage image = new UMImage(getActivity(), "http://www.umeng.com/images/pic/social/integrated_3.png");
-    String url = "http://www.umeng.com";
-
     @OnClick(R.id.to_share)
     public void toShare() {
-//        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE)
-//                .withTitle("文龙一账通")
-//                .withText("来自文龙一账通的分享")
-//                .withMedia(image)
-//                .withTargetUrl(url)
-//                .setCallback(umShareListener)
-//                //.withShareBoardDirection(view, Gravity.TOP|Gravity.LEFT)
-//                .open();
         startActivity(new Intent(getActivity(), ShareActivity.class));
     }
-
-    private UMShareListener umShareListener = new UMShareListener() {
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-            LogUtil.d("plat", "platform" + platform);
-            if (platform.name().equals("WEIXIN_FAVORITE")) {
-                ToastUtil.showToast("收藏成功啦");
-            } else {
-                ToastUtil.showToast("分享成功啦");
-            }
-        }
-
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            ToastUtil.showToast("分享失败啦");
-            if (t != null) {
-                LogUtil.d("throw", "throw:" + t.getMessage());
-            }
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            ToastUtil.showToast("分享取消了");
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.e("ProfileFragment", "===onCreate===");
+//        ToastUtil.showToast("登录状态：" + AccountUtil.isLogin());
     }
 
     @Override
@@ -114,7 +87,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
-        ImageLoader.with(R.mipmap.ic_launcher, "http://www.baidu.com/img/bd_logo1.png", civAvatar);
+//        ImageLoader.with(R.mipmap.ic_launcher, "http://www.baidu.com/img/bd_logo1.png", civAvatar);
         LogUtil.e("ProfileFragment", "===onCreateView===");
         return view;
     }
@@ -126,4 +99,28 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Activity.RESULT_FIRST_USER) {
+            if (data != null) { // 返回data为空不需要处理
+                String loginSuccess = data.getStringExtra(MessageFlag.LOGIN_SUCCESS);
+                if ("true".equals(loginSuccess)) { // 登录成功
+                    // 取出当前登录用户对象
+                    UserInfo userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO);
+                    if (userInfo != null) {
+                        String username = userInfo.getUsername();
+                        if (!TextUtils.isEmpty(username)) {
+                            tvLoginNow.setText(username);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OnClick(R.id.tv_login_now)
+    public void onClick() {
+        toLogin();
+    }
 }

@@ -42,7 +42,6 @@ public class URLUtil {
         public static final String RESET_PASS = USER + "/reset_pass";
         public static final String GETQR = USER + "/getqr";
         public static final String CHANGE_AVATAR = USER + "/change_avatar";
-        public static final String GET_APPLY_STATUS = USER + "/get_apply_status";
     }
 
     /**
@@ -65,8 +64,12 @@ public class URLUtil {
     }
 
 
+    /**
+     * 文交所接口
+     */
     public static final class WJSApi {
         public static final String WJS = API_SERVER + "/wjs";
         public static final String GETLIST = WJS + "/getlist";
+        public static final String GET_APPLY_STATUS = WJS + "/get_apply_status";
     }
 }

@@ -27,6 +27,10 @@ public class MessageFlag {
     public static final String IS_SHOW_TOPBAR_SHARE = "is_show_topbar_share"; // 是否显示分享按钮
 
 
-//    public static final String a = "";
+    public static final String CURRENT_USER_INFO = "current_user_info"; // 当前登录用户对象
+    public static final String LOGIN_SUCCESS  = "login_success";
+
+
+    //    public static final String a = "";
 
 }

@@ -1,5 +1,6 @@
 package com.inanhu.wenjiaosuo.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,7 +13,9 @@ import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.MD5Util;
@@ -72,9 +75,29 @@ public class LoginActivity extends BaseActivity {
                     ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
                     }.getType());
                     LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
-                    String token = rsp.getData();
-                    if (rsp.isSuccess() && !TextUtils.isEmpty(token)) { // 登录成功，保存token
-                        GlobalValue.getInstance().saveGlobal(Constant.RequestKey.ACCESS_TOKEN, token);
+                    String data = rsp.getData();
+                    if (rsp.isSuccess() && !TextUtils.isEmpty(data)) { // 登录成功，保存token
+                        GlobalValue.getInstance().saveGlobal(Constant.RequestKey.ACCESS_TOKEN, data);
+                        // 登录成功获取用户基本信息
+                        RequestParams params = new RequestParams(LoginActivity.this);
+                        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, data);
+                        HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
+                            @Override
+                            public void onResponse(String response, Headers headers) {
+                                ApiResponse<UserInfo> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<UserInfo>>() {
+                                }.getType());
+                                if (rsp != null && rsp.isSuccess()) {
+                                    UserInfo userInfo = rsp.getData();
+                                    if (userInfo != null) { // 保存当前用户到全局变量
+                                        GlobalValue.getInstance().saveGlobal(MessageFlag.CURRENT_USER_INFO, userInfo);
+                                        setResult(Activity.RESULT_FIRST_USER, new Intent().putExtra(MessageFlag.LOGIN_SUCCESS, "true"));
+                                        finish();
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ToastUtil.showToast("登录失败 " + data);
                     }
                 }
 
