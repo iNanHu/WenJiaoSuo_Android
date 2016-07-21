@@ -105,6 +105,7 @@ public class RegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         showTopBarBack(true);
+        showTopBarRight(false);
         setTopBarTitle(R.string.register_);
     }
 }

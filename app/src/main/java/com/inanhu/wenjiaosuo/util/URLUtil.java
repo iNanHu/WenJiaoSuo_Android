@@ -42,6 +42,7 @@ public class URLUtil {
         public static final String RESET_PASS = USER + "/reset_pass";
         public static final String GETQR = USER + "/getqr";
         public static final String CHANGE_AVATAR = USER + "/change_avatar";
+        public static final String GET_APPLY_STATUS = USER + "/get_apply_status";
     }
 
     /**
@@ -58,10 +59,14 @@ public class URLUtil {
     /**
      * 共用接口
      */
-    public static final class CommonApi{
+    public static final class CommonApi {
         public static final String COMMON = API_SERVER + "/common";
         public static final String UPFILE = COMMON + "/upfile";
     }
 
 
+    public static final class WJSApi {
+        public static final String WJS = API_SERVER + "/wjs";
+        public static final String GETLIST = WJS + "/getlist";
+    }
 }

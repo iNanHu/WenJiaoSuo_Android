@@ -145,7 +145,7 @@
             android:value="developer-default"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="8ed9ccd5e11309120362edb2"/> <!--  </>值来自开发者平台取得的AppKey-->
+            android:value="2f73a4898eb89ee109ace824"/> <!--  </>值来自开发者平台取得的AppKey-->
         <!--======================================END=========================================================-->
 
 
@@ -262,6 +262,10 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.ShareActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.WJSApplyStatusActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
     </application>

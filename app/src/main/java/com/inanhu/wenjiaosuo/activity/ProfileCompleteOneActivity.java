@@ -128,6 +128,7 @@ public class ProfileCompleteOneActivity extends BaseActivity {
         setContentView(R.layout.activity_profile_complete_one);
         ButterKnife.bind(this);
         showTopBarBack(true);
+        showTopBarRight(false);
         setTopBarTitle(R.string.profile_complete);
         initListener();
     }

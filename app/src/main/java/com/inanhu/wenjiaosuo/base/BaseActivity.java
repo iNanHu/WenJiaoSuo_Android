@@ -90,6 +90,37 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
         ((TextView) findViewById(R.id.id_topbar_title)).setText(resId);
     }
 
+    /**
+     * 是否显示标题栏右侧区域
+     *
+     * @param isNeedToShow
+     */
+    protected void showTopBarRight(boolean isNeedToShow) {
+        TextView tvTopBarBack = (TextView) findViewById(R.id.id_topbar_right);
+        if (isNeedToShow) {
+            tvTopBarBack.setVisibility(View.VISIBLE);
+        } else {
+            tvTopBarBack.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
+     * 设置标题栏右侧
+     *
+     * @param title
+     */
+    protected void setTopBarRight(String title) {
+        ((TextView) findViewById(R.id.id_topbar_right)).setText(title);
+    }
+
+    /**
+     * 设置标题栏右侧
+     *
+     * @param resId
+     */
+    protected void setTopBarRight(int resId) {
+        ((TextView) findViewById(R.id.id_topbar_right)).setText(resId);
+    }
 
     /**
      * 判断网络是否连接

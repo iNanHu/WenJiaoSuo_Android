@@ -32,6 +32,7 @@ public class AboutUsActivity extends BaseActivity {
         setContentView(R.layout.activity_about_us);
         ButterKnife.bind(this);
         showTopBarBack(true);
+        showTopBarRight(false);
         setTopBarTitle(R.string.about_us);
         // 设置版本号
         tvAppVersion.setText(getResources().getString(R.string.app_name) + VersionUtil.getVersionName(this) + "版");

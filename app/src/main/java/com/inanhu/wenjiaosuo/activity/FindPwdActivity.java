@@ -67,6 +67,7 @@ public class FindPwdActivity extends BaseActivity {
         setContentView(R.layout.activity_find_pwd);
         ButterKnife.bind(this);
         showTopBarBack(true);
+        showTopBarRight(false);
         setTopBarTitle(R.string.find_pwd);
     }
 }

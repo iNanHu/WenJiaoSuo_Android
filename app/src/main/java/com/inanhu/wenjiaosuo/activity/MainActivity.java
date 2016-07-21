@@ -2,6 +2,7 @@ package com.inanhu.wenjiaosuo.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
@@ -20,6 +21,9 @@ import com.inanhu.wenjiaosuo.fragment.EquityFragment;
 import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
@@ -53,6 +57,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         initView();
         initEvent();
@@ -85,6 +90,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 showTopBar(true);
                 setTopBarTitle(R.string.news);
                 showTopBarBack(false);
+                showTopBarRight(false);
 
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentNews.getmTopbarTitle());
@@ -111,6 +117,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 showTopBar(true);
                 setTopBarTitle(R.string.equity);
                 showTopBarBack(false);
+                showTopBarRight(false);
 
                 // 设置顶部分组信息
 //                setTopTitleText(mFragmentBlog.getmTopbarTitle());
@@ -145,6 +152,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 showTopBar(true);
                 setTopBarTitle(R.string.account);
                 showTopBarBack(false);
+                showTopBarRight(true);
+                setTopBarRight(R.string.proccess_search);
                 break;
             case 3:
                 // 显示对应的fragment
@@ -311,5 +320,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @OnClick(R.id.id_topbar_right)
+    public void onClick() {
+        startActivity(new Intent(MainActivity.this, WJSApplyStatusActivity.class));
     }
 }

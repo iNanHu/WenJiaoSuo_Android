@@ -8,6 +8,7 @@
     <string name="mine">我的</string>
     <string name="about_us">关于我们</string>
     <string name="social_share">我要分享</string>
+    <string name="proccess_search">进度查询</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
@@ -63,4 +64,7 @@
     <string name="about_us_help">使用帮助</string>
     <string name="about_us_contact">联系我们</string>
     <string name="about_us_rule">免责声明</string>
+
+
+    <string name="tip_wjs_status">温馨提示：一键开户获取的账号和密码为初始账号密码</string>
 </resources>

@@ -99,6 +99,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         showTopBarBack(true);
+        showTopBarRight(false);
         setTopBarTitle(R.string.login);
     }
 

@@ -56,6 +56,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
         ButterKnife.bind(this);
         showTopBarBack(true);
         setTopBarTitle(R.string.news_center);
+        showTopBarRight(false);
         // 初始化下拉刷新
         initRefreshLayout();
         // 初始化RecylerView
@@ -95,7 +96,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
                 closeProgressDialog();
                 ApiResponse<ArrayList<NewsBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<NewsBean>>>() {
                 }.getType());
-                if (rsp != null) {
+                if (rsp != null && rsp.isSuccess()) {
                     List<NewsBean> list = rsp.getData();
                     if (list != null) {
                         mAdapter.addNewDatas(list);

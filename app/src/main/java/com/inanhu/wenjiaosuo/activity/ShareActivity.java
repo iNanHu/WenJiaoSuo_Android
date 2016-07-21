@@ -32,6 +32,7 @@ public class ShareActivity extends BaseActivity {
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         showTopBarBack(true);
+        showTopBarRight(false);
         setTopBarTitle(R.string.social_share);
     }
 
