@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity {
                     if (rsp.isSuccess() && !TextUtils.isEmpty(data)) {
                         // 登录成功，保存token
                         GlobalValue.getInstance().saveGlobal(Constant.RequestKey.ACCESS_TOKEN, data);
-                        //TODO 登录成功保存用户名密码（MD5加密后）到本地文件，以后一般启动免登录
+                        // 登录成功保存用户名密码（MD5加密后）到本地文件，以后一般启动免登录
                         SPUtil.put(LoginActivity.this, Constant.SPKey.USERNAME, userPhone);
                         SPUtil.put(LoginActivity.this, Constant.SPKey.PASSWORD, MD5Util.getMD5String(userPwd));
                         // 登录成功获取用户基本信息

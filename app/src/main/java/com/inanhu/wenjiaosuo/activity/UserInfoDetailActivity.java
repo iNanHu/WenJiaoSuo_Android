@@ -93,7 +93,9 @@ public class UserInfoDetailActivity extends BaseActivity {
                 if (rsp.isSuccess()) { // 登出成功
                     // 清除当前用户的token
                     GlobalValue.getInstance().deleteGlobal(Constant.RequestKey.ACCESS_TOKEN);
-                    //TODO 清除当前文件中的免登录账号和密码
+                    // 清除当前用户对象
+                    GlobalValue.getInstance().deleteGlobal(MessageFlag.CURRENT_USER_INFO);
+                    // 清除当前文件中的免登录账号和密码
                     SPUtil.remove(UserInfoDetailActivity.this, Constant.SPKey.USERNAME);
                     SPUtil.remove(UserInfoDetailActivity.this, Constant.SPKey.PASSWORD);
                     // 返回

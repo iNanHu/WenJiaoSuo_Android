@@ -84,7 +84,7 @@ public class WJSListAdapter extends BGARecyclerViewAdapter<WJSBean> implements M
                         context.startActivity(intent);
                     }
                 } else {
-                    ToastUtil.showToast("完善用户详细信息后方可使用该功能");
+                    ToastUtil.showToast("登录并完善用户详细信息后方可使用该功能");
                 }
 
             }

@@ -159,7 +159,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                 String loginSuccess = data.getStringExtra(MessageFlag.LOGIN_SUCCESS);
                 if ("true".equals(loginSuccess)) { // 登录成功，更新界面
                     // 取出当前登录用户对象
-                    userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO);
+                    userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO, null);
                     if (userInfo != null) {
                         String username = userInfo.getUsername();
                         if (!TextUtils.isEmpty(username)) {
