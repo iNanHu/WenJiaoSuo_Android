@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.toolsfinal.ActivityManager;
 import cn.qqtheme.framework.picker.AddressPicker;
 
 /**
@@ -118,7 +119,6 @@ public class ProfileCompleteOneActivity extends BaseActivity {
         GlobalValue.getInstance().saveGlobal(MessageFlag.BRANCH_NAME, branchName);
 
         startActivity(new Intent(ProfileCompleteOneActivity.this, ProfileCompleteTwoActivity.class));
-
 
     }
 

@@ -7,8 +7,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:padding="20dp"
-        android:background="@color/title_bar_bg_color">
+        android:background="@color/title_bar_bg_color"
+        android:padding="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_avatar"
@@ -34,6 +34,94 @@
             android:visibility="visible"/>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/mine_favorites_btn"
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/list_item_selector"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/my_collection"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="会员中心"
+                android:textColor="@color/seting_text_color"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mine_open_account_btn"
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/list_item_selector"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fast_open_account"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="我的下级"
+                android:textColor="@color/seting_text_color"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mine_optional_btn"
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/list_item_selector"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/self_selector"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="我的自选"
+                android:textColor="@color/seting_text_color"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:layout_marginBottom="10dp"
+        android:background="@color/line_bj_color"/>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,21 +136,21 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/guanzhu_teacher_btn"
+                android:id="@+id/complete_profile_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
-                android:onClick="toGuanzhuTeacher"
+                android:onClick="toCompleteProfile"
                 android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:drawableLeft="@mipmap/attention_teacher"
+                    android:drawableLeft="@mipmap/evaluate"
                     android:drawablePadding="5.0dip"
-                    android:text="我关注的讲师"
+                    android:text="完善详细信息"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 

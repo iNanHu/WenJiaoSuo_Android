@@ -68,7 +68,7 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
 
             @Override
             public void onStart() {
-                showProgressDialog("证件照正面正在上传中");
+                showProgressDialog("证件照正面正在上传中", false);
             }
 
             @Override
@@ -87,7 +87,7 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
                     HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
                         @Override
                         public void onStart() {
-                            showProgressDialog("证件照反面正在上传中");
+                            showProgressDialog("证件照反面正在上传中", false);
                         }
 
                         @Override
@@ -106,7 +106,7 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
                                 HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
                                     @Override
                                     public void onStart() {
-                                        showProgressDialog("银行卡正面照正在上传中");
+                                        showProgressDialog("银行卡正面照正在上传中", false);
                                     }
 
                                     @Override
@@ -115,7 +115,7 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
                                         closeProgressDialog();
                                         ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
                                         }.getType());
-                                        if (rsp.isSuccess()){ // 至此文件上传结束
+                                        if (rsp.isSuccess()) { // 至此文件上传结束
                                             Upfile upfile = rsp.getData();
                                             if (upfile != null) {
                                                 imageUrls.put(Constant.RequestKey.BANK_CARD, upfile.getUrl());
@@ -134,36 +134,45 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
 
     /**
      * 最终提交
-     *
      */
-    private void commit(){
-        ToastUtil.showToast("提交啦");
+    private void commit() {
         RequestParams params = new RequestParams(this);
-        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
+        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN, ""));
 //        params.addFormDataPart(Constant.RequestKey.UID, );
-        params.addFormDataPart(Constant.RequestKey.REALNAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.REALNAME));
-        params.addFormDataPart(Constant.RequestKey.SEX, (int) GlobalValue.getInstance().getGlobal(MessageFlag.GENDER));
-        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_TYPE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_TYPE));
-        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_NUMBER));
-        params.addFormDataPart(Constant.RequestKey.TELPHONE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.TELPHONE));
-        params.addFormDataPart(Constant.RequestKey.ADDRESS, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ADDRESS));
-        params.addFormDataPart(Constant.RequestKey.BANK, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK));
-        params.addFormDataPart(Constant.RequestKey.ACCOUNT_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ACCOUNT_NUMBER));
-        params.addFormDataPart(Constant.RequestKey.BANK_LOCATION, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK_LOCATION));
-        params.addFormDataPart(Constant.RequestKey.BRANCH_NAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BRANCH_NAME));
+        params.addFormDataPart(Constant.RequestKey.REALNAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.REALNAME, ""));
+        params.addFormDataPart(Constant.RequestKey.SEX, (int) GlobalValue.getInstance().getGlobal(MessageFlag.GENDER, 1));
+        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_TYPE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_TYPE, ""));
+        params.addFormDataPart(Constant.RequestKey.CERTIFICATE_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.CERTIFICATE_NUMBER, ""));
+        params.addFormDataPart(Constant.RequestKey.TELPHONE, (String) GlobalValue.getInstance().getGlobal(MessageFlag.TELPHONE, ""));
+        params.addFormDataPart(Constant.RequestKey.ADDRESS, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ADDRESS, ""));
+        params.addFormDataPart(Constant.RequestKey.BANK, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK, ""));
+        params.addFormDataPart(Constant.RequestKey.ACCOUNT_NUMBER, (String) GlobalValue.getInstance().getGlobal(MessageFlag.ACCOUNT_NUMBER, ""));
+        params.addFormDataPart(Constant.RequestKey.BANK_LOCATION, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BANK_LOCATION, ""));
+        params.addFormDataPart(Constant.RequestKey.BRANCH_NAME, (String) GlobalValue.getInstance().getGlobal(MessageFlag.BRANCH_NAME, ""));
         params.addFormDataPart(Constant.RequestKey.CERTIFICATE_FRONT_IMAGE, imageUrls.get(Constant.RequestKey.CERTIFICATE_FRONT));
         params.addFormDataPart(Constant.RequestKey.CERTIFICATE_BACK_IMAGE, imageUrls.get(Constant.RequestKey.CERTIFICATE_BACK));
         params.addFormDataPart(Constant.RequestKey.BANK_CARD_IMAGE, imageUrls.get(Constant.RequestKey.BANK_CARD));
-        HttpEngine.doPost(URLUtil.UserApi.COMPLETE, params, new BaseHttpRequestCallback(){
+        HttpEngine.doPost(URLUtil.UserApi.COMPLETE, params, new BaseHttpRequestCallback() {
             @Override
             public void onStart() {
-                showProgressDialog("完整资料上传中");
+                showProgressDialog("完整资料上传中", false);
             }
 
             @Override
             public void onResponse(String response, Headers headers) {
                 closeProgressDialog();
                 LogUtil.e(TAG, response);
+                ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
+                }.getType());
+                String data = rsp.getData();
+                if (rsp.isSuccess()) { // 完善资料成功
+                    ToastUtil.showToast("完善资料成功");
+                    // 注册成功后关闭注册的两个页面
+                    activityManagerUtil.finishActivity(ProfileCompleteOneActivity.class);
+                    activityManagerUtil.finishActivity(ProfileCompleteTwoActivity.this);
+                } else { // 注册失败
+                    ToastUtil.showToast("完善资料失败 " + data);
+                }
             }
         });
     }

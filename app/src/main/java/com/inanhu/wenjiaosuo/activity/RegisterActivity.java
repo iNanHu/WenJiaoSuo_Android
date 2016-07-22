@@ -90,8 +90,13 @@ public class RegisterActivity extends BaseActivity {
                 public void onResponse(String response, Headers headers) {
                     ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
                     }.getType());
-                    LogUtil.e(TAG, response);
-                    LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
+                    String data = rsp.getData();
+                    if (rsp.isSuccess()) { // 注册成功，返回登录界面
+                        ToastUtil.showToast("注册成功");
+                        activityManagerUtil.finishActivity(RegisterActivity.this);
+                    } else {
+                        ToastUtil.showToast("注册失败 " + data);
+                    }
                 }
             });
         } else {

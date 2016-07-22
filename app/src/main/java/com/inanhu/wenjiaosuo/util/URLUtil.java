@@ -36,12 +36,14 @@ public class URLUtil {
         public static final String USER = API_SERVER + "/user";
         public static final String REGISTER = USER + "/register";
         public static final String LOGIN = USER + "/login";
+        public static final String LOGOUT = USER + "/logout";
         public static final String COMPLETE = USER + "/complete";
         public static final String INFO = USER + "/info";
         public static final String APPLY_WJS = USER + "/apply_wjs";
         public static final String RESET_PASS = USER + "/reset_pass";
         public static final String GETQR = USER + "/getqr";
         public static final String CHANGE_AVATAR = USER + "/change_avatar";
+        public static final String GET_APPLY_STATUS = USER + "/get_apply_status";
     }
 
     /**
@@ -70,6 +72,5 @@ public class URLUtil {
     public static final class WJSApi {
         public static final String WJS = API_SERVER + "/wjs";
         public static final String GETLIST = WJS + "/getlist";
-        public static final String GET_APPLY_STATUS = WJS + "/get_apply_status";
     }
 }

@@ -2,18 +2,33 @@ package com.inanhu.wenjiaosuo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
+import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.util.HttpEngine;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+import com.inanhu.wenjiaosuo.util.MD5Util;
+import com.inanhu.wenjiaosuo.util.SPUtil;
+import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.inanhu.wenjiaosuo.util.URLUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.RequestParams;
 import cn.jpush.android.api.JPushInterface;
+import okhttp3.Headers;
 
 public class SplashActivity extends BaseActivity {
 
@@ -34,7 +49,31 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationStart(Animation animation) {
+                String userPhone = (String) SPUtil.get(SplashActivity.this, Constant.SPKey.USERNAME, "");
+                String userPwd = (String) SPUtil.get(SplashActivity.this, Constant.SPKey.PASSWORD, "");
+                if (!TextUtils.isEmpty(userPhone) && !TextUtils.isEmpty(userPwd)) { // 本地文件中有免登录账号的用户名和密码则去做登录
+                    RequestParams params = new RequestParams(SplashActivity.this);
+                    params.addFormDataPart(Constant.RequestKey.NAME, userPhone);
+                    params.addFormDataPart(Constant.RequestKey.LOGIN_PASSWORD, userPwd);
+                    if (isNetConnected()) {
+                        HttpEngine.doPost(URLUtil.UserApi.LOGIN, params, new BaseHttpRequestCallback() {
 
+                            @Override
+                            public void onResponse(String response, Headers headers) {
+                                ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
+                                }.getType());
+                                String data = rsp.getData();
+                                if (rsp.isSuccess() && !TextUtils.isEmpty(data)) {
+                                    // 登录成功，保存token
+                                    ToastUtil.showToast("登录成功");
+                                    GlobalValue.getInstance().saveGlobal(Constant.RequestKey.ACCESS_TOKEN, data);
+                                }
+                            }
+                        });
+                    } else {
+                        ToastUtil.showToast(R.string.toast_network_unconnceted);
+                    }
+                }
             }
 
             @Override

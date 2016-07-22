@@ -45,8 +45,8 @@ public class Constant {
         public static final String PAGE = "page"; // 页码
         public static final String PAGESIZE = "pagesize"; // 每页显示条数
 
-
-//        public static final String USERNAME = "";
+        // 文交所id
+        public static final String WJSID = "wjsid";
 //        public static final String USERNAME = "";
 //        public static final String USERNAME = "";
 
@@ -55,5 +55,9 @@ public class Constant {
 //        public static final String USERNAME = "";
     }
 
+    public class SPKey {
+        public static final String USERNAME = "username";
+        public static final String PASSWORD = "password";
+    }
 
 }

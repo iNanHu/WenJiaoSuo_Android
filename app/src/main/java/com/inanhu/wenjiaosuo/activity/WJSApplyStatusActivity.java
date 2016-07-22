@@ -66,19 +66,21 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
 
     private void getData() {
         RequestParams params = new RequestParams(this);
-        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
-        HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
+        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN, ""));
+        HttpEngine.doGet(URLUtil.UserApi.GET_APPLY_STATUS, params, new BaseHttpRequestCallback() {
             @Override
             public void onResponse(String response, Headers headers) {
                 LogUtil.e(TAG, response);
-//                ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
-//                }.getType());
-//                if (rsp != null && rsp.isSuccess()) {
-//                    wjsStatusBeanList = rsp.getData();
-//                    if (wjsStatusBeanList != null) {
-//                        mAdapter.setDatas(wjsStatusBeanList);
-//                    }
-//                }
+                ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
+                }.getType());
+                if (rsp != null && rsp.isSuccess()) {
+                    wjsStatusBeanList = rsp.getData();
+                    if (wjsStatusBeanList != null) {
+                        mAdapter.setDatas(wjsStatusBeanList);
+                    }
+                } else {
+                    ToastUtil.showToast("进度查询失败");
+                }
             }
 
         });

@@ -20,6 +20,7 @@ import com.inanhu.wenjiaosuo.fragment.AccountFragment;
 import com.inanhu.wenjiaosuo.fragment.EquityFragment;
 import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
+import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 
 import butterknife.ButterKnife;
@@ -324,6 +325,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
 
     @OnClick(R.id.id_topbar_right)
     public void onClick() {
-        startActivity(new Intent(MainActivity.this, WJSApplyStatusActivity.class));
+        if (AccountUtil.isUserProfileComplete()){ // 完善了详细信息的用户才能使用一账通模块
+            startActivity(new Intent(MainActivity.this, WJSApplyStatusActivity.class));
+        } else {
+            ToastUtil.showToast("完善用户详细信息后方可使用该功能");
+        }
     }
 }

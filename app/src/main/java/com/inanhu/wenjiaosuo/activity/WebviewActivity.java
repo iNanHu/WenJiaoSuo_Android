@@ -63,7 +63,7 @@ public class WebviewActivity extends BaseActivity {
 
                     @Override
                     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                        showProgressDialog("");
+                        showProgressDialog("", true);
                     }
 
                     @Override
@@ -93,7 +93,7 @@ public class WebviewActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_back_btn:
-                finish();
+                activityManagerUtil.finishActivity(WebviewActivity.this);
                 break;
             case R.id.tv_share_btn:
                 final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]{SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE};

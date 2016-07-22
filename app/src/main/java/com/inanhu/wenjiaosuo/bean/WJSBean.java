@@ -6,19 +6,27 @@ import java.io.Serializable;
  * Created by Jason on 2016/7/21.
  */
 public class WJSBean implements Serializable {
-
-
     /**
+     * data_id : 1
      * logo : http://www.youbicard.com/logo.jpg
      * link : http://www.youbicard.com/
      * name : 邮币卡之家
      * onekey : 2
      */
 
+    private String data_id;
     private String logo;
     private String link; // 支持一键开户的就为官网地址，不支持的则为开户地址
     private String name;
     private String onekey; // 是否支持一键注册 1是 2 否
+
+    public String getData_id() {
+        return data_id;
+    }
+
+    public void setData_id(String data_id) {
+        this.data_id = data_id;
+    }
 
     public String getLogo() {
         return logo;
@@ -51,4 +59,5 @@ public class WJSBean implements Serializable {
     public void setOnekey(String onekey) {
         this.onekey = onekey;
     }
+
 }

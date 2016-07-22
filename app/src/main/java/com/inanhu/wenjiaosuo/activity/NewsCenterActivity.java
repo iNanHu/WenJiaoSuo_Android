@@ -88,7 +88,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
 
             @Override
             public void onStart() {
-                showProgressDialog("");
+                showProgressDialog("", true);
             }
 
             @Override

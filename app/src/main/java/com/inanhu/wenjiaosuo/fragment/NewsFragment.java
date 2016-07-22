@@ -23,8 +23,11 @@ import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.Banner;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
+import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.DateUtil;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.ImageLoader;
@@ -57,6 +60,9 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     ConvenientBanner convenientBanner;
     @BindView(R.id.sv_news_container)
     ScrollView scrollviewContent;
+
+    // 当前登录用户
+    private UserInfo userInfo;
 
     /**
      * 新闻模块
@@ -112,9 +118,32 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         LogUtil.e(TAG, "===onCreateView===");
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
+//        init();
         initBanner();
         initRefreshLayout();
         return view;
+    }
+
+    private void init() {
+        if (AccountUtil.isLogin()) {
+            // 登录成功获取用户基本信息
+            RequestParams params = new RequestParams(this);
+            params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
+            HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    ApiResponse<UserInfo> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<UserInfo>>() {
+                    }.getType());
+                    if (rsp != null && rsp.isSuccess()) {
+                        userInfo = rsp.getData();
+                        if (userInfo != null) { // 保存当前用户到全局变量
+                            GlobalValue.getInstance().saveGlobal(MessageFlag.CURRENT_USER_INFO, userInfo);
+                        }
+
+                    }
+                }
+            });
+        }
     }
 
 

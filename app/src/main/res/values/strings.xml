@@ -9,6 +9,7 @@
     <string name="about_us">关于我们</string>
     <string name="social_share">我要分享</string>
     <string name="proccess_search">进度查询</string>
+    <string name="account_manage">账户管理</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
@@ -45,7 +46,7 @@
     <string name="certificate_back_image">证件反面照</string>
     <string name="bank_card_image">银行卡正面照</string>
     <string name="tip_upload_certificate_image">请依次拍摄证件照正面，证件照反面，银行卡正面照上传</string>
-    
+
 
     <!--首页菜单-->
     <string name="news_menu_dzp">电子盘</string>
@@ -58,7 +59,7 @@
     <string name="news_menu_xh">现货</string>
 
     <string name="news_center">新闻中心</string>
-    
+
     <!-- 关于我们 -->
     <string name="about_us_intro">产品介绍</string>
     <string name="about_us_cooperate">商务合作</string>

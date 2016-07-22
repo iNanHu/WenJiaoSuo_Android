@@ -143,10 +143,11 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
     /**
      * 显示进度条
      *
-     * @param message
+     * @param message 显示文字
+     * @param cancelable 是否可取消
      */
-    protected void showProgressDialog(String message) {
-        dialog = CustomProgress.show(this, message, true, null);
+    protected void showProgressDialog(String message, boolean cancelable) {
+        dialog = CustomProgress.show(this, message, cancelable, null);
     }
 
     /**

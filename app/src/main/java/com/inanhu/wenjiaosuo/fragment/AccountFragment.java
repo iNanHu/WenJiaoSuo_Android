@@ -15,9 +15,14 @@ import com.inanhu.wenjiaosuo.adapter.EquityListAdapter;
 import com.inanhu.wenjiaosuo.adapter.WJSListAdapter;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
+import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.bean.EquityDataBean;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
 import com.inanhu.wenjiaosuo.bean.WJSBean;
+import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
@@ -31,6 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.RequestParams;
 import okhttp3.Headers;
 
 
@@ -48,11 +54,35 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
 
     private List<WJSBean> wjsDatas = new ArrayList<>();
     private WJSListAdapter mAdapter;
+    // 当前登录用户
+    private UserInfo userInfo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        refreshData();
+        init();
+    }
+
+    private void init() {
+        if (AccountUtil.isLogin()) {
+            // 登录成功获取用户基本信息
+            RequestParams params = new RequestParams(this);
+            params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
+            HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    ApiResponse<UserInfo> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<UserInfo>>() {
+                    }.getType());
+                    if (rsp != null && rsp.isSuccess()) {
+                        userInfo = rsp.getData();
+                        if (userInfo != null) { // 保存当前用户到全局变量
+                            GlobalValue.getInstance().saveGlobal(MessageFlag.CURRENT_USER_INFO, userInfo);
+                        }
+
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -68,6 +98,7 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
         showProgressDialog("数据加载中...");
         initRefreshLayout();
         initRecyclerView();
+        refreshData();
         return view;
     }
 

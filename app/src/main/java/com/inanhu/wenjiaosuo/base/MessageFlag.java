@@ -29,6 +29,7 @@ public class MessageFlag {
 
     public static final String CURRENT_USER_INFO = "current_user_info"; // 当前登录用户对象
     public static final String LOGIN_SUCCESS  = "login_success";
+    public static final String LOGOUT_SUCCESS  = "logout_success";
 
 
     //    public static final String a = "";
