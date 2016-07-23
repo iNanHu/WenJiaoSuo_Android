@@ -118,7 +118,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         LogUtil.e(TAG, "===onCreateView===");
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         ButterKnife.bind(this, view);
-//        init();
+        init();
         initBanner();
         initRefreshLayout();
         return view;
@@ -204,7 +204,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onResponse(String response, Headers headers) {
                 ApiResponse<ArrayList<NewsBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<NewsBean>>>() {
                 }.getType());
-                if (rsp != null) {
+                if (rsp != null && rsp.isSuccess()) {
                     news = rsp.getData();
                     setNews();
                 }

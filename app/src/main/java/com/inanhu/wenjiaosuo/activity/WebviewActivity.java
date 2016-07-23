@@ -3,6 +3,7 @@ package com.inanhu.wenjiaosuo.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,10 +12,13 @@ import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
@@ -38,6 +42,11 @@ public class WebviewActivity extends BaseActivity {
     // Webview入口地址
     private String url;
 
+    // 软文标题（分享用）
+    private String title = "";
+    // 当前用户
+    private UserInfo userInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +54,8 @@ public class WebviewActivity extends BaseActivity {
         ButterKnife.bind(this);
         intent = getIntent();
         setTopBar();
+        // 获取当前用户
+        userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO, null);
         loadWebview();
     }
 
@@ -68,8 +79,10 @@ public class WebviewActivity extends BaseActivity {
 
                     @Override
                     public void onPageFinished(WebView view, String url) {
+                        title = view.getTitle();
                         closeProgressDialog();
                     }
+
                 });
             }
         }
@@ -96,10 +109,18 @@ public class WebviewActivity extends BaseActivity {
                 activityManagerUtil.finishActivity(WebviewActivity.this);
                 break;
             case R.id.tv_share_btn:
-                final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]{SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE};
-                new ShareAction(this).setDisplayList(displaylist)
+//                http://wmyzt.applinzi.com/article/5.html
+                if (userInfo != null) {
+                    String inviteNumber = userInfo.getInvite_number();
+                    if (!TextUtils.isEmpty(inviteNumber)) { //有邀请码的用户分享的软文携带邀请码
+                        url = url + "?invite=" + inviteNumber;
+                        LogUtil.e(TAG, url);
+                    }
+                }
+                new ShareAction(WebviewActivity.this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
+                        .withTitle(title)
                         .withTargetUrl(url)
-                        .setListenerList(umShareListener)
+                        .setCallback(umShareListener)
                         .open();
                 break;
         }
@@ -124,4 +145,19 @@ public class WebviewActivity extends BaseActivity {
             ToastUtil.showToast("分享取消了");
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        LogUtil.d("result", "onActivityResult");
+    }
+
+    @Override
+    protected void onDestroy() {
+        LogUtil.e(TAG, "==onDestroy===");
+        super.onDestroy();
+        url = null;
+    }
 }

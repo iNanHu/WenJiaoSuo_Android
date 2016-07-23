@@ -3,7 +3,10 @@ package com.inanhu.wenjiaosuo.activity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
@@ -47,13 +50,20 @@ public class FindPwdActivity extends BaseActivity {
             return;
         }
         RequestParams params = new RequestParams(this);
-//        params.addFormDataPart(Constant.Key.USERNAME, userPhone);
         params.addFormDataPart(Constant.RequestKey.EMAIL, userEmail);
         if (isNetConnected()) {
-            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new BaseHttpRequestCallback(){
+            HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new BaseHttpRequestCallback() {
                 @Override
                 public void onResponse(String response, Headers headers) {
-                    super.onResponse(response, headers);
+                    ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
+                    }.getType());
+                    LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
+                    String data = rsp.getData();
+                    if (rsp.isSuccess()) {
+                        ToastUtil.showToast("请登录注册邮箱重置登录密码");
+                    } else {
+                        ToastUtil.showToast("找回密码失败 " + data);
+                    }
                 }
             });
         } else {

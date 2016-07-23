@@ -175,4 +175,10 @@ public class ShareActivity extends BaseActivity {
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         LogUtil.d("result", "onActivityResult");
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        url = null;
+    }
 }
