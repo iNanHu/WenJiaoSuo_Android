@@ -89,7 +89,11 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 
     @OnClick(R.id.to_share)
     public void toShare() {
-        startActivity(new Intent(getActivity(), ShareActivity.class));
+        if (AccountUtil.isUserProfileComplete()) { // 登录并完善用户详细信息后方可使用该功能
+            startActivity(new Intent(getActivity(), ShareActivity.class));
+        } else {
+            ToastUtil.showToast("登录并完善用户详细信息后方可分享注册");
+        }
     }
 
     @Override
@@ -130,7 +134,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                                 tvLoginNow.setText(username);
                             }
                             String inviteNumber = userInfo.getInvite_number();
-                            if (!TextUtils.isEmpty(inviteNumber)){ // 有邀请码则表明用户已经完善详细资料
+                            if (!TextUtils.isEmpty(inviteNumber)) { // 有邀请码则表明用户已经完善详细资料
                                 completeProfileBtn.setVisibility(View.GONE);
                             } else {
                                 completeProfileBtn.setVisibility(View.VISIBLE);
@@ -166,7 +170,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                             tvLoginNow.setText(username);
                         }
                         String inviteNumber = userInfo.getInvite_number();
-                        if (!TextUtils.isEmpty(inviteNumber)){ // 有邀请码则表明用户已经完善详细资料
+                        if (!TextUtils.isEmpty(inviteNumber)) { // 有邀请码则表明用户已经完善详细资料
                             completeProfileBtn.setVisibility(View.GONE);
                         } else {
                             completeProfileBtn.setVisibility(View.VISIBLE);

@@ -55,8 +55,6 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
         showTopBarRight(false);
         setTopBarTitle(R.string.proccess_search);
 
-        ToastUtil.showToast("登录状态：" + AccountUtil.isLogin());
-
         // 初始化下拉刷新
         initRefreshLayout();
         // 初始化RecylerView
@@ -67,23 +65,33 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
     private void getData() {
         RequestParams params = new RequestParams(this);
         params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN, ""));
-        HttpEngine.doGet(URLUtil.UserApi.GET_APPLY_STATUS, params, new BaseHttpRequestCallback() {
-            @Override
-            public void onResponse(String response, Headers headers) {
-                LogUtil.e(TAG, response);
-                ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
-                }.getType());
-                if (rsp != null && rsp.isSuccess()) {
-                    wjsStatusBeanList = rsp.getData();
-                    if (wjsStatusBeanList != null) {
-                        mAdapter.setDatas(wjsStatusBeanList);
+        if (isNetConnected()) {
+            HttpEngine.doGet(URLUtil.UserApi.GET_APPLY_STATUS, params, new BaseHttpRequestCallback() {
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    LogUtil.e(TAG, response);
+                    ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
+                    }.getType());
+                    if (rsp != null && rsp.isSuccess()) {
+                        wjsStatusBeanList = rsp.getData();
+                        if (wjsStatusBeanList != null) {
+                            mAdapter.setDatas(wjsStatusBeanList);
+                        }
+                    } else {
+                        ToastUtil.showToast("进度查询失败");
                     }
-                } else {
-                    ToastUtil.showToast("进度查询失败");
+                    if (wjsStatusContainer.isRefreshing()) {
+                        wjsStatusContainer.setRefreshing(false);
+                    }
                 }
-            }
 
-        });
+            });
+        } else {
+            ToastUtil.showToast(R.string.toast_network_unconnceted);
+            if (wjsStatusContainer.isRefreshing()) {
+                wjsStatusContainer.setRefreshing(false);
+            }
+        }
     }
 
     private void initRefreshLayout() {

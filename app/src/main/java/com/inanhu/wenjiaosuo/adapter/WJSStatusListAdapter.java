@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.bean.WJSStatusBean;
+import com.inanhu.wenjiaosuo.util.ImageLoader;
 
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
@@ -22,6 +23,14 @@ public class WJSStatusListAdapter extends BGARecyclerViewAdapter<WJSStatusBean> 
 
     @Override
     protected void fillData(BGAViewHolderHelper bgaViewHolderHelper, int i, WJSStatusBean wjsStatusBean) {
+        String wjsName = wjsStatusBean.getName();
+        if (!TextUtils.isEmpty(wjsName)) {
+            bgaViewHolderHelper.setText(R.id.tv_wjs_name, wjsName);
+        }
+        String logo = wjsStatusBean.getLogo();
+        if (!TextUtils.isEmpty(logo)) {
+            ImageLoader.with(R.mipmap.nanjing, logo, bgaViewHolderHelper.getImageView(R.id.iv_wjs_logo));
+        }
         String statusCode = wjsStatusBean.getStatus(); // "1"-待分配  "2"-已分配  "3"-已完成  "4"-已驳回
         String status = "待分配";
         View view = bgaViewHolderHelper.getView(R.id.ll_wjs_status_success);
@@ -33,6 +42,7 @@ public class WJSStatusListAdapter extends BGARecyclerViewAdapter<WJSStatusBean> 
             } else if ("3".equals(statusCode)) {
                 status = "已完成";
                 view.setVisibility(View.VISIBLE);
+                bgaViewHolderHelper.setText(R.id.tv_wjs_username, "账号：" + wjsStatusBean.getWjsusername()).setText(R.id.tv_wjs_passwrod, "密码：" + wjsStatusBean.getWjspass());
             } else if ("4".equals(statusCode)) {
                 status = "已驳回";
             }

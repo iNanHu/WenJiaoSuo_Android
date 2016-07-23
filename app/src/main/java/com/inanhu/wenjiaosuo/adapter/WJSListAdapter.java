@@ -71,7 +71,7 @@ public class WJSListAdapter extends BGARecyclerViewAdapter<WJSBean> implements M
                                 }.getType());
                                 String data = rsp.getData();
                                 if (rsp.isSuccess()){ // 提交申请成功
-
+                                    ToastUtil.showToast("提交申请成功");
                                 } else {
                                     ToastUtil.showToast("提交申请失败 " + data);
                                 }

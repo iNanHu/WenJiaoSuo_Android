@@ -5,11 +5,18 @@ package com.inanhu.wenjiaosuo.util;
  */
 public class URLUtil {
 
-    public static final String APP_SERVER = "http://wmyzt.applinzi.com";
     /**
      * APP服务器地址
      */
+    public static final String APP_SERVER = "http://wmyzt.applinzi.com";
+    /**
+     * API地址
+     */
     public static final String API_SERVER = APP_SERVER + "/api";
+    /**
+     * APP分享注册地址
+     */
+    public static final String SHARE_REGISTER = APP_SERVER + "/register.html?invite=";
     /**
      * 邮币卡之家
      */

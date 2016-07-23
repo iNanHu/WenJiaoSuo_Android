@@ -91,6 +91,7 @@ public class LoginActivity extends BaseActivity {
                         HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
                             @Override
                             public void onResponse(String response, Headers headers) {
+                                LogUtil.e(TAG, response);
                                 ApiResponse<UserInfo> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<UserInfo>>() {
                                 }.getType());
                                 if (rsp != null && rsp.isSuccess()) {

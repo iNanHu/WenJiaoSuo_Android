@@ -60,15 +60,17 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/tv_wjs_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="账号：123456"/>
 
             <TextView
+                android:id="@+id/tv_wjs_passwrod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="密码：123456"/>
+                android:text="w123456"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

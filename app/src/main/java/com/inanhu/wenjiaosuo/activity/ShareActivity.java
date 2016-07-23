@@ -5,8 +5,14 @@ import android.os.Bundle;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
+import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
+import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
+import com.inanhu.wenjiaosuo.util.URLUtil;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -15,6 +21,9 @@ import com.umeng.socialize.media.UMImage;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.RequestParams;
+import okhttp3.Headers;
 
 /**
  * 我要分享界面
@@ -23,8 +32,11 @@ import butterknife.OnClick;
  */
 public class ShareActivity extends BaseActivity {
 
-    UMImage image = new UMImage(this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-    String url = "http://www.baidu.com";
+    UMImage image = new UMImage(this, R.mipmap.app_icon);
+    String url = URLUtil.SHARE_REGISTER;
+
+    // 当前登录用户
+    private UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +46,29 @@ public class ShareActivity extends BaseActivity {
         showTopBarBack(true);
         showTopBarRight(false);
         setTopBarTitle(R.string.social_share);
+        // 获取当前登录用户
+        userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO, null);
+        // 拼接分享注册url
+        if (userInfo != null) {
+            url += userInfo.getInvite_number();
+        }
+//        generateQR();
+    }
+
+    /**
+     * 获取用户推荐注册二维码
+     */
+    private void generateQR() {
+        if (userInfo != null) {
+            RequestParams params = new RequestParams(this);
+            params.addFormDataPart(Constant.RequestKey.INVITE, userInfo.getInvite_number());
+            HttpEngine.doPost(URLUtil.UserApi.GETQR, params, new BaseHttpRequestCallback() {
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    LogUtil.e(TAG, response);
+                }
+            });
+        }
     }
 
     /**
@@ -41,14 +76,18 @@ public class ShareActivity extends BaseActivity {
      */
     @OnClick(R.id.wexinChat)
     public void shareToWechat() {
-        new ShareAction(this)
-                .setPlatform(SHARE_MEDIA.WEIXIN)
-                .setCallback(umShareListener)
-                .withTitle("Title")
-                .withText("Text")
-                .withTargetUrl(url)
-                .withMedia(image)
-                .share();
+        if (userInfo != null) {
+            new ShareAction(this)
+                    .setPlatform(SHARE_MEDIA.WEIXIN)
+                    .setCallback(umShareListener)
+                    .withTitle(getResources().getString(R.string.app_name))
+                    .withText("分享注册赢福利啦")
+                    .withTargetUrl(url)
+                    .withMedia(image)
+                    .share();
+        } else {
+            ToastUtil.showToast("分享失败");
+        }
     }
 
     /**
@@ -56,14 +95,18 @@ public class ShareActivity extends BaseActivity {
      */
     @OnClick(R.id.wexinCircle)
     public void shareToWXCircle() {
-        new ShareAction(this)
-                .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                .setCallback(umShareListener)
-                .withTitle("Title")
-                .withText("Text")
-                .withTargetUrl(url)
-                .withMedia(image)
-                .share();
+        if (userInfo != null) {
+            new ShareAction(this)
+                    .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                    .setCallback(umShareListener)
+                    .withTitle(getResources().getString(R.string.app_name))
+                    .withText("分享注册赢福利啦")
+                    .withTargetUrl(url)
+                    .withMedia(image)
+                    .share();
+        } else {
+            ToastUtil.showToast("分享失败");
+        }
     }
 
     /**
@@ -71,14 +114,18 @@ public class ShareActivity extends BaseActivity {
      */
     @OnClick(R.id.qqFrinds)
     public void shareToQQ() {
-        new ShareAction(this)
-                .setPlatform(SHARE_MEDIA.QQ)
-                .setCallback(umShareListener)
-                .withTitle("Title")
-                .withText("Text")
-                .withTargetUrl(url)
-                .withMedia(image)
-                .share();
+        if (userInfo != null) {
+            new ShareAction(this)
+                    .setPlatform(SHARE_MEDIA.QQ)
+                    .setCallback(umShareListener)
+                    .withTitle(getResources().getString(R.string.app_name))
+                    .withText("分享注册赢福利啦")
+                    .withTargetUrl(url)
+                    .withMedia(image)
+                    .share();
+        } else {
+            ToastUtil.showToast("分享失败");
+        }
     }
 
     /**
@@ -86,14 +133,18 @@ public class ShareActivity extends BaseActivity {
      */
     @OnClick(R.id.qqZone)
     public void shareToQZone() {
-        new ShareAction(this)
-                .setPlatform(SHARE_MEDIA.QZONE)
-                .setCallback(umShareListener)
-                .withTitle("Title")
-                .withText("Text")
-                .withTargetUrl(url)
-                .withMedia(image)
-                .share();
+        if (userInfo != null) {
+            new ShareAction(this)
+                    .setPlatform(SHARE_MEDIA.QZONE)
+                    .setCallback(umShareListener)
+                    .withTitle(getResources().getString(R.string.app_name))
+                    .withText("分享注册赢福利啦")
+                    .withTargetUrl(url)
+                    .withMedia(image)
+                    .share();
+        } else {
+            ToastUtil.showToast("分享失败");
+        }
     }
 
     private UMShareListener umShareListener = new UMShareListener() {

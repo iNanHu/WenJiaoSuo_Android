@@ -184,12 +184,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mRereshLayout.setRefreshing(false);
-            }
-        }, 5000);
+        getData();
     }
 
     private void getData() {
@@ -212,6 +207,9 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 if (rsp != null) {
                     news = rsp.getData();
                     setNews();
+                }
+                if (mRereshLayout.isRefreshing()){
+                    mRereshLayout.setRefreshing(false);
                 }
             }
         });

@@ -74,9 +74,11 @@ public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.O
                 public void onResponse(String response, Headers headers) {
                     closeProgressDialog();
                     LogUtil.e(TAG, response);
-                    equityDatas = new Gson().fromJson(response, new TypeToken<List<EquityDataBean>>() {}.getType());
-                    LogUtil.e(TAG, equityDatas.size());
-                    mAdapter.setDatas(equityDatas);
+                    equityDatas = new Gson().fromJson(response, new TypeToken<List<EquityDataBean>>() {
+                    }.getType());
+                    if (equityDatas != null && equityDatas.size() > 0) {
+                        mAdapter.setDatas(equityDatas);
+                    }
                     if (mRereshLayout.isRefreshing()) {
                         mRereshLayout.setRefreshing(false);
                     }
@@ -84,6 +86,9 @@ public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.O
             });
         } else {
             ToastUtil.showToast(R.string.toast_network_unconnceted);
+            if (mRereshLayout.isRefreshing()) {
+                mRereshLayout.setRefreshing(false);
+            }
         }
     }
 

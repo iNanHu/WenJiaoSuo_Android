@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.inanhu.wenjiaosuo.activity.WebviewActivity;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
+import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 
 import org.json.JSONException;
@@ -21,6 +22,9 @@ import cn.jpush.android.api.JPushInterface;
 /**
  * 自定义接收器
  * <p/>
+ * 一期使用发送通知接口
+ * <p/>
+ * <p/>
  * 如果不定义这个 Receiver，则：
  * 1) 默认用户会打开主界面
  * 2) 接收不到自定义消息
@@ -31,37 +35,38 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        String url = null;
-        Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+        LogUtil.e(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
             String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-            Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
+            LogUtil.e(TAG, "[MyReceiver] 接收Registration Id : " + regId);
             //send the Registration Id to your server...
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-//            processCustomMessage(context, bundle);
+            LogUtil.e(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+
+        } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+            LogUtil.e(TAG, "[MyReceiver] 接收到推送下来的通知");
+            int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+            LogUtil.e(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+
+        } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
+            LogUtil.e(TAG, "[MyReceiver] 用户点击打开了通知");
             String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            String url = null;
             try {
                 JSONObject jsonObject = new JSONObject(extra);
                 url = jsonObject.getString("url");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-        } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
-            int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
-
-        } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
             if (!TextUtils.isEmpty(url)) {
+                LogUtil.e(TAG, url);
                 Intent intent1 = new Intent();
                 intent1.setClass(context, WebviewActivity.class);
                 intent1.putExtra(MessageFlag.WEBVIEW_LOAD_URL, url);
                 intent1.putExtra(MessageFlag.IS_SHOW_TOPBAR_SHARE, true);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent1);
             }
 
@@ -73,14 +78,14 @@ public class MyReceiver extends BroadcastReceiver {
 //            context.startActivity(i);
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
+            LogUtil.e(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
 
         } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
             boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
-            Log.w(TAG, "[MyReceiver]" + intent.getAction() + " connected state change to " + connected);
+            LogUtil.e(TAG, "[MyReceiver]" + intent.getAction() + " connected state change to " + connected);
         } else {
-            Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
+            LogUtil.e(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
     }
 
