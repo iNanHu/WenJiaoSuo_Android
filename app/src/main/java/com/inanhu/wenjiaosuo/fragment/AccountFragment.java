@@ -11,15 +11,13 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.adapter.EquityListAdapter;
+import com.inanhu.wenjiaosuo.adapter.OneKeyWJSListAdapter;
 import com.inanhu.wenjiaosuo.adapter.WJSListAdapter;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
-import com.inanhu.wenjiaosuo.bean.EquityDataBean;
-import com.inanhu.wenjiaosuo.bean.NewsBean;
 import com.inanhu.wenjiaosuo.bean.UserInfo;
 import com.inanhu.wenjiaosuo.bean.WJSBean;
 import com.inanhu.wenjiaosuo.util.AccountUtil;
@@ -51,7 +49,13 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
     RecyclerView rvWjsList;
     @BindView(R.id.swipe_wjs_container)
     CustomSwipeToRefresh swipeWjsContainer;
+    @BindView(R.id.rv_wjs_list1)
+    RecyclerView rvWjsList1;
 
+    // 支持一键开户的文交所
+    private List<WJSBean> oneKeyWjsDatas = new ArrayList<>();
+    private OneKeyWJSListAdapter mOneKeyAdapter;
+    // 用户自行开户的文交所
     private List<WJSBean> wjsDatas = new ArrayList<>();
     private WJSListAdapter mAdapter;
     // 当前登录用户
@@ -112,7 +116,20 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
                     ApiResponse<ArrayList<WJSBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSBean>>>() {
                     }.getType());
                     if (rsp != null && rsp.isSuccess()) {
-                        wjsDatas = rsp.getData();
+                        List<WJSBean> wjsBeans = rsp.getData();
+                        // 获取列表覆盖原有的
+                        oneKeyWjsDatas.clear();
+                        wjsDatas.clear();
+                        for (WJSBean wjsBean : wjsBeans) {
+                            if ("1".equals(wjsBean.getOnekey())) { // 一键开户
+                                oneKeyWjsDatas.add(wjsBean);
+                            } else if ("2".equals(wjsBean.getOnekey())) { // 自行开户
+                                wjsDatas.add(wjsBean);
+                            }
+                        }
+                        if (oneKeyWjsDatas != null) {
+                            mOneKeyAdapter.setDatas(oneKeyWjsDatas);
+                        }
                         if (wjsDatas != null) {
                             mAdapter.setDatas(wjsDatas);
                         }
@@ -139,9 +156,14 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
 
     private void initRecyclerView() {
         rvWjsList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new WJSListAdapter(getActivity(), rvWjsList);
-        rvWjsList.setAdapter(mAdapter);
+        mOneKeyAdapter = new OneKeyWJSListAdapter(getActivity(), rvWjsList);
+        rvWjsList.setAdapter(mOneKeyAdapter);
         rvWjsList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+
+        rvWjsList1.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new WJSListAdapter(getActivity(), rvWjsList1);
+        rvWjsList1.setAdapter(mAdapter);
+        rvWjsList1.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
     }
 
     @Override

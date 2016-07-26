@@ -21,6 +21,7 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,6 +103,8 @@ public class WebviewActivity extends BaseActivity {
 
     }
 
+    UMImage image = new UMImage(this, R.mipmap.app_icon);
+
     @OnClick({R.id.toolbar_back_btn, R.id.tv_share_btn})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -117,11 +120,14 @@ public class WebviewActivity extends BaseActivity {
                         LogUtil.e(TAG, url);
                     }
                 }
-                new ShareAction(WebviewActivity.this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
+                new ShareAction(this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
                         .withTitle(title)
+                        .withText("")
                         .withTargetUrl(url)
+                        .withMedia(image)
                         .setCallback(umShareListener)
                         .open();
+
                 break;
         }
     }

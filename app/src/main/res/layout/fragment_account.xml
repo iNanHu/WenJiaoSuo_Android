@@ -23,8 +23,30 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/share_banner"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:padding="5dp"
+                android:text="以下合作文交所支持一键开户"
+                android:textColor="@color/white"/>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_wjs_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:padding="5dp"
+                android:text="以下暂未合作的文交所需要自行开户"
+                android:textColor="@color/white"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_wjs_list1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical"/>

@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 currentFragment = 0;
                 // 设置底部Tab图标和文字状态
                 mImgNews.setImageResource(R.mipmap.tabbar_news_highlight);
-                mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                mTextViewNews.setTextColor(ContextCompat.getColor(this, R.color.red));
                 showTopBar(true);
                 setTopBarTitle(R.string.news);
                 showTopBarBack(false);
@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 currentFragment = 1;
                 // 设置底部Tab图标和文字状态
                 mImgEquity.setImageResource(R.mipmap.tabbar_equity_highlight);
-                mTextViewEquity.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                mTextViewEquity.setTextColor(ContextCompat.getColor(this, R.color.red));
                 showTopBar(true);
                 setTopBarTitle(R.string.equity);
                 showTopBarBack(false);
@@ -146,7 +146,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 currentFragment = 2;
                 // 设置底部Tab图标和文字状态
                 mImgAccount.setImageResource(R.mipmap.tabbar_account_highlight);
-                mTextViewAccount.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                mTextViewAccount.setTextColor(ContextCompat.getColor(this, R.color.red));
                 // 设置顶部标题
 //                mTextViewTopTitle.setText("博客圈");
 //                mTextViewTopTitle.setClickable(false);
@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 currentFragment = 3;
                 // 设置底部Tab图标和文字状态
                 mImgProfile.setImageResource(R.mipmap.tabbar_mine_highlight);
-                mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.tabbar_text_selected));
+                mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.red));
                 // 设置顶部标题
 //                mTextViewTopTitle.setText("个人中心");
 //                mTextViewTopTitle.setClickable(false);

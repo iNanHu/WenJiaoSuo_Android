@@ -15,7 +15,7 @@
 
     <!-- 登录按钮 -->
     <style name="LoginBtn">
-        <item name="android:background">@color/topbar_bg</item>
+        <item name="android:background">@color/red</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
