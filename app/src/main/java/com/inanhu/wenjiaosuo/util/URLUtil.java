@@ -51,6 +51,7 @@ public class URLUtil {
         public static final String GETQR = USER + "/getqr";
         public static final String CHANGE_AVATAR = USER + "/change_avatar";
         public static final String GET_APPLY_STATUS = USER + "/get_apply_status";
+        public static final String GET_FAN_LIST = USER + "/get_fan_list";
     }
 
     /**

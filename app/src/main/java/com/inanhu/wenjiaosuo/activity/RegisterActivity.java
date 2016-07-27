@@ -88,6 +88,7 @@ public class RegisterActivity extends BaseActivity {
 
                 @Override
                 public void onResponse(String response, Headers headers) {
+                    LogUtil.e(TAG, response);
                     ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
                     }.getType());
                     String data = rsp.getData();

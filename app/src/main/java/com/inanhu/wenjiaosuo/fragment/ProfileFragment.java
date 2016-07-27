@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.activity.AboutUsActivity;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
+import com.inanhu.wenjiaosuo.activity.MyFansActivity;
 import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
 import com.inanhu.wenjiaosuo.activity.ShareActivity;
 import com.inanhu.wenjiaosuo.activity.UserInfoDetailActivity;
@@ -203,7 +204,8 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                 ToastUtil.showToast("去会员中心拉");
                 break;
             case R.id.mine_fans_btn:
-                ToastUtil.showToast("去粉丝中心拉");
+//                ToastUtil.showToast("去粉丝中心拉");
+                startActivity(new Intent(getActivity(), MyFansActivity.class));
                 break;
             case R.id.mine_optional_btn:
                 ToastUtil.showToast("暂未开放该功能");

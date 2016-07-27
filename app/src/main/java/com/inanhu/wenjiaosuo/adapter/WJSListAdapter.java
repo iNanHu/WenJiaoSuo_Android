@@ -64,6 +64,19 @@ public class WJSListAdapter extends BGARecyclerViewAdapter<WJSBean> implements M
 
             }
         });
+        bgaViewHolderHelper.getTextView(R.id.tv_wjs_guide).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (AccountUtil.isUserProfileComplete()) { // 完善了详细信息的用户才能使用一账通模块
+                    Intent intent = new Intent(context, WebviewActivity.class);
+                    intent.putExtra(MessageFlag.WEBVIEW_TOPBAR_TITLE, wjsBean.getName() + "入金激活教程");
+                    intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, wjsBean.getTutorial_link());
+                    context.startActivity(intent);
+                } else {
+                    ToastUtil.showToast("登录并完善用户详细信息后方可使用该功能");
+                }
+            }
+        });
     }
 
     @Override

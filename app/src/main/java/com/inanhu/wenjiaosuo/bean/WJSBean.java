@@ -19,6 +19,7 @@ public class WJSBean implements Serializable {
     private String link; // 支持一键开户的就为官网地址，不支持的则为开户地址
     private String name;
     private String onekey; // 是否支持一键注册 1是 2 否
+    private String tutorial_link; // 出金教程链接
 
     public String getData_id() {
         return data_id;
@@ -58,6 +59,14 @@ public class WJSBean implements Serializable {
 
     public void setOnekey(String onekey) {
         this.onekey = onekey;
+    }
+
+    public String getTutorial_link() {
+        return tutorial_link;
+    }
+
+    public void setTutorial_link(String tutorial_link) {
+        this.tutorial_link = tutorial_link;
     }
 
 }
