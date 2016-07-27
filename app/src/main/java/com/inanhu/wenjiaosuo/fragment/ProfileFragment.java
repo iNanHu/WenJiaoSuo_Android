@@ -41,7 +41,7 @@ import okhttp3.Headers;
 
 /**
  * 个人中心界面
- * <p/>
+ * <p>
  * Created by zzmiao on 2015/9/23.
  */
 public class ProfileFragment extends BaseFragment /*implements View.OnClickListener */ {
@@ -194,5 +194,20 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     @OnClick(R.id.tv_login_now)
     public void onClick() {
         toLogin();
+    }
+
+    @OnClick({R.id.mine_member_btn, R.id.mine_fans_btn, R.id.mine_optional_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.mine_member_btn:
+                ToastUtil.showToast("去会员中心拉");
+                break;
+            case R.id.mine_fans_btn:
+                ToastUtil.showToast("去粉丝中心拉");
+                break;
+            case R.id.mine_optional_btn:
+                ToastUtil.showToast("暂未开放该功能");
+                break;
+        }
     }
 }

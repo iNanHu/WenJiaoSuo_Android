@@ -81,6 +81,7 @@ public class WebviewActivity extends BaseActivity {
                     @Override
                     public void onPageFinished(WebView view, String url) {
                         title = view.getTitle();
+//                        view.getContentDescription();
                         closeProgressDialog();
                     }
 
