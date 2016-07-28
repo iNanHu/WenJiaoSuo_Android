@@ -8,6 +8,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
@@ -38,6 +39,8 @@ public class WebviewActivity extends BaseActivity {
     TextView activityTitle;
     @BindView(R.id.tv_share_btn)
     ImageView tvShareBtn;
+    @BindView(R.id.webview_container)
+    LinearLayout webviewContainer;
 
     private Intent intent;
     // Webview入口地址
@@ -81,7 +84,6 @@ public class WebviewActivity extends BaseActivity {
                     @Override
                     public void onPageFinished(WebView view, String url) {
                         title = view.getTitle();
-//                        view.getContentDescription();
                         closeProgressDialog();
                     }
 
@@ -123,7 +125,7 @@ public class WebviewActivity extends BaseActivity {
                 }
                 new ShareAction(this).setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
                         .withTitle(title)
-                        .withText("")
+                        .withText(title)
                         .withTargetUrl(url)
                         .withMedia(image)
                         .setCallback(umShareListener)
@@ -164,6 +166,12 @@ public class WebviewActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         LogUtil.e(TAG, "==onDestroy===");
+        // 释放Webview资源
+        if (webView != null) {
+            webviewContainer.removeView(webView);
+            webView.removeAllViews();
+            webView.destroy();
+        }
         super.onDestroy();
         url = null;
     }

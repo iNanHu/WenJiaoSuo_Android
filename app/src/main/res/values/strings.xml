@@ -10,6 +10,7 @@
     <string name="social_share">我要分享</string>
     <string name="proccess_search">进度查询</string>
     <string name="account_manage">账户管理</string>
+    <string name="my_fans">我的粉丝</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>

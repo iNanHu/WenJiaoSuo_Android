@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_topbar"
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+    <cn.bingoogolapple.bgaindicator.BGAFixedIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        app:indicator_dividerColor="@color/red"
+        app:indicator_dividerVerticalMargin="5dp"
+        app:indicator_dividerWidth="2dp"
+        app:indicator_hasDivider="true"
+        app:indicator_textColor="@color/red"
+        app:indicator_textSizeNormal="12sp"
+        app:indicator_textSizeSelected="14sp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_viewpager_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
