@@ -18,6 +18,7 @@ public class MessageFlag {
     public static final String ACCOUNT_NUMBER = "account_number";
     public static final String BANK_LOCATION = "bank_location";
     public static final String BRANCH_NAME = "branch_name";
+    public static final String UID = "uid";
 
     /**
      * Webview相关

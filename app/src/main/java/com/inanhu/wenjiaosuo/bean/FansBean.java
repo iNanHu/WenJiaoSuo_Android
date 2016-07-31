@@ -17,7 +17,7 @@ public class FansBean implements Serializable {
 
     private String uid;
     private String level; // 粉丝等级，一级和二级
-    private String name; // 粉丝真实姓名
+    private String realname; // 粉丝真实姓名
     private String telphone; // 粉丝电话号码
 
     public String getUid() {
@@ -36,12 +36,12 @@ public class FansBean implements Serializable {
         this.level = level;
     }
 
-    public String getName() {
-        return name;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     public String getTelphone() {

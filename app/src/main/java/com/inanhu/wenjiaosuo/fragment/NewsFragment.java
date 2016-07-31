@@ -192,8 +192,8 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         RequestParams params = new RequestParams(this);
 //        params.addFormDataPart(Constant.RequestKey.CID, "2"); // 不传分类列表就获取全类别的
         params.addFormDataPart(Constant.RequestKey.ORDER, "time"); // 排序，方式有time/views/rec
-        params.addFormDataPart(Constant.RequestKey.PAGESIZE, "2");
-        params.addFormDataPart(Constant.RequestKey.PAGE, "1");
+        params.addFormDataPart(Constant.RequestKey.NEWS_PAGESIZE, "2");
+        params.addFormDataPart(Constant.RequestKey.NEWS_PAGE, "1");
         HttpEngine.doGet(URLUtil.NewsApi.GETLIST, params, new BaseHttpRequestCallback() {
             @Override
             public void onStart() {

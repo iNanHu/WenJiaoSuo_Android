@@ -24,7 +24,6 @@ public class Constant {
         public static final String BANK_CARD = "bank_card";
 
         // 完善用户信息
-        public static final String UID = "uid";
         public static final String REALNAME = "realname";
         public static final String SEX = "sex";
         public static final String CERTIFICATE_TYPE = "certificate_type";
@@ -42,13 +41,17 @@ public class Constant {
         // 获取新闻列表
         public static final String CID = "cid"; // 分类id
         public static final String ORDER = "order"; // 排序方式
-        public static final String PAGE = "page"; // 页码
-        public static final String PAGESIZE = "pagesize"; // 每页显示条数
+        public static final String NEWS_PAGE = "page"; // 页码
+        public static final String NEWS_PAGESIZE = "pagesize"; // 每页显示条数
 
         // 文交所id
         public static final String WJSID = "wjsid";
-//        public static final String USERNAME = "";
-//        public static final String USERNAME = "";
+
+        // 获取下级用户列表
+        public static final String UID = "uid"; // 用户id
+        public static final String FANS_LEVEL = "level"; // 粉丝等级
+        public static final String FANS_PAGESIZE = "pagesize"; // 粉丝列表每页条数
+        public static final String FANS_PAGENUM = "pagenum"; // 粉丝列表页码
 
 
 //        public static final String USERNAME = "";

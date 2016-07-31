@@ -49,16 +49,6 @@ public class MyFansActivity extends BaseActivity {
         setContentView(R.layout.activity_fans);
         ButterKnife.bind(this);
         initView();
-
-
-//        RequestParams params = new RequestParams(this);
-//        params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN));
-//        HttpEngine.doGet(URLUtil.UserApi.GET_FAN_LIST, params, new BaseHttpRequestCallback() {
-//            @Override
-//            public void onResponse(String response, Headers headers) {
-//                LogUtil.e(TAG, response);
-//            }
-//        });
     }
 
     private void initView() {

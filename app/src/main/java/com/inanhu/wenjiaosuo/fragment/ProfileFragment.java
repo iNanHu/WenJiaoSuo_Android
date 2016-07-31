@@ -204,8 +204,11 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                 ToastUtil.showToast("去会员中心拉");
                 break;
             case R.id.mine_fans_btn:
-//                ToastUtil.showToast("去粉丝中心拉");
-                startActivity(new Intent(getActivity(), MyFansActivity.class));
+                if (AccountUtil.isLogin()){
+                    startActivity(new Intent(getActivity(), MyFansActivity.class));
+                } else {
+                    ToastUtil.showToast("请登录后查看");
+                }
                 break;
             case R.id.mine_optional_btn:
                 ToastUtil.showToast("暂未开放该功能");

@@ -17,13 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
-        app:indicator_dividerColor="@color/red"
-        app:indicator_dividerVerticalMargin="5dp"
-        app:indicator_dividerWidth="2dp"
-        app:indicator_hasDivider="true"
-        app:indicator_textColor="@color/red"
+        app:indicator_hasDivider="false"
+        app:indicator_textColor="@color/selector_tab"
         app:indicator_textSizeNormal="12sp"
-        app:indicator_textSizeSelected="14sp"/>
+        app:indicator_textSizeSelected="14sp"
+        app:indicator_triangleColor="@color/red"
+        app:indicator_triangleHeight="2dp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_viewpager_content"
