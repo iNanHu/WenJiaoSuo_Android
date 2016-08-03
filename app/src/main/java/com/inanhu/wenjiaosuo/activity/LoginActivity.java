@@ -26,12 +26,15 @@ import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
 import cn.finalteam.okhttpfinal.RequestParams;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import okhttp3.Headers;
 
 /**
@@ -101,6 +104,30 @@ public class LoginActivity extends BaseActivity {
                                         setResult(ProfileFragment.REQUEST_CODE_LOGIN, new Intent().putExtra(MessageFlag.LOGIN_SUCCESS, "true"));
                                         finish();
                                     }
+                                }
+                            }
+                        });
+                        // 登录成功设置推送别名
+                        /**
+                         * 需要理解的是，这个接口是覆盖逻辑，而不是增量逻辑。即新的调用会覆盖之前的设置。
+                         *
+                         * 只有call back 返回值为 0 才设置成功，才可以向目标推送。否则服务器 API 会返回1011错误。
+
+                         */
+                        JPushInterface.setAlias(LoginActivity.this, userPhone, new TagAliasCallback() {
+                            @Override
+                            public void gotResult(int code, String alias, Set<String> tags) {
+                                switch (code) {
+                                    case 0: // 设置成功
+                                        ToastUtil.showToast("设置别名成功");
+                                        break;
+
+                                    case 6002: // 设置超时
+                                        ToastUtil.showToast("设置别名超时");
+                                        break;
+
+                                    default:
+                                        ToastUtil.showToast("设置别名出错-" + code);
                                 }
                             }
                         });

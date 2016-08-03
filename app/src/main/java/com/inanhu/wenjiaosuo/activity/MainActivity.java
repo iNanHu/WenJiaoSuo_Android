@@ -25,6 +25,7 @@ import com.inanhu.wenjiaosuo.util.ToastUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
@@ -313,6 +314,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
         long secondTime = System.currentTimeMillis();
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (secondTime - firstTime < 2000) {
+                // 关闭极光推送
+                JPushInterface.stopPush(MainActivity.this);
                 activityManagerUtil.appExit();
             } else {
                 ToastUtil.showToast("再按一次 退出文龙一账通");

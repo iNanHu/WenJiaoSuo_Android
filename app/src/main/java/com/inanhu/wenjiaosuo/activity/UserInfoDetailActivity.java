@@ -23,11 +23,15 @@ import com.inanhu.wenjiaosuo.util.SPUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
 
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
 import cn.finalteam.okhttpfinal.RequestParams;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import okhttp3.Headers;
 
 /**
@@ -98,6 +102,24 @@ public class UserInfoDetailActivity extends BaseActivity {
                     // 清除当前文件中的免登录账号和密码
                     SPUtil.remove(UserInfoDetailActivity.this, Constant.SPKey.USERNAME);
                     SPUtil.remove(UserInfoDetailActivity.this, Constant.SPKey.PASSWORD);
+                    // 登出后清除之前的别名
+                    JPushInterface.setAlias(UserInfoDetailActivity.this, "", new TagAliasCallback() {
+                        @Override
+                        public void gotResult(int code, String alias, Set<String> tags) {
+                            switch (code) {
+                                case 0: // 设置成功
+                                    ToastUtil.showToast("取消别名成功");
+                                    break;
+
+                                case 6002: // 设置超时
+                                    ToastUtil.showToast("取消别名超时");
+                                    break;
+
+                                default:
+                                    ToastUtil.showToast("取消别名出错-" + code);
+                            }
+                        }
+                    });
                     // 返回
                     setResult(ProfileFragment.REQUEST_CODE_LOGOUT, new Intent().putExtra(MessageFlag.LOGOUT_SUCCESS, "true"));
                     finish();

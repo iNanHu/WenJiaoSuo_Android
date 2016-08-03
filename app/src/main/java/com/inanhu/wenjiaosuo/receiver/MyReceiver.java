@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.inanhu.wenjiaosuo.activity.MyFansActivity;
+import com.inanhu.wenjiaosuo.activity.WJSApplyStatusActivity;
 import com.inanhu.wenjiaosuo.activity.WebviewActivity;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.util.LogUtil;
@@ -52,31 +54,30 @@ public class MyReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             LogUtil.e(TAG, "[MyReceiver] 用户点击打开了通知");
+            /**
+             * type = [1,2,3]
+             * 1 开户申请通过
+             * 2 开户申请被驳回
+             * 3 下级会员注册成功
+             */
+            String type = null;
             String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            String url = null;
             try {
                 JSONObject jsonObject = new JSONObject(extra);
-                url = jsonObject.getString("url");
+                type = jsonObject.getString("type");
+                if (!TextUtils.isEmpty(type)) {
+                    Intent intent1 = new Intent();
+                    if ("1".equals(type) || "2".equals(type)) { // 开户结果
+                        intent1.setClass(context, WJSApplyStatusActivity.class);
+                    } else if ("3".equals(type)) { // 新粉丝
+                        intent1.setClass(context, MyFansActivity.class);
+                    }
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(intent1);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (!TextUtils.isEmpty(url)) {
-                LogUtil.e(TAG, url);
-                Intent intent1 = new Intent();
-                intent1.setClass(context, WebviewActivity.class);
-                intent1.putExtra(MessageFlag.WEBVIEW_LOAD_URL, url);
-                intent1.putExtra(MessageFlag.IS_SHOW_TOPBAR_SHARE, true);
-                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent1);
-            }
-
-//            //打开自定义的Activity
-//            Intent i = new Intent(context, TestActivity.class);
-//            i.putExtras(bundle);
-//            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            context.startActivity(i);
-
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             LogUtil.e(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..

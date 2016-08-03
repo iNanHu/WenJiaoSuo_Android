@@ -49,6 +49,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationStart(Animation animation) {
+                // 免登录
                 String userPhone = (String) SPUtil.get(SplashActivity.this, Constant.SPKey.USERNAME, "");
                 String userPwd = (String) SPUtil.get(SplashActivity.this, Constant.SPKey.PASSWORD, "");
                 if (!TextUtils.isEmpty(userPhone) && !TextUtils.isEmpty(userPwd)) { // 本地文件中有免登录账号的用户名和密码则去做登录
@@ -73,6 +74,11 @@ public class SplashActivity extends BaseActivity {
                     } else {
                         ToastUtil.showToast(R.string.toast_network_unconnceted);
                     }
+                }
+                // 开启极光推送
+                boolean isPushStopped = JPushInterface.isPushStopped(SplashActivity.this);
+                if (isPushStopped) {
+                    JPushInterface.resumePush(SplashActivity.this);
                 }
             }
 
