@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,8 +116,13 @@ public class LevelOneFansFragment extends BaseV4Fragment implements BGARefreshLa
     @Override
     public void onRVItemClick(ViewGroup viewGroup, View view, int position) {
         Intent intent = new Intent(getActivity(), WJSApplyStatusActivity.class);
-        intent.putExtra(MessageFlag.UID, fansBeanList.get(position).getUid());
-        startActivity(intent);
+        String uid = fansBeanList.get(position).getUid();
+        if (TextUtils.isEmpty(uid)){ // 粉丝未完善信息，没有uid，不能查询开户状态
+            ToastUtil.showToast("该用户未完善信息，不能查询开户进度");
+        } else { // 粉丝完善过信息
+            intent.putExtra(MessageFlag.UID, uid);
+            startActivity(intent);
+        }
     }
 
     @Override
