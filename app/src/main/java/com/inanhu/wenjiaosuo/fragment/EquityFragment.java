@@ -31,7 +31,7 @@ import okhttp3.Headers;
 
 /**
  * 行情界面
- * <p/>
+ * <p>
  * Created by zzmiao on 2015/9/23.
  */
 public class EquityFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {

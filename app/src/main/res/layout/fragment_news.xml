@@ -67,7 +67,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.0"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -206,7 +207,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.0"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -281,6 +283,7 @@
                     android:layout_height="100dp"
                     android:background="@drawable/list_item_selector"
                     android:clickable="true"
+                    android:onClick="toNews"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -373,6 +376,7 @@
                     android:layout_height="100dp"
                     android:background="@drawable/list_item_selector"
                     android:clickable="true"
+                    android:onClick="toNews1"
                     android:orientation="horizontal">
 
                     <RelativeLayout

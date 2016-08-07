@@ -11,7 +11,8 @@
         android:id="@+id/iv_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/guide_01"/>
+        android:scaleType="fitXY"
+        android:src="@mipmap/splash"/>
 
 
 </LinearLayout>

@@ -2,7 +2,6 @@ package com.inanhu.wenjiaosuo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,8 +16,13 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.activity.WebviewActivity;
+import com.inanhu.wenjiaosuo.activity.DianpinActivity;
+import com.inanhu.wenjiaosuo.activity.GonggaoActivity;
+import com.inanhu.wenjiaosuo.activity.HuodongActivity;
+import com.inanhu.wenjiaosuo.activity.MainActivity;
 import com.inanhu.wenjiaosuo.activity.NewsCenterActivity;
+import com.inanhu.wenjiaosuo.activity.ShengouActivity;
+import com.inanhu.wenjiaosuo.activity.WebviewActivity;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.Banner;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
@@ -208,7 +212,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     news = rsp.getData();
                     setNews();
                 }
-                if (mRereshLayout.isRefreshing()){
+                if (mRereshLayout.isRefreshing()) {
                     mRereshLayout.setRefreshing(false);
                 }
             }
@@ -237,28 +241,60 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }
     }
 
-    @OnClick({R.id.ll_news, R.id.ll_news1})
-    public void onClick(View view) {
+    @OnClick(R.id.ll_news)
+    public void toNews() {
         Intent intent = new Intent();
-        switch (view.getId()) {
-            case R.id.ll_news:
-                if (newsBean != null) {
-                    if (!TextUtils.isEmpty(newsBean.getAurl())) {
-                        intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, newsBean.getAurl());
-                    }
-                }
-                break;
-            case R.id.ll_news1:
-                if (newsBean1 != null) {
-                    if (!TextUtils.isEmpty(newsBean1.getAurl())) {
-                        intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, newsBean1.getAurl());
-                    }
-                }
-                break;
+        if (newsBean != null) {
+            if (!TextUtils.isEmpty(newsBean.getAurl())) {
+                intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, newsBean.getAurl());
+            }
         }
         intent.setClass(getActivity(), WebviewActivity.class);
         intent.putExtra(MessageFlag.IS_SHOW_TOPBAR_SHARE, true);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.ll_news1)
+    public void toNews1() {
+        Intent intent = new Intent();
+        if (newsBean1 != null) {
+            if (!TextUtils.isEmpty(newsBean1.getAurl())) {
+                intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, newsBean1.getAurl());
+            }
+        }
+        intent.setClass(getActivity(), WebviewActivity.class);
+        intent.putExtra(MessageFlag.IS_SHOW_TOPBAR_SHARE, true);
+        startActivity(intent);
+    }
+
+
+    @OnClick({R.id.ll_stock, R.id.ll_zx, R.id.ll_sg, R.id.ll_news_center, R.id.ll_agree, R.id.ll_gg, R.id.ll_activity, R.id.ll_xh})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_stock:
+                // 切换到电子盘界面
+                ((MainActivity) getActivity()).setSelect(1);
+                break;
+            case R.id.ll_zx:
+                break;
+            case R.id.ll_sg:
+                startActivity(new Intent(getActivity(), ShengouActivity.class));
+                break;
+            case R.id.ll_news_center:
+                toNewsCenter();
+                break;
+            case R.id.ll_agree:
+                startActivity(new Intent(getActivity(), DianpinActivity.class));
+                break;
+            case R.id.ll_gg:
+                startActivity(new Intent(getActivity(), GonggaoActivity.class));
+                break;
+            case R.id.ll_activity:
+                startActivity(new Intent(getActivity(), HuodongActivity.class));
+                break;
+            case R.id.ll_xh:
+                break;
+        }
     }
 }
 

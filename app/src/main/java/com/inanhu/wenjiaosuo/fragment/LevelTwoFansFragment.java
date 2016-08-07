@@ -2,6 +2,7 @@ package com.inanhu.wenjiaosuo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -118,7 +119,13 @@ public class LevelTwoFansFragment extends BaseV4Fragment implements BGARefreshLa
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        //TODO 完善刷新
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refreshFans.endRefreshing();
+            }
+        }, 3000);
     }
 
     @Override

@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
 //        super.onSaveInstanceState(outState);
     }
 
-    private void setSelect(int i) {
+    public void setSelect(int i) {
         resetImgsandText();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();

@@ -15,10 +15,12 @@ import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.activity.AboutUsActivity;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
+import com.inanhu.wenjiaosuo.activity.MemberCenterActivity;
 import com.inanhu.wenjiaosuo.activity.MyFansActivity;
 import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
 import com.inanhu.wenjiaosuo.activity.ShareActivity;
 import com.inanhu.wenjiaosuo.activity.UserInfoDetailActivity;
+import com.inanhu.wenjiaosuo.activity.WebviewActivity;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.base.Constant;
@@ -94,6 +96,22 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
             startActivity(new Intent(getActivity(), ShareActivity.class));
         } else {
             ToastUtil.showToast("登录并完善用户详细信息后方可分享注册");
+        }
+    }
+
+    @OnClick(R.id.to_promote)
+    public void toPromote() {
+        if (AccountUtil.isUserProfileComplete()) { // 登录并完善用户详细信息后方可使用该功能
+//            startActivity(new Intent(getActivity(), ShareActivity.class));
+
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), WebviewActivity.class);
+            intent.putExtra(MessageFlag.WEBVIEW_TOPBAR_TITLE, "申购");
+            intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, "http://www.youbicard.com/plus/data/newCollections.php?method=futurePurchase");
+            startActivity(intent);
+
+        } else {
+            ToastUtil.showToast("登录并完善用户详细信息后方可生成推广海报");
         }
     }
 
@@ -201,10 +219,14 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_member_btn:
-                ToastUtil.showToast("去会员中心拉");
+                if (AccountUtil.isLogin()) {
+                    startActivity(new Intent(getActivity(), MemberCenterActivity.class));
+                } else {
+                    ToastUtil.showToast("请登录后查看");
+                }
                 break;
             case R.id.mine_fans_btn:
-                if (AccountUtil.isLogin()){
+                if (AccountUtil.isLogin()) {
                     startActivity(new Intent(getActivity(), MyFansActivity.class));
                 } else {
                     ToastUtil.showToast("请登录后查看");

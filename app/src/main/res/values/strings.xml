@@ -11,6 +11,11 @@
     <string name="proccess_search">进度查询</string>
     <string name="account_manage">账户管理</string>
     <string name="my_fans">我的粉丝</string>
+    <string name="huodong">活动</string>
+    <string name="huodong_area">活动专区</string>
+    <string name="member_center">等级特权</string>
+    <string name="shengou">申购</string>
+    <string name="dianping">点评</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>

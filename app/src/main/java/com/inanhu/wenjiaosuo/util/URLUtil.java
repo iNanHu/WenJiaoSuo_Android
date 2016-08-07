@@ -25,7 +25,11 @@ public class URLUtil {
      * 邮币卡之家获取行情数据接口
      */
     public static final String EQUITY_FROM_YOUBICARD = YOUBICARD + "/plus/data/excList.php?action=zhongshuju";
-
+    /**
+     * 邮币卡之家获取公告数据接口
+     */
+    //TODO 目前只用只抓取第一页公告
+    public static final String GONGGAO_FROM_YOUBICARD = YOUBICARD + "/member/getAgent2.php?wjsname=all&page=1";
     /**
      * 邮币卡之家获取文交所Logo接口
      *

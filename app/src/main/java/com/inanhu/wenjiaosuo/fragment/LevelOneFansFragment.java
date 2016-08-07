@@ -2,6 +2,7 @@ package com.inanhu.wenjiaosuo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -116,18 +117,19 @@ public class LevelOneFansFragment extends BaseV4Fragment implements BGARefreshLa
     @Override
     public void onRVItemClick(ViewGroup viewGroup, View view, int position) {
         Intent intent = new Intent(getActivity(), WJSApplyStatusActivity.class);
-        String uid = fansBeanList.get(position).getUid();
-        if (TextUtils.isEmpty(uid)){ // 粉丝未完善信息，没有uid，不能查询开户状态
-            ToastUtil.showToast("该用户未完善信息，不能查询开户进度");
-        } else { // 粉丝完善过信息
-            intent.putExtra(MessageFlag.UID, uid);
-            startActivity(intent);
-        }
+        intent.putExtra(MessageFlag.UID, fansBeanList.get(position).getUid());
+        startActivity(intent);
     }
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
+        //TODO 完善刷新
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                refreshFans.endRefreshing();
+            }
+        }, 3000);
     }
 
     @Override

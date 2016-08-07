@@ -336,13 +336,13 @@
             <include layout="@layout/hline_view"/>
 
             <RelativeLayout
-                android:id="@+id/to_evaluate"
+                android:id="@+id/to_promote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
-                android:padding="15dp"
-                android:visibility="gone">
+                android:onClick="toPromote"
+                android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -350,7 +350,7 @@
                     android:layout_alignParentLeft="true"
                     android:drawableLeft="@mipmap/evaluate"
                     android:drawablePadding="5.0dip"
-                    android:text="给评分"
+                    android:text="生成推广海报"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 
