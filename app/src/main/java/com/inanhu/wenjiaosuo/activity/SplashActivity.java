@@ -66,7 +66,7 @@ public class SplashActivity extends BaseActivity {
                                 String data = rsp.getData();
                                 if (rsp.isSuccess() && !TextUtils.isEmpty(data)) {
                                     // 登录成功，保存token
-                                    ToastUtil.showToast("登录成功");
+//                                    ToastUtil.showToast("登录成功");
                                     GlobalValue.getInstance().saveGlobal(Constant.RequestKey.ACCESS_TOKEN, data);
                                 }
                             }

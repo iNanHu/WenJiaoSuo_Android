@@ -26,9 +26,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/yellow"
+                android:background="@color/blue"
                 android:padding="5dp"
-                android:text="以下合作文交所支持一键开户"
+                android:text="A. 以下文交所，点击“一键开户”即可体验极速开户一键搞定"
                 android:textColor="@color/white"/>
 
             <android.support.v7.widget.RecyclerView
@@ -40,9 +40,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/yellow"
+                android:background="@color/blue"
                 android:padding="5dp"
-                android:text="以下暂未合作的文交所需要自行开户"
+                android:text="B. 以下文交所，尚未开通极速体验，开户请点击“立即开户”"
                 android:textColor="@color/white"/>
 
             <android.support.v7.widget.RecyclerView

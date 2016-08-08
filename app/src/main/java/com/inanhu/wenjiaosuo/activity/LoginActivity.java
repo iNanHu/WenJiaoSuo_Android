@@ -119,15 +119,15 @@ public class LoginActivity extends BaseActivity {
                             public void gotResult(int code, String alias, Set<String> tags) {
                                 switch (code) {
                                     case 0: // 设置成功
-                                        ToastUtil.showToast("设置别名成功");
+                                        LogUtil.e(TAG, "设置别名成功");
                                         break;
 
                                     case 6002: // 设置超时
-                                        ToastUtil.showToast("设置别名超时");
+                                        LogUtil.e(TAG, "设置别名超时");
                                         break;
 
                                     default:
-                                        ToastUtil.showToast("设置别名出错-" + code);
+                                        LogUtil.e(TAG, "设置别名出错-" + code);
                                 }
                             }
                         });

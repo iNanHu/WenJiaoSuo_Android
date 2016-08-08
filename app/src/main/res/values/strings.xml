@@ -55,14 +55,17 @@
 
 
     <!--首页菜单-->
-    <string name="news_menu_dzp">电子盘</string>
+    <string name="news_menu_dzp">大盘行情</string>
     <string name="news_menu_zx">自选</string>
     <string name="news_menu_sg">申购</string>
     <string name="news_menu_news">新闻中心</string>
     <string name="news_menu_agree">点评</string>
-    <string name="news_menu_gg">公告</string>
-    <string name="news_menu_activity">活动</string>
+    <string name="news_menu_gg">文交所公告</string>
+    <string name="news_menu_activity">活动专区</string>
     <string name="news_menu_xh">现货</string>
+    <string name="news_menu_sq">文民社群</string>
+    <string name="news_menu_sxy">文民商学院</string>
+    <string name="news_menu_qmjj">全民经纪</string>
 
     <string name="news_center">新闻中心</string>
 
