@@ -32,6 +32,7 @@ public class MessageFlag {
     public static final String LOGIN_SUCCESS  = "login_success";
     public static final String LOGOUT_SUCCESS  = "logout_success";
 
+    public static final String POSTER_URL = "poster_url";
 
     //    public static final String a = "";
 

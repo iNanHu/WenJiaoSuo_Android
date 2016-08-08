@@ -16,13 +16,13 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.activity.DianpinActivity;
 import com.inanhu.wenjiaosuo.activity.GonggaoActivity;
 import com.inanhu.wenjiaosuo.activity.HuodongActivity;
 import com.inanhu.wenjiaosuo.activity.MainActivity;
 import com.inanhu.wenjiaosuo.activity.NewsCenterActivity;
-import com.inanhu.wenjiaosuo.activity.ShengouActivity;
 import com.inanhu.wenjiaosuo.activity.WebviewActivity;
+import com.inanhu.wenjiaosuo.activity.WenMinSXYActivity;
+import com.inanhu.wenjiaosuo.activity.WenMinSheQunActivity;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.Banner;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
@@ -53,7 +53,7 @@ import okhttp3.Headers;
 
 /**
  * 首页资讯界面
- * <p/>
+ * <p>
  * Created by zzmiao on 2015/9/23.
  */
 public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
@@ -267,24 +267,12 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         startActivity(intent);
     }
 
-
-    @OnClick({R.id.ll_stock, R.id.ll_zx, R.id.ll_sg, R.id.ll_news_center, R.id.ll_agree, R.id.ll_gg, R.id.ll_activity, R.id.ll_xh})
+    @OnClick({R.id.ll_stock, R.id.ll_gg, R.id.ll_activity, R.id.ll_wmsq, R.id.ll_wmsxy, R.id.ll_qmjj})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_stock:
                 // 切换到电子盘界面
                 ((MainActivity) getActivity()).setSelect(1);
-                break;
-            case R.id.ll_zx:
-                break;
-            case R.id.ll_sg:
-                startActivity(new Intent(getActivity(), ShengouActivity.class));
-                break;
-            case R.id.ll_news_center:
-                toNewsCenter();
-                break;
-            case R.id.ll_agree:
-                startActivity(new Intent(getActivity(), DianpinActivity.class));
                 break;
             case R.id.ll_gg:
                 startActivity(new Intent(getActivity(), GonggaoActivity.class));
@@ -292,7 +280,14 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             case R.id.ll_activity:
                 startActivity(new Intent(getActivity(), HuodongActivity.class));
                 break;
-            case R.id.ll_xh:
+            case R.id.ll_wmsq:
+                startActivity(new Intent(getActivity(), WenMinSheQunActivity.class));
+                break;
+            case R.id.ll_wmsxy:
+                startActivity(new Intent(getActivity(), WenMinSXYActivity.class));
+                break;
+            case R.id.ll_qmjj:
+                ((MainActivity)getActivity()).setSelect(3);
                 break;
         }
     }

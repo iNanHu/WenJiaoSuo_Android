@@ -1,6 +1,9 @@
 package com.inanhu.wenjiaosuo.util;
 
+import java.io.File;
+
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.FileDownloadCallback;
 import cn.finalteam.okhttpfinal.HttpRequest;
 import cn.finalteam.okhttpfinal.OkHttpFinal;
 import cn.finalteam.okhttpfinal.OkHttpFinalConfiguration;
@@ -52,6 +55,17 @@ public class HttpEngine {
      */
     public static void doPost(String url, RequestParams params, BaseHttpRequestCallback callback) {
         HttpRequest.post(url, params, callback);
+    }
+
+    /**
+     * 下载文件
+     *
+     * @param url
+     * @param target
+     * @param callback
+     */
+    public static void download(String url, File target, FileDownloadCallback callback) {
+        HttpRequest.download(url, target, callback);
     }
 
 }

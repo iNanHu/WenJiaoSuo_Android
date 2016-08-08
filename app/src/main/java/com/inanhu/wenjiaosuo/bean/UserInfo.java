@@ -35,6 +35,7 @@ public class UserInfo implements Serializable {
     private String email;
     private String invite_number;
     private String login_time;
+    private String rank;
     private String uid;
     private String realname;
     private String sex;
@@ -80,6 +81,14 @@ public class UserInfo implements Serializable {
 
     public void setLogin_time(String login_time) {
         this.login_time = login_time;
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 
     public String getUid() {

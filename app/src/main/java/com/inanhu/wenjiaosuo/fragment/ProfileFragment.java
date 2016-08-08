@@ -18,6 +18,7 @@ import com.inanhu.wenjiaosuo.activity.LoginActivity;
 import com.inanhu.wenjiaosuo.activity.MemberCenterActivity;
 import com.inanhu.wenjiaosuo.activity.MyFansActivity;
 import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
+import com.inanhu.wenjiaosuo.activity.PromotePosterActivity;
 import com.inanhu.wenjiaosuo.activity.ShareActivity;
 import com.inanhu.wenjiaosuo.activity.UserInfoDetailActivity;
 import com.inanhu.wenjiaosuo.activity.WebviewActivity;
@@ -44,7 +45,7 @@ import okhttp3.Headers;
 
 /**
  * 个人中心界面
- * <p>
+ * <p/>
  * Created by zzmiao on 2015/9/23.
  */
 public class ProfileFragment extends BaseFragment /*implements View.OnClickListener */ {
@@ -64,10 +65,14 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
 
     @OnClick(R.id.complete_profile_btn)
     public void toCompleteProfile() {
-        if (AccountUtil.isLogin()) {
-            startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
+        if (AccountUtil.isUserProfileComplete()) { // 当前用户已经完善信息
+            ToastUtil.showToast("您已经完善信息啦");
         } else {
-            ToastUtil.showToast("请先登录");
+            if (AccountUtil.isLogin()) {
+                startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
+            } else {
+                ToastUtil.showToast("请先登录");
+            }
         }
     }
 
@@ -102,14 +107,38 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     @OnClick(R.id.to_promote)
     public void toPromote() {
         if (AccountUtil.isUserProfileComplete()) { // 登录并完善用户详细信息后方可使用该功能
-//            startActivity(new Intent(getActivity(), ShareActivity.class));
+            if (TextUtils.isEmpty(userInfo.getInvite_number())) { // 重新获取当前登录用户
+                userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO, null);
+            }
+            String url = URLUtil.UserApi.GET_POSTER + userInfo.getInvite_number();
+            HttpEngine.doGet(url, new BaseHttpRequestCallback() {
 
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), WebviewActivity.class);
-            intent.putExtra(MessageFlag.WEBVIEW_TOPBAR_TITLE, "申购");
-            intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, "http://www.youbicard.com/plus/data/newCollections.php?method=futurePurchase");
-            startActivity(intent);
+                @Override
+                public void onStart() {
+                    showProgressDialog("推广海报生成中...请稍后");
+                }
 
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    closeProgressDialog();
+                    LogUtil.e(TAG, response);
+                    ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
+                    }.getType());
+                    String data = rsp.getData();
+                    if (rsp.isSuccess() && !TextUtils.isEmpty(data)) { // 生成海报成功
+                        Intent intent = new Intent(getActivity(), PromotePosterActivity.class);
+                        intent.putExtra(MessageFlag.POSTER_URL, data);
+                        startActivity(intent);
+                    } else { // 生成海报失败
+                        ToastUtil.showToast("生成推广海报失败");
+                    }
+                }
+
+                @Override
+                public void onFinish() {
+                    closeProgressDialog();
+                }
+            });
         } else {
             ToastUtil.showToast("登录并完善用户详细信息后方可生成推广海报");
         }
@@ -220,7 +249,24 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
         switch (view.getId()) {
             case R.id.mine_member_btn:
                 if (AccountUtil.isLogin()) {
-                    startActivity(new Intent(getActivity(), MemberCenterActivity.class));
+                    // 获取最新用户信息
+                    RequestParams params = new RequestParams(this);
+                    params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN, ""));
+                    HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
+                        @Override
+                        public void onResponse(String response, Headers headers) {
+                            LogUtil.e(TAG, response);
+                            ApiResponse<UserInfo> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<UserInfo>>() {
+                            }.getType());
+                            if (rsp != null && rsp.isSuccess()) {
+                                userInfo = rsp.getData();
+                                if (userInfo != null) { // 保存当前用户到全局变量
+                                    GlobalValue.getInstance().saveGlobal(MessageFlag.CURRENT_USER_INFO, userInfo);
+                                    startActivity(new Intent(getActivity(), MemberCenterActivity.class));
+                                }
+                            }
+                        }
+                    });
                 } else {
                     ToastUtil.showToast("请登录后查看");
                 }

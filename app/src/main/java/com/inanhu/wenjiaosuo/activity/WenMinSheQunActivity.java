@@ -8,17 +8,19 @@ import com.inanhu.wenjiaosuo.base.BaseActivity;
 import butterknife.ButterKnife;
 
 /**
+ * 文民社群界面
+ *
  * Created by Jason on 2016/8/7.
  */
-public class ShengouActivity extends BaseActivity {
+public class WenMinSheQunActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shengou);
+        setContentView(R.layout.activity_wmsq);
         ButterKnife.bind(this);
         showTopBarBack(true);
         showTopBarRight(false);
-        setTopBarTitle(R.string.shengou);
+        setTopBarTitle(R.string.wmsq);
     }
 }

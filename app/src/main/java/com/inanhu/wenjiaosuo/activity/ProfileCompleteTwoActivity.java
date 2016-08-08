@@ -1,5 +1,6 @@
 package com.inanhu.wenjiaosuo.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,8 @@ import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.base.Upfile;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
+import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.ImageUtil;
 import com.inanhu.wenjiaosuo.util.LogUtil;
@@ -167,9 +170,26 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
                 String data = rsp.getData();
                 if (rsp.isSuccess()) { // 完善资料成功
                     ToastUtil.showToast("完善资料成功");
-                    // 注册成功后关闭注册的两个页面
-                    activityManagerUtil.finishActivity(ProfileCompleteOneActivity.class);
-                    activityManagerUtil.finishActivity(ProfileCompleteTwoActivity.this);
+                    // 完善信息成功后获取用户基本信息
+                    RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
+                    params.addHeader(Constant.RequestKey.ACCESS_TOKEN, (String) GlobalValue.getInstance().getGlobal(Constant.RequestKey.ACCESS_TOKEN, ""));
+                    HttpEngine.doGet(URLUtil.UserApi.INFO, params, new BaseHttpRequestCallback() {
+                        @Override
+                        public void onResponse(String response, Headers headers) {
+                            LogUtil.e(TAG, response);
+                            ApiResponse<UserInfo> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<UserInfo>>() {
+                            }.getType());
+                            if (rsp != null && rsp.isSuccess()) {
+                                UserInfo userInfo = rsp.getData();
+                                if (userInfo != null) { // 保存当前用户到全局变量
+                                    GlobalValue.getInstance().saveGlobal(MessageFlag.CURRENT_USER_INFO, userInfo);
+                                }
+                            }
+                            // 注册成功后关闭注册的两个页面
+                            activityManagerUtil.finishActivity(ProfileCompleteOneActivity.class);
+                            activityManagerUtil.finishActivity(ProfileCompleteTwoActivity.this);
+                        }
+                    });
                 } else { // 注册失败
                     ToastUtil.showToast("完善资料失败 " + data);
                 }

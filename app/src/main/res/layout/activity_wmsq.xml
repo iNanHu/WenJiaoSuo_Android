@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="点评功能暂未开启，敬请期待"
+        android:text="文民社群功能建设中，将于2.0版本惊艳发布！"
         android:textSize="18sp"/>
 
 </RelativeLayout>

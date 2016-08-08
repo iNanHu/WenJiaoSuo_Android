@@ -282,12 +282,12 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.ShengouActivity"
+            android:name=".activity.WenMinSXYActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.DianpinActivity"
+            android:name=".activity.WenMinSheQunActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
@@ -303,6 +303,11 @@
 
         <activity
             android:name=".activity.MemberCenterActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.PromotePosterActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
     </application>

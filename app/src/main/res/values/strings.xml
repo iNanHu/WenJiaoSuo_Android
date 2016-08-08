@@ -14,8 +14,9 @@
     <string name="huodong">活动</string>
     <string name="huodong_area">活动专区</string>
     <string name="member_center">等级特权</string>
-    <string name="shengou">申购</string>
-    <string name="dianping">点评</string>
+    <string name="wmsxy">文民商学院</string>
+    <string name="wmsq">文民社群</string>
+    <string name="promote_poster">推广海报</string>
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>

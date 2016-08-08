@@ -85,79 +85,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_sg"
-                        android:layout_width="0.0dip"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.0"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@mipmap/icon_sg"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/news_menu_sg"
-                            android:textColor="@color/gray_55"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_news_center"
-                        android:layout_width="0.0dip"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.0"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@mipmap/icon_news"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/news_menu_news"
-                            android:textColor="@color/gray_55"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/ll_agree"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.0"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@mipmap/icon_agree"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/news_menu_agree"
-                            android:textColor="@color/gray_55"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:id="@+id/ll_gg"
                         android:layout_width="0.0dip"
                         android:layout_height="match_parent"
@@ -202,7 +129,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_xh"
+                        android:id="@+id/ll_news_center"
                         android:layout_width="0.0dip"
                         android:layout_height="match_parent"
                         android:layout_weight="1.0"
@@ -213,13 +140,86 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
+                            android:src="@mipmap/icon_news"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/news_menu_news"
+                            android:textColor="@color/gray_55"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_wmsq"
+                        android:layout_width="0.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/icon_sg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/news_menu_sq"
+                            android:textColor="@color/gray_55"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_wmsxy"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/icon_agree"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/news_menu_sxy"
+                            android:textColor="@color/gray_55"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_qmjj"
+                        android:layout_width="0.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:src="@mipmap/icon_xh"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/news_menu_xh"
+                            android:text="@string/news_menu_qmjj"
                             android:textColor="@color/gray_55"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -297,8 +297,7 @@
                             android:layout_height="80dp"
                             android:layout_centerInParent="true"
                             android:layout_margin="6dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:scaleType="fitXY"/>
 
                     </RelativeLayout>
 
@@ -390,8 +389,7 @@
                             android:layout_height="80dp"
                             android:layout_centerInParent="true"
                             android:layout_margin="6dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:scaleType="fitXY"/>
 
                     </RelativeLayout>
 

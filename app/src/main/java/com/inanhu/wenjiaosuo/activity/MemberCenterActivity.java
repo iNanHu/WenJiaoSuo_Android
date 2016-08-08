@@ -1,11 +1,15 @@
 package com.inanhu.wenjiaosuo.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
+import com.inanhu.wenjiaosuo.base.MessageFlag;
+import com.inanhu.wenjiaosuo.bean.UserInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +33,15 @@ public class MemberCenterActivity extends BaseActivity {
     TextView tvConditionOfDiamond;
     @BindView(R.id.tv_show_level)
     TextView tvShowLevel;
+    @BindView(R.id.tv_name)
+    TextView tvName;
+    @BindView(R.id.tv_level)
+    TextView tvLevel;
+    @BindView(R.id.tv_level_label)
+    TextView tvLevelLabel;
+
+    // 当前登录用户
+    private UserInfo userInfo = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +51,21 @@ public class MemberCenterActivity extends BaseActivity {
         showTopBarBack(true);
         showTopBarRight(false);
         setTopBarTitle(R.string.member_center);
+        userInfo = (UserInfo) GlobalValue.getInstance().getGlobal(MessageFlag.CURRENT_USER_INFO, null);
+        initView();
+    }
+
+    private void initView() {
+        if (userInfo != null) {
+            String name = userInfo.getUsername();
+            tvName.setText(name);
+            String level = userInfo.getRank();
+            if (TextUtils.isEmpty(level)){ // 无等级
+                tvLevelLabel.setText("您当前粉丝数还未达到评级标准哦");
+            } else {
+                tvLevel.setText(level);
+            }
+        }
     }
 
     @OnClick({R.id.ll_level_copper, R.id.ll_level_silver, R.id.ll_level_gold, R.id.ll_level_diamond})
