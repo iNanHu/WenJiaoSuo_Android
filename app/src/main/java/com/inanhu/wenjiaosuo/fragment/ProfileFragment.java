@@ -1,6 +1,7 @@
 package com.inanhu.wenjiaosuo.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -83,6 +84,15 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
         } else { // 未登录则跳转到登录界面
             startActivityForResult(new Intent(getActivity(), LoginActivity.class), REQUEST_CODE_LOGIN);
         }
+    }
+
+    @OnClick(R.id.feed_back_btn)
+    public void toFeedBack() {
+        Intent data = new Intent(Intent.ACTION_SENDTO);
+        data.setData(Uri.parse("mailto:wenlongservice@126.com"));
+        data.putExtra(Intent.EXTRA_SUBJECT, "意见反馈");
+//        data.putExtra(Intent.EXTRA_TEXT, "这是内容");
+        startActivity(data);
     }
 
     @OnClick(R.id.abouts_us_btn)
