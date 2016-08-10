@@ -93,7 +93,7 @@ public class RegisterActivity extends BaseActivity {
                     }.getType());
                     String data = rsp.getData();
                     if (rsp.isSuccess()) { // 注册成功，返回登录界面
-                        ToastUtil.showToast("注册成功");
+                        ToastUtil.showToast(R.string.register_success);
                         activityManagerUtil.finishActivity(RegisterActivity.this);
                     } else {
                         ToastUtil.showToast("注册失败 " + data);

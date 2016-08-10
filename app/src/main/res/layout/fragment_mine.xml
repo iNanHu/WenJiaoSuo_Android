@@ -150,7 +150,7 @@
                     android:layout_alignParentLeft="true"
                     android:drawableLeft="@mipmap/evaluate"
                     android:drawablePadding="5.0dip"
-                    android:text="完善详细信息"
+                    android:text="成为高级文民"
                     android:textColor="@color/seting_text_color"
                     android:textSize="14sp"/>
 

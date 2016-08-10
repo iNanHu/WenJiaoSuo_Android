@@ -20,6 +20,7 @@ import com.inanhu.wenjiaosuo.fragment.AccountFragment;
 import com.inanhu.wenjiaosuo.fragment.EquityFragment;
 import com.inanhu.wenjiaosuo.fragment.NewsFragment;
 import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
+import com.inanhu.wenjiaosuo.fragment.YangMaoFragment;
 import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 
@@ -30,6 +31,7 @@ import cn.jpush.android.api.JPushInterface;
 public class MainActivity extends BaseActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private LinearLayout mTabNews;
     private LinearLayout mTabEquity;
+
     private LinearLayout mTabAccount;
     private LinearLayout mTabProfile;
 
@@ -44,7 +46,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
     private TextView mTextViewProfile;
 
     private NewsFragment mFragmentNews;
-    private EquityFragment mFragmentEquity;
+//    private EquityFragment mFragmentEquity;
+    private YangMaoFragment mFragmentYangMao;
     private AccountFragment mFragmentAccount;
     private ProfileFragment mFragmentProfile;
     private int currentFragment = 0; // 表示当前Fragment, 0-News/1-Blog/2-Focus/3-Profile
@@ -93,48 +96,29 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 setTopBarTitle(R.string.news);
                 showTopBarBack(false);
                 showTopBarRight(false);
-
-                // 设置顶部分组信息
-//                setTopTitleText(mFragmentNews.getmTopbarTitle());
-//                mTextViewTopTitle.setClickable(true);
-//                groups.clear();
-//                groups.add(getString(R.string.n_news));
-//                groups.add(getString(R.string.n_mobile));
-//                groups.add(getString(R.string.n_cloud));
-//                groups.add(getString(R.string.n_develop));
-//                groups.add(getString(R.string.n_programmer));
                 break;
             case 1:
                 // 显示对应的fragment
-                if (mFragmentEquity == null) {
-                    mFragmentEquity = new EquityFragment();
-                    transaction.add(R.id.id_content, mFragmentEquity);
+//                if (mFragmentEquity == null) {
+//                    mFragmentEquity = new EquityFragment();
+//                    transaction.add(R.id.id_content, mFragmentEquity);
+//                } else {
+//                    transaction.show(mFragmentEquity);
+//                }
+                if (mFragmentYangMao == null) {
+                    mFragmentYangMao = new YangMaoFragment();
+                    transaction.add(R.id.id_content, mFragmentYangMao);
                 } else {
-                    transaction.show(mFragmentEquity);
+                    transaction.show(mFragmentYangMao);
                 }
                 currentFragment = 1;
                 // 设置底部Tab图标和文字状态
                 mImgEquity.setImageResource(R.mipmap.tabbar_equity_highlight);
                 mTextViewEquity.setTextColor(ContextCompat.getColor(this, R.color.red));
                 showTopBar(true);
-                setTopBarTitle(R.string.equity);
+                setTopBarTitle(R.string.news_menu_activity);
                 showTopBarBack(false);
                 showTopBarRight(false);
-
-                // 设置顶部分组信息
-//                setTopTitleText(mFragmentBlog.getmTopbarTitle());
-//                mTextViewTopTitle.setClickable(true);
-//                groups.clear();
-//                groups.add(getString(R.string.b_mobile));
-//                groups.add(getString(R.string.b_web));
-//                groups.add(getString(R.string.b_enterprise));
-//                groups.add(getString(R.string.b_code));
-//                groups.add(getString(R.string.b_www));
-//                groups.add(getString(R.string.b_database));
-//                groups.add(getString(R.string.b_system));
-//                groups.add(getString(R.string.b_cloud));
-//                groups.add(getString(R.string.b_software));
-//                groups.add(getString(R.string.b_other));
                 break;
             case 2:
                 // 显示对应的fragment
@@ -148,9 +132,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 // 设置底部Tab图标和文字状态
                 mImgAccount.setImageResource(R.mipmap.tabbar_account_highlight);
                 mTextViewAccount.setTextColor(ContextCompat.getColor(this, R.color.red));
-                // 设置顶部标题
-//                mTextViewTopTitle.setText("博客圈");
-//                mTextViewTopTitle.setClickable(false);
                 showTopBar(true);
                 setTopBarTitle(R.string.account);
                 showTopBarBack(false);
@@ -169,10 +150,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
                 // 设置底部Tab图标和文字状态
                 mImgProfile.setImageResource(R.mipmap.tabbar_mine_highlight);
                 mTextViewProfile.setTextColor(ContextCompat.getColor(this, R.color.red));
-                // 设置顶部标题
-//                mTextViewTopTitle.setText("个人中心");
-//                mTextViewTopTitle.setClickable(false);
-//                mTopBar.setVisibility(View.INVISIBLE);
                 showTopBar(false);
                 break;
             default:
@@ -185,8 +162,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
         if (mFragmentNews != null) {
             transaction.hide(mFragmentNews);
         }
-        if (mFragmentEquity != null) {
-            transaction.hide(mFragmentEquity);
+        if (mFragmentYangMao != null) {
+//            transaction.hide(mFragmentEquity);
+            transaction.hide(mFragmentYangMao);
         }
         if (mFragmentAccount != null) {
             transaction.hide(mFragmentAccount);

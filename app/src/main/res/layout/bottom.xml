@@ -49,7 +49,7 @@
             android:id="@+id/id_tab_blog_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/equity"
+            android:text="@string/news_menu_activity"
             android:textColor="@color/tabbar_text_default"/>
     </LinearLayout>
 

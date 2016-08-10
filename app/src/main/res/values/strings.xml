@@ -20,6 +20,7 @@
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
+    <string name="register_success">您已成功注册成为普通文民！</string>
 
     <!--登录/注册/找回密码/完善用户资料-->
     <string name="hint_input_phone">请输入手机号</string>
@@ -62,7 +63,7 @@
     <string name="news_menu_news">新闻中心</string>
     <string name="news_menu_agree">点评</string>
     <string name="news_menu_gg">文交所公告</string>
-    <string name="news_menu_activity">活动专区</string>
+    <string name="news_menu_activity">羊毛专区</string>
     <string name="news_menu_xh">现货</string>
     <string name="news_menu_sq">文民社群</string>
     <string name="news_menu_sxy">文民商学院</string>

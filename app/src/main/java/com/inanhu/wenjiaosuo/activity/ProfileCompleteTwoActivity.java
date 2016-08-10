@@ -65,74 +65,78 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
 
     @OnClick(R.id.btn_complete_commit)
     public void toCommit() {
-        RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
-        params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.CERTIFICATE_FRONT));
-        HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
+        if (files.size() == 3){
+            RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
+            params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.CERTIFICATE_FRONT));
+            HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
 
-            @Override
-            public void onStart() {
-                showProgressDialog("证件照正面正在上传中", false);
-            }
+                @Override
+                public void onStart() {
+                    showProgressDialog("证件照正面正在上传中", false);
+                }
 
-            @Override
-            public void onResponse(String response, Headers headers) {
-                LogUtil.e(TAG, response);
-                closeProgressDialog();
-                ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
-                }.getType());
-                if (rsp.isSuccess()) { // 上传成功
-                    Upfile upfile = rsp.getData();
-                    if (upfile != null) {
-                        imageUrls.put(Constant.RequestKey.CERTIFICATE_FRONT, upfile.getUrl());
-                    }
-                    RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
-                    params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.CERTIFICATE_BACK));
-                    HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
-                        @Override
-                        public void onStart() {
-                            showProgressDialog("证件照反面正在上传中", false);
+                @Override
+                public void onResponse(String response, Headers headers) {
+                    LogUtil.e(TAG, response);
+                    closeProgressDialog();
+                    ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
+                    }.getType());
+                    if (rsp.isSuccess()) { // 上传成功
+                        Upfile upfile = rsp.getData();
+                        if (upfile != null) {
+                            imageUrls.put(Constant.RequestKey.CERTIFICATE_FRONT, upfile.getUrl());
                         }
+                        RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
+                        params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.CERTIFICATE_BACK));
+                        HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
+                            @Override
+                            public void onStart() {
+                                showProgressDialog("证件照反面正在上传中", false);
+                            }
 
-                        @Override
-                        public void onResponse(String response, Headers headers) {
-                            LogUtil.e(TAG, response);
-                            closeProgressDialog();
-                            ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
-                            }.getType());
-                            if (rsp.isSuccess()) {
-                                Upfile upfile = rsp.getData();
-                                if (upfile != null) {
-                                    imageUrls.put(Constant.RequestKey.CERTIFICATE_BACK, upfile.getUrl());
-                                }
-                                RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
-                                params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.BANK_CARD));
-                                HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
-                                    @Override
-                                    public void onStart() {
-                                        showProgressDialog("银行卡正面照正在上传中", false);
+                            @Override
+                            public void onResponse(String response, Headers headers) {
+                                LogUtil.e(TAG, response);
+                                closeProgressDialog();
+                                ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
+                                }.getType());
+                                if (rsp.isSuccess()) {
+                                    Upfile upfile = rsp.getData();
+                                    if (upfile != null) {
+                                        imageUrls.put(Constant.RequestKey.CERTIFICATE_BACK, upfile.getUrl());
                                     }
+                                    RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
+                                    params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.BANK_CARD));
+                                    HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
+                                        @Override
+                                        public void onStart() {
+                                            showProgressDialog("银行卡正面照正在上传中", false);
+                                        }
 
-                                    @Override
-                                    public void onResponse(String response, Headers headers) {
-                                        LogUtil.e(TAG, response);
-                                        closeProgressDialog();
-                                        ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
-                                        }.getType());
-                                        if (rsp.isSuccess()) { // 至此文件上传结束
-                                            Upfile upfile = rsp.getData();
-                                            if (upfile != null) {
-                                                imageUrls.put(Constant.RequestKey.BANK_CARD, upfile.getUrl());
-                                                commit();
+                                        @Override
+                                        public void onResponse(String response, Headers headers) {
+                                            LogUtil.e(TAG, response);
+                                            closeProgressDialog();
+                                            ApiResponse<Upfile> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<Upfile>>() {
+                                            }.getType());
+                                            if (rsp.isSuccess()) { // 至此文件上传结束
+                                                Upfile upfile = rsp.getData();
+                                                if (upfile != null) {
+                                                    imageUrls.put(Constant.RequestKey.BANK_CARD, upfile.getUrl());
+                                                    commit();
+                                                }
                                             }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            ToastUtil.showToast("请按要求选择图片");
+        }
     }
 
     /**

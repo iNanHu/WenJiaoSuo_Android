@@ -37,6 +37,7 @@ public class ShareActivity extends BaseActivity {
 
     // 当前登录用户
     private UserInfo userInfo;
+    private String shareText = "一键式注册，各大文交所联手配你原始票！狂欢盛宴，点击开启";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class ShareActivity extends BaseActivity {
                     .setPlatform(SHARE_MEDIA.WEIXIN)
                     .setCallback(umShareListener)
                     .withTitle(getResources().getString(R.string.app_name))
-                    .withText("分享注册赢福利啦")
+                    .withText(shareText)
                     .withTargetUrl(url)
                     .withMedia(image)
                     .share();
@@ -100,7 +101,7 @@ public class ShareActivity extends BaseActivity {
                     .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                     .setCallback(umShareListener)
                     .withTitle(getResources().getString(R.string.app_name))
-                    .withText("分享注册赢福利啦")
+                    .withText(shareText)
                     .withTargetUrl(url)
                     .withMedia(image)
                     .share();
@@ -119,7 +120,7 @@ public class ShareActivity extends BaseActivity {
                     .setPlatform(SHARE_MEDIA.QQ)
                     .setCallback(umShareListener)
                     .withTitle(getResources().getString(R.string.app_name))
-                    .withText("分享注册赢福利啦")
+                    .withText(shareText)
                     .withTargetUrl(url)
                     .withMedia(image)
                     .share();
@@ -138,7 +139,7 @@ public class ShareActivity extends BaseActivity {
                     .setPlatform(SHARE_MEDIA.QZONE)
                     .setCallback(umShareListener)
                     .withTitle(getResources().getString(R.string.app_name))
-                    .withText("分享注册赢福利啦")
+                    .withText(shareText)
                     .withTargetUrl(url)
                     .withMedia(image)
                     .share();

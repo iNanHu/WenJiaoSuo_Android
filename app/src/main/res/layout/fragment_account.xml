@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/blue"
+                android:background="@color/gray"
                 android:padding="5dp"
                 android:text="A. 以下文交所，点击“一键开户”即可体验极速开户一键搞定"
                 android:textColor="@color/white"/>
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/blue"
+                android:background="@color/gray"
                 android:padding="5dp"
                 android:text="B. 以下文交所，尚未开通极速体验，开户请点击“立即开户”"
                 android:textColor="@color/white"/>

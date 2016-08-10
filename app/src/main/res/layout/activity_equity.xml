@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_topbar"
+        layout="@layout/top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+    <com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh
+        android:id="@+id/swipe_equity_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_equity_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"/>
+    </com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh>
+
+</LinearLayout>
+

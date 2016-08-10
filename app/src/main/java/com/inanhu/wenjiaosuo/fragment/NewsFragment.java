@@ -16,6 +16,7 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.activity.EquityActivity;
 import com.inanhu.wenjiaosuo.activity.GonggaoActivity;
 import com.inanhu.wenjiaosuo.activity.HuodongActivity;
 import com.inanhu.wenjiaosuo.activity.MainActivity;
@@ -53,7 +54,7 @@ import okhttp3.Headers;
 
 /**
  * 首页资讯界面
- * <p>
+ * <p/>
  * Created by zzmiao on 2015/9/23.
  */
 public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
@@ -271,14 +272,15 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_stock:
-                // 切换到电子盘界面
-                ((MainActivity) getActivity()).setSelect(1);
+//                ((MainActivity) getActivity()).setSelect(1);
+                startActivity(new Intent(getActivity(), EquityActivity.class));
                 break;
             case R.id.ll_gg:
                 startActivity(new Intent(getActivity(), GonggaoActivity.class));
                 break;
             case R.id.ll_activity:
-                startActivity(new Intent(getActivity(), HuodongActivity.class));
+//                startActivity(new Intent(getActivity(), HuodongActivity.class));
+                ((MainActivity) getActivity()).setSelect(1);
                 break;
             case R.id.ll_wmsq:
                 startActivity(new Intent(getActivity(), WenMinSheQunActivity.class));
@@ -287,7 +289,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 startActivity(new Intent(getActivity(), WenMinSXYActivity.class));
                 break;
             case R.id.ll_qmjj:
-                ((MainActivity)getActivity()).setSelect(3);
+                ((MainActivity) getActivity()).setSelect(3);
                 break;
         }
     }
