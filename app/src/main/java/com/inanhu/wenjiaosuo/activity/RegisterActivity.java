@@ -1,7 +1,9 @@
 package com.inanhu.wenjiaosuo.activity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -16,9 +18,6 @@ import com.inanhu.wenjiaosuo.util.MD5Util;
 import com.inanhu.wenjiaosuo.util.RegexUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +41,10 @@ public class RegisterActivity extends BaseActivity {
     EditText etUserEmail;
     @BindView(R.id.et_user_invite)
     EditText etUserInvite;
+    @BindView(R.id.btn_get_phone_check_number)
+    Button btnGetPhoneCheckNumber;
+
+    private TimeCount timeCount;
 
     @OnClick(R.id.btn_register)
     public void toRegister() {
@@ -113,5 +116,31 @@ public class RegisterActivity extends BaseActivity {
         showTopBarBack(true);
         showTopBarRight(false);
         setTopBarTitle(R.string.register_);
+
+        timeCount = new TimeCount(60000, 1000);
+    }
+
+    @OnClick(R.id.btn_get_phone_check_number)
+    public void onClick() {
+        timeCount.start();
+    }
+
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            btnGetPhoneCheckNumber.setClickable(false);
+            btnGetPhoneCheckNumber.setText(millisUntilFinished / 1000 + "秒");
+        }
+
+        @Override
+        public void onFinish() {
+            btnGetPhoneCheckNumber.setText(getString(R.string.hint_get_phone_check_number));
+            btnGetPhoneCheckNumber.setClickable(true);
+        }
     }
 }
