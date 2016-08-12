@@ -217,6 +217,11 @@
         </activity>
 
         <activity
+            android:name=".activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash.Fullscreen"/>
+
+        <activity
             android:name=".activity.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>

@@ -108,7 +108,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void enterHomeActivity() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
         finish();
     }
 
