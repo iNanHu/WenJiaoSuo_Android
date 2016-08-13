@@ -195,7 +195,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private void getData() {
         // 加载新闻（2条）
         RequestParams params = new RequestParams(this);
-//        params.addFormDataPart(Constant.RequestKey.CID, "2"); // 不传分类列表就获取全类别的
+        params.addFormDataPart(Constant.RequestKey.CID, "2"); // 不传分类列表就获取全类别的
         params.addFormDataPart(Constant.RequestKey.ORDER, "time"); // 排序，方式有time/views/rec
         params.addFormDataPart(Constant.RequestKey.NEWS_PAGESIZE, "2");
         params.addFormDataPart(Constant.RequestKey.NEWS_PAGE, "1");

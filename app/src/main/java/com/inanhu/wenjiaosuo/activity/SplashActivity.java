@@ -36,6 +36,8 @@ public class SplashActivity extends BaseActivity {
 
     @BindView(R.id.iv_splash)
     ImageView ivSplash;
+    // 初次使用标记
+    private boolean isFirst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationStart(Animation animation) {
+                // 是否第一次使用
+                isFirst = (boolean) SPUtil.get(SplashActivity.this, Constant.SPKey.FIRST_RUN, true);
                 // 免登录
                 String userPhone = (String) SPUtil.get(SplashActivity.this, Constant.SPKey.USERNAME, "");
                 String userPwd = (String) SPUtil.get(SplashActivity.this, Constant.SPKey.PASSWORD, "");
@@ -89,7 +93,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                enterHomeActivity();
+                toNext();
             }
         });
 
@@ -107,9 +111,13 @@ public class SplashActivity extends BaseActivity {
         JPushInterface.onPause(this);
     }
 
-    private void enterHomeActivity() {
-        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
-        finish();
+    private void toNext() {
+        if (isFirst) { // 第一次运行进入引导页
+            startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+        } else {
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        }
+        activityManagerUtil.finishActivity(this);
     }
 
 }

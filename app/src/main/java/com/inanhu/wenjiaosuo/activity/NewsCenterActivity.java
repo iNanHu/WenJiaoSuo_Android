@@ -20,6 +20,7 @@ import com.inanhu.wenjiaosuo.base.Constant;
 import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.bean.NewsBean;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
+import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
 import com.inanhu.wenjiaosuo.widget.DividerItemDecoration;
@@ -80,7 +81,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
 
     private void getData() {
         RequestParams params = new RequestParams(this);
-//        params.addFormDataPart(Constant.RequestKey.CID, "2"); // 不传分类列表就获取全类别的
+        params.addFormDataPart(Constant.RequestKey.CID, "2"); // 不传分类列表就获取全类别的
         params.addFormDataPart(Constant.RequestKey.ORDER, "time"); // 排序，方式有time/views/rec
 //        params.addFormDataPart(Constant.RequestKey.PAGESIZE, "2");
 //        params.addFormDataPart(Constant.RequestKey.PAGE, "1");
@@ -93,6 +94,7 @@ public class NewsCenterActivity extends BaseActivity implements SwipeRefreshLayo
 
             @Override
             public void onResponse(String response, Headers headers) {
+                LogUtil.e(TAG, response);
                 closeProgressDialog();
                 ApiResponse<ArrayList<NewsBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<NewsBean>>>() {
                 }.getType());

@@ -53,7 +53,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/my_collection"/>
+                android:src="@drawable/member_center"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/fast_open_account"/>
+                android:src="@drawable/my_fans"/>
 
             <TextView
                 android:layout_width="wrap_content"

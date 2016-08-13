@@ -73,7 +73,7 @@ public class PromotePosterActivity extends BaseActivity {
     @OnClick(R.id.id_topbar_right)
     public void onClick() {
         if (downloadFileSuccess){
-            ToastUtil.showToast("海报保存成功");
+            ToastUtil.showToast("海报保存到SD卡成功");
         }
     }
 }

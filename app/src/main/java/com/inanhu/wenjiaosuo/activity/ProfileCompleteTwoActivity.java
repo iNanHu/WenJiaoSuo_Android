@@ -24,6 +24,7 @@ import com.inanhu.wenjiaosuo.fragment.ProfileFragment;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.ImageUtil;
 import com.inanhu.wenjiaosuo.util.LogUtil;
+import com.inanhu.wenjiaosuo.util.PicassoImageLoader;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
 
@@ -35,7 +36,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
 import cn.finalteam.okhttpfinal.HttpRequest;
@@ -65,7 +69,7 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
 
     @OnClick(R.id.btn_complete_commit)
     public void toCommit() {
-        if (files.size() == 3){
+        if (files.size() == 3) {
             RequestParams params = new RequestParams(ProfileCompleteTwoActivity.this);
             params.addFormDataPart(Constant.RequestKey.UPFILE, files.get(Constant.RequestKey.CERTIFICATE_FRONT));
             HttpRequest.post(URLUtil.CommonApi.UPFILE, params, new BaseHttpRequestCallback() {
@@ -209,6 +213,29 @@ public class ProfileCompleteTwoActivity extends BaseActivity {
         showTopBarBack(true);
         showTopBarRight(false);
         setTopBarTitle(R.string.profile_complete);
+        // 配置Gallery
+        initGallery();
+    }
+
+    private void initGallery() {
+        // 设置主题
+        ThemeConfig theme = ThemeConfig.CYAN;
+        // 配置功能
+        FunctionConfig functionConfig = new FunctionConfig.Builder()
+                .setEnableCamera(true)
+                .setEnableEdit(false)
+                .setEnableCrop(true)
+                .setEnableRotate(false)
+//                .setForceCrop(true)
+//                .setCropSquare(true)
+                .setEnablePreview(true)
+                .build();
+        // 配置imageloader
+        cn.finalteam.galleryfinal.ImageLoader imageLoader = new PicassoImageLoader();
+        CoreConfig coreConfig = new CoreConfig.Builder(this, imageLoader, theme)
+                .setFunctionConfig(functionConfig)
+                .build();
+        GalleryFinal.init(coreConfig);
     }
 
     /**

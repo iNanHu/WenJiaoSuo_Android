@@ -71,7 +71,7 @@ public class OneKeyWJSListAdapter extends BGARecyclerViewAdapter<WJSBean> implem
                         }
                     });
                 } else {
-                    ToastUtil.showToast("登录并完善用户详细信息后方可使用该功能");
+                    ToastUtil.showToast(R.string.commit_profile_onekey);
                 }
 
             }
@@ -86,7 +86,7 @@ public class OneKeyWJSListAdapter extends BGARecyclerViewAdapter<WJSBean> implem
                     intent.putExtra(MessageFlag.WEBVIEW_LOAD_URL, wjsBean.getTutorial_link());
                     context.startActivity(intent);
                 } else {
-                    ToastUtil.showToast("登录并完善用户详细信息后方可使用该功能");
+                    ToastUtil.showToast(R.string.commit_to_jihuo);
                 }
             }
         });

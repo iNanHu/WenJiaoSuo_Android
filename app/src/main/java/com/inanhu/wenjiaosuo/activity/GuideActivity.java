@@ -11,13 +11,19 @@ import android.widget.TextView;
 
 import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
+import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.util.LogUtil;
+import com.inanhu.wenjiaosuo.util.SPUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.bgabanner.BGABanner;
+import cn.bingoogolapple.bgabanner.BGABannerUtil;
 
 /**
  * 引导页
@@ -70,28 +76,30 @@ public class GuideActivity extends BaseActivity {
             }
         });
 
-        mBackgroundBanner.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        // 初始化方式1：通过传入数据模型并结合Adapter的方式初始化
-        mBackgroundBanner.setAdapter(new BGABanner.Adapter() {
-            @Override
-            public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
-                ((ImageView) view).setImageResource((int) model);
-            }
-        });
-        mBackgroundBanner.setData(Arrays.asList(R.mipmap.guide_01, R.mipmap.guide_02, R.mipmap.guide_03), null);
+//        mBackgroundBanner.setOverScrollMode(View.OVER_SCROLL_NEVER);
+//        // 初始化方式1：通过传入数据模型并结合Adapter的方式初始化
+//        mBackgroundBanner.setAdapter(new BGABanner.Adapter() {
+//            @Override
+//            public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
+//                ((ImageView) view).setImageResource((int) model);
+//            }
+//        });
+//        mBackgroundBanner.setData(Arrays.asList(R.mipmap.guide_01, R.mipmap.guide_02, R.mipmap.guide_03), null);
 
 
-//        // 初始化方式2：通过直接传入视图集合的方式初始化
-//        List<View> views = new ArrayList<>();
-//        views.add(BGABannerUtil.getItemImageView(this, R.drawable.uoko_guide_foreground_1));
-//        views.add(BGABannerUtil.getItemImageView(this, R.drawable.uoko_guide_foreground_2));
-//        views.add(BGABannerUtil.getItemImageView(this, R.drawable.uoko_guide_foreground_3));
-//        mForegroundBanner.setData(views);
+        // 初始化方式2：通过直接传入视图集合的方式初始化
+        List<View> views = new ArrayList<>();
+        views.add(BGABannerUtil.getItemImageView(this, R.mipmap.guide_01));
+        views.add(BGABannerUtil.getItemImageView(this, R.mipmap.guide_02));
+        views.add(BGABannerUtil.getItemImageView(this, R.mipmap.guide_03));
+        mBackgroundBanner.setData(views);
     }
 
     @OnClick({R.id.tv_guide_skip, R.id.btn_guide_enter})
     public void onClick(View view) {
         if (view.getId() == R.id.btn_guide_enter || view.getId() == R.id.tv_guide_skip) {
+            // 引导完成 第一次运行变量置为false
+            SPUtil.put(GuideActivity.this, Constant.SPKey.FIRST_RUN, false);
             startActivity(new Intent(GuideActivity.this, MainActivity.class));
             finish();
         }

@@ -43,6 +43,8 @@ public class RegisterActivity extends BaseActivity {
     EditText etUserInvite;
     @BindView(R.id.btn_get_phone_check_number)
     Button btnGetPhoneCheckNumber;
+    @BindView(R.id.et_phone_check_number)
+    EditText etPhoneCheckNumber;
 
     private TimeCount timeCount;
 
@@ -53,6 +55,7 @@ public class RegisterActivity extends BaseActivity {
         String userPwdCheck = etUserPwdCheck.getText().toString().trim();
         String userEmail = etUserEmail.getText().toString().trim();
         String userInvite = etUserInvite.getText().toString().trim();
+        String phoneCode = etPhoneCheckNumber.getText().toString().trim();
         if (!RegexUtil.checkMobile(userPhone)) {
             ToastUtil.showToast("手机号输入有误");
             return;
@@ -69,10 +72,14 @@ public class RegisterActivity extends BaseActivity {
             ToastUtil.showToast("邮箱输入有误");
             return;
         }
+        if (TextUtils.isEmpty(phoneCode) || phoneCode.length() != 4) {
+            ToastUtil.showToast("请输入正确的验证码");
+        }
         RequestParams params = new RequestParams(this);
         params.addFormDataPart(Constant.RequestKey.USERNAME, userPhone);
         params.addFormDataPart(Constant.RequestKey.REGISTER_PASSWORD, MD5Util.getMD5String(userPwd));
         params.addFormDataPart(Constant.RequestKey.EMAIL, userEmail);
+        params.addFormDataPart(Constant.RequestKey.CODE, phoneCode);
         if (!TextUtils.isEmpty(userInvite)) {
             params.addFormDataPart(Constant.RequestKey.INVITE, userInvite);
         }
@@ -122,7 +129,36 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick(R.id.btn_get_phone_check_number)
     public void onClick() {
-        timeCount.start();
+        String mobile = etUserPhone.getText().toString().trim();
+        if (!RegexUtil.checkMobile(mobile)) {
+            ToastUtil.showToast("手机号输入有误");
+            return;
+        } else {
+            // 60秒后才能再次发送
+            timeCount.start();
+            // 发送验证码
+            RequestParams params = new RequestParams(this);
+            params.addFormDataPart(Constant.RequestKey.MOBILE, mobile);
+            if (isNetConnected()) {
+                HttpEngine.doGet(URLUtil.UserApi.CHECK_MOBILE, params, new BaseHttpRequestCallback() {
+
+                    @Override
+                    public void onResponse(String response, Headers headers) {
+                        LogUtil.e(TAG, response);
+                        ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
+                        }.getType());
+                        String data = rsp.getData();
+                        if (rsp.isSuccess()) { // 发送成功
+                            ToastUtil.showToast(R.string.check_mobile_success);
+                        } else {
+                            ToastUtil.showToast("验证码发送失败 " + data);
+                        }
+                    }
+                });
+            } else {
+                ToastUtil.showToast(R.string.toast_network_unconnceted);
+            }
+        }
     }
 
     class TimeCount extends CountDownTimer {

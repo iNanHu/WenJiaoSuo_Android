@@ -76,24 +76,24 @@ public class WJSApplication extends Application {
     }
 
     private void initGalleryFinal() {
-        // 设置主题
-        ThemeConfig theme = ThemeConfig.CYAN;
-        // 配置功能
-        FunctionConfig functionConfig = new FunctionConfig.Builder()
-                .setEnableCamera(true)
-                .setEnableEdit(false)
-                .setEnableCrop(true)
-                .setEnableRotate(false)
-//                .setForceCrop(true)
-//                .setCropSquare(true)
-                .setEnablePreview(true)
-                .build();
-        // 配置imageloader
-        cn.finalteam.galleryfinal.ImageLoader imageLoader = new PicassoImageLoader();
-        CoreConfig coreConfig = new CoreConfig.Builder(this, imageLoader, theme)
-                .setFunctionConfig(functionConfig)
-                .build();
-        GalleryFinal.init(coreConfig);
+//        // 设置主题
+//        ThemeConfig theme = ThemeConfig.CYAN;
+//        // 配置功能
+//        FunctionConfig functionConfig = new FunctionConfig.Builder()
+//                .setEnableCamera(true)
+//                .setEnableEdit(false)
+//                .setEnableCrop(true)
+//                .setEnableRotate(false)
+////                .setForceCrop(true)
+////                .setCropSquare(true)
+//                .setEnablePreview(true)
+//                .build();
+//        // 配置imageloader
+//        cn.finalteam.galleryfinal.ImageLoader imageLoader = new PicassoImageLoader();
+//        CoreConfig coreConfig = new CoreConfig.Builder(this, imageLoader, theme)
+//                .setFunctionConfig(functionConfig)
+//                .build();
+//        GalleryFinal.init(coreConfig);
     }
 
     public static WJSApplication getInstance() {

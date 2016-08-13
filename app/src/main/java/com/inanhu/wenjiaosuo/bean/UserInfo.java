@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 用户信息（用于本地保存）
- *
+ * <p/>
  * Created by iNanHu on 2016/7/21.
  */
 public class UserInfo implements Serializable {
@@ -36,6 +36,7 @@ public class UserInfo implements Serializable {
     private String invite_number;
     private String login_time;
     private String rank;
+    private String avatar;
     private String uid;
     private String realname;
     private String sex;
@@ -89,6 +90,14 @@ public class UserInfo implements Serializable {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getUid() {

@@ -16,6 +16,7 @@ public class Constant {
         public static final String LOGIN_PASSWORD = "pass";
         public static final String EMAIL = "email";
         public static final String INVITE = "invite";
+        public static final String CODE = "code";
 
         // 文件上传
         public static final String UPFILE = "file";
@@ -37,6 +38,7 @@ public class Constant {
         public static final String CERTIFICATE_FRONT_IMAGE = "certificate_front_image";
         public static final String CERTIFICATE_BACK_IMAGE = "certificate_back_image";
         public static final String BANK_CARD_IMAGE = "bank_card_image";
+        public static final String MOBILE = "mobile";
 
         // 获取新闻列表
         public static final String CID = "cid"; // 分类id
@@ -53,6 +55,8 @@ public class Constant {
         public static final String FANS_PAGESIZE = "pagesize"; // 粉丝列表每页条数
         public static final String FANS_PAGENUM = "pagenum"; // 粉丝列表页码
 
+        public static final String AVATAR = "file"; // 用户头像
+
 
 //        public static final String USERNAME = "";
 //        public static final String USERNAME = "";
@@ -61,6 +65,7 @@ public class Constant {
     public class SPKey {
         public static final String USERNAME = "username";
         public static final String PASSWORD = "password";
+        public static final String FIRST_RUN = "first_run";
     }
 
 }

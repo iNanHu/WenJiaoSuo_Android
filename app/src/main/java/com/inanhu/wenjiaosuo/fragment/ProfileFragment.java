@@ -31,6 +31,7 @@ import com.inanhu.wenjiaosuo.base.MessageFlag;
 import com.inanhu.wenjiaosuo.bean.UserInfo;
 import com.inanhu.wenjiaosuo.util.AccountUtil;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
+import com.inanhu.wenjiaosuo.util.ImageLoader;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.ToastUtil;
 import com.inanhu.wenjiaosuo.util.URLUtil;
@@ -52,7 +53,7 @@ import okhttp3.Headers;
 public class ProfileFragment extends BaseFragment /*implements View.OnClickListener */ {
 
     public static int REQUEST_CODE_LOGIN = 0x10;
-    public static int REQUEST_CODE_LOGOUT = 0x11;
+    public static int REQUEST_CODE_USER_MANAGE = 0x11;
 
     @BindView(R.id.civ_avatar)
     CircleImageView civAvatar;
@@ -80,7 +81,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     @OnClick(R.id.civ_avatar)
     public void toLogin() {
         if (AccountUtil.isLogin()) { // 登录用户点击跳转账户管理界面
-            startActivityForResult(new Intent(getActivity(), UserInfoDetailActivity.class), REQUEST_CODE_LOGOUT);
+            startActivityForResult(new Intent(getActivity(), UserInfoDetailActivity.class), REQUEST_CODE_USER_MANAGE);
         } else { // 未登录则跳转到登录界面
             startActivityForResult(new Intent(getActivity(), LoginActivity.class), REQUEST_CODE_LOGIN);
         }
@@ -169,11 +170,14 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
-        init();
+        getUserInfo();
         return view;
     }
 
-    private void init() {
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo() {
         if (AccountUtil.isLogin()) {
             // 登录成功获取用户基本信息
             RequestParams params = new RequestParams(this);
@@ -197,7 +201,10 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                             } else {
                                 completeProfileBtn.setVisibility(View.VISIBLE);
                             }
-                            civAvatar.setImageResource(R.mipmap.app_icon);
+                            String avatar = userInfo.getAvatar();
+                            if (!TextUtils.isEmpty(avatar)) {
+                                ImageLoader.with(R.mipmap.nologin, avatar, civAvatar);
+                            }
                         }
 
                     }
@@ -233,17 +240,24 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                         } else {
                             completeProfileBtn.setVisibility(View.VISIBLE);
                         }
-                        civAvatar.setImageResource(R.mipmap.app_icon);
+                        String avatar = userInfo.getAvatar();
+                        if (!TextUtils.isEmpty(avatar)) {
+                            ImageLoader.with(R.mipmap.nologin, avatar, civAvatar);
+                        }
                     }
                 }
             }
-        } else if (requestCode == REQUEST_CODE_LOGOUT) { // 登出返回
+        } else if (requestCode == REQUEST_CODE_USER_MANAGE) { // 登出返回
             if (data != null) {
                 String logoutSuccess = data.getStringExtra(MessageFlag.LOGOUT_SUCCESS);
-                if ("true".equals(logoutSuccess)) { // 登出成功，更新界面
+                if (!TextUtils.isEmpty(logoutSuccess) && "true".equals(logoutSuccess)) { // 登出成功，更新界面
                     tvLoginNow.setText(getResources().getString(R.string.login_now));
                     completeProfileBtn.setVisibility(View.GONE);
                     civAvatar.setImageResource(R.mipmap.nologin);
+                }
+                String changeAvatarSuccess = data.getStringExtra(MessageFlag.CHANGE_AVATAR_SUCCESS);
+                if (!TextUtils.isEmpty(changeAvatarSuccess) && "true".equals(changeAvatarSuccess)) { // 修改头像成功，更新头像
+                    getUserInfo();
                 }
             }
         }

@@ -19,7 +19,7 @@ import cn.finalteam.okhttpfinal.HttpTaskHandler;
 /**
  * Created by iNanHu on 2016/6/27.
  */
-public class BaseActivity extends AppCompatActivity implements MyHttpCycleContext {
+public abstract class AbstractBaseActivity extends AppCompatActivity implements MyHttpCycleContext {
     protected String TAG;
     protected CustomProgress dialog;
     protected WJSApplication application;
@@ -49,13 +49,16 @@ public class BaseActivity extends AppCompatActivity implements MyHttpCycleContex
             tvTopBarBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finish();
+                    onBackPress();
+                    activityManagerUtil.finishActivity(AbstractBaseActivity.this);
                 }
             });
         } else {
             tvTopBarBack.setVisibility(View.INVISIBLE);
         }
     }
+
+    protected abstract void onBackPress();
 
 
     /**

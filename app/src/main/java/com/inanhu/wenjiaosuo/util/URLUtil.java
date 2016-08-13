@@ -58,6 +58,7 @@ public class URLUtil {
         public static final String GET_FAN_LIST = USER + "/get_fan_list";
         public static final String GET_APPLY_STATUS_BYUID = USER +"/get_apply_status_byuid";
         public static final String GET_POSTER = USER + "/combine?invite=";
+        public static final String CHECK_MOBILE = USER + "/check_mobile";
     }
 
     /**

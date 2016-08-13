@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/yellow"
+        android:background="@color/red"
         android:padding="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -82,23 +82,60 @@
                 android:textSize="15sp"
                 android:visibility="visible"/>
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="等级"/>
+
+                <include layout="@layout/vline_view"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:text="@string/condition_of_level"/>
+            </LinearLayout>
+
+            <include layout="@layout/hline_view"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_level"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_header"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <LinearLayout
                 android:id="@+id/ll_level_copper"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:clickable="true"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -106,20 +143,29 @@
                     android:src="@mipmap/level_copper"/>
 
                 <TextView
+                    android:id="@+id/tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="铜牌经纪人"
-                    android:textColor="@color/white"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_condition_of_copper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:textSize="13sp"/>
             </LinearLayout>
 
+            <include layout="@layout/hline_view"/>
+
             <LinearLayout
                 android:id="@+id/ll_level_silver"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -130,17 +176,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="银牌经纪人"
-                    android:textColor="@color/white"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_condition_of_silver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:textSize="13sp"/>
             </LinearLayout>
 
+            <include layout="@layout/hline_view"/>
+
             <LinearLayout
                 android:id="@+id/ll_level_gold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -151,17 +205,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="金牌经纪人"
-                    android:textColor="@color/white"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_condition_of_gold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:textSize="13sp"/>
             </LinearLayout>
 
+            <include layout="@layout/hline_view"/>
+
             <LinearLayout
                 android:id="@+id/ll_level_diamond"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -172,66 +234,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="钻石合伙人"
-                    android:textColor="@color/white"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/tv_condition_of_diamond"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:textSize="13sp"/>
             </LinearLayout>
 
         </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/tv_show_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="铜牌经纪人"
-            android:textColor="@color/red"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/tv_condition_of_copper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="荣升标准：一度粉丝与二度粉丝数量之和超过3个。"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/tv_condition_of_silver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="荣升标准：一度粉丝与二度粉丝数量之和超过36个。"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/tv_condition_of_gold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="荣升标准：一度粉丝与二度粉丝数量之和超过120个。"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/tv_condition_of_diamond"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="荣升标准：一度粉丝与二度粉丝数量之和超过600个。"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:visibility="gone"/>
     </RelativeLayout>
 
 </LinearLayout>

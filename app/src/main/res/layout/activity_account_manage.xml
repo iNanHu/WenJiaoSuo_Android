@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_selector"
                 android:clickable="true"
+                android:onClick="toChangeAvatar"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="10.0dip">
@@ -67,7 +68,8 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10.0dip">
+                android:padding="10.0dip"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="0.0dip"
@@ -218,6 +220,7 @@
                 android:layout_height="50dip"
                 android:layout_below="@id/line5"
                 android:layout_marginTop="50dp"
+                android:onClick="toLogout"
                 android:gravity="center"
                 android:text="退出登录"
                 android:textColor="@color/white"

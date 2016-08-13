@@ -20,7 +20,10 @@
 
     <!--Toast提示-->
     <string name="toast_network_unconnceted">无网络连接</string>
-    <string name="register_success">您已成功注册成为普通文民！</string>
+    <string name="register_success">恭喜您成为普通文民！</string>
+    <string name="check_mobile_success">验证码发送成功</string>
+    <string name="commit_profile_onekey">完善个人信息，成为高级文民，即可体验一键极速开户！</string>
+    <string name="commit_to_jihuo">成为高级文民才能使用该功能哦</string>
 
     <!--登录/注册/找回密码/完善用户资料-->
     <string name="hint_input_phone">请输入手机号</string>
@@ -82,4 +85,6 @@
 
 
     <string name="tip_wjs_status">温馨提示：一键开户获取的账号和密码为初始账号密码</string>
+
+    <string name="condition_of_level">荣升标准\n（一度粉丝与二度粉丝数量之和>=）</string>
 </resources>

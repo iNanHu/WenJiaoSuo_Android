@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/white"
@@ -11,13 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"/>
 
-    <TextView
-        android:id="@+id/tv_huodong_none_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="文民商学院功能暂未开启，敬请期待"
-        android:textSize="18sp"/>
+    <com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh
+        android:id="@+id/swipe_wmsxy_container"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_wmsxy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.inanhu.wenjiaosuo.widget.customswipetorefresh.CustomSwipeToRefresh>
+</LinearLayout>
 
