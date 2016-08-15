@@ -111,7 +111,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
         if (AccountUtil.isUserProfileComplete()) { // 登录并完善用户详细信息后方可使用该功能
             startActivity(new Intent(getActivity(), ShareActivity.class));
         } else {
-            ToastUtil.showToast("登录并完善用户详细信息后方可分享注册");
+            ToastUtil.showToast("高级文民才能分享注册哦");
         }
     }
 
@@ -151,7 +151,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
                 }
             });
         } else {
-            ToastUtil.showToast("登录并完善用户详细信息后方可生成推广海报");
+            ToastUtil.showToast("高级文民才能生成推广海报哦");
         }
     }
 

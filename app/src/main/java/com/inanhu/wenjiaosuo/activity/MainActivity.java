@@ -309,7 +309,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Adapt
         if (AccountUtil.isUserProfileComplete()){ // 完善了详细信息的用户才能使用一账通模块
             startActivity(new Intent(MainActivity.this, WJSApplyStatusActivity.class));
         } else {
-            ToastUtil.showToast("登录并完善用户详细信息后方可使用该功能");
+            ToastUtil.showToast("高级文民才能查询文交所开户进度哦");
         }
     }
 }

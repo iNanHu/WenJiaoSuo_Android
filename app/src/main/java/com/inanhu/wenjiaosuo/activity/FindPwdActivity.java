@@ -9,6 +9,7 @@ import com.inanhu.wenjiaosuo.R;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseActivity;
 import com.inanhu.wenjiaosuo.base.Constant;
+import com.inanhu.wenjiaosuo.base.GlobalValue;
 import com.inanhu.wenjiaosuo.util.HttpEngine;
 import com.inanhu.wenjiaosuo.util.LogUtil;
 import com.inanhu.wenjiaosuo.util.RegexUtil;
@@ -55,12 +56,13 @@ public class FindPwdActivity extends BaseActivity {
             HttpEngine.doPost(URLUtil.UserApi.RESET_PASS, params, new BaseHttpRequestCallback() {
                 @Override
                 public void onResponse(String response, Headers headers) {
+                    LogUtil.e(TAG, response);
                     ApiResponse<String> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<String>>() {
                     }.getType());
-                    LogUtil.e(TAG, rsp.isSuccess() + "/" + rsp.getData());
                     String data = rsp.getData();
                     if (rsp.isSuccess()) {
                         ToastUtil.showToast("请登录注册邮箱重置登录密码");
+                        activityManagerUtil.finishActivity(FindPwdActivity.this);
                     } else {
                         ToastUtil.showToast("找回密码失败 " + data);
                     }

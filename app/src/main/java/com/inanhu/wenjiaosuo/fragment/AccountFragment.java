@@ -1,5 +1,6 @@
 package com.inanhu.wenjiaosuo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
+import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
 import com.inanhu.wenjiaosuo.adapter.OneKeyWJSListAdapter;
 import com.inanhu.wenjiaosuo.adapter.WJSListAdapter;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
@@ -33,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
 import cn.finalteam.okhttpfinal.RequestParams;
 import okhttp3.Headers;
@@ -169,5 +172,16 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     public void onRefresh() {
         refreshData();
+    }
+
+    @OnClick(R.id.iv_wjs_promotion)
+    public void onClick() {
+        if (!AccountUtil.isLogin()) {
+            ToastUtil.showToast("登录才能成为高级文明哦");
+        } else if (AccountUtil.isUserProfileComplete()) {
+            ToastUtil.showToast("您已经是高级文民啦");
+        } else {// 登录用户但还未成为高级文民的去完善资料
+            startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
+        }
     }
 }

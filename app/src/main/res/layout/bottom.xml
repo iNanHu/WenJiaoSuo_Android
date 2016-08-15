@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="@string/news"
             android:textColor="@color/tabbar_text_default"/>
-    </LinearLayout>
+    </LinearLayout>`
 
     <LinearLayout
         android:id="@+id/id_tab_blog"

@@ -38,6 +38,7 @@ public class ShareActivity extends BaseActivity {
     // 当前登录用户
     private UserInfo userInfo;
     private String shareText = "一键式注册，各大文交所联手配你原始票！狂欢盛宴，点击开启";
+    private String shareTextAll = "【文龙一账通】" + shareText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class ShareActivity extends BaseActivity {
             new ShareAction(this)
                     .setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                     .setCallback(umShareListener)
-                    .withTitle(getResources().getString(R.string.app_name))
+                    .withTitle(shareTextAll)
                     .withText(shareText)
                     .withTargetUrl(url)
                     .withMedia(image)
