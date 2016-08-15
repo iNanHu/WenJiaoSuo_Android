@@ -18,11 +18,10 @@ import com.inanhu.wenjiaosuo.activity.AboutUsActivity;
 import com.inanhu.wenjiaosuo.activity.LoginActivity;
 import com.inanhu.wenjiaosuo.activity.MemberCenterActivity;
 import com.inanhu.wenjiaosuo.activity.MyFansActivity;
-import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
+import com.inanhu.wenjiaosuo.activity.ProfileCompleteRuleActivity;
 import com.inanhu.wenjiaosuo.activity.PromotePosterActivity;
 import com.inanhu.wenjiaosuo.activity.ShareActivity;
 import com.inanhu.wenjiaosuo.activity.UserInfoDetailActivity;
-import com.inanhu.wenjiaosuo.activity.WebviewActivity;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
 import com.inanhu.wenjiaosuo.base.BaseFragment;
 import com.inanhu.wenjiaosuo.base.Constant;
@@ -71,7 +70,7 @@ public class ProfileFragment extends BaseFragment /*implements View.OnClickListe
             ToastUtil.showToast("您已经完善信息啦");
         } else {
             if (AccountUtil.isLogin()) {
-                startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
+                startActivity(new Intent(getActivity(), ProfileCompleteRuleActivity.class));
             } else {
                 ToastUtil.showToast("请先登录");
             }

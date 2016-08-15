@@ -21,6 +21,6 @@ public class YangmaoListAdapter extends BGARecyclerViewAdapter<YangmaoBean> {
 
     @Override
     protected void fillData(BGAViewHolderHelper bgaViewHolderHelper, int position, YangmaoBean yangmaoBean) {
-        ImageLoader.with(R.mipmap.ic_launcher, yangmaoBean.getImage(), (ImageView) bgaViewHolderHelper.getView(R.id.iv_yangmao));
+        ImageLoader.with(yangmaoBean.getImage(), (ImageView) bgaViewHolderHelper.getView(R.id.iv_yangmao));
     }
 }

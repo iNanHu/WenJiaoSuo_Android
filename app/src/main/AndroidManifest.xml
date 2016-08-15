@@ -320,6 +320,11 @@
             android:name=".activity.EquityActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.ProfileCompleteRuleActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

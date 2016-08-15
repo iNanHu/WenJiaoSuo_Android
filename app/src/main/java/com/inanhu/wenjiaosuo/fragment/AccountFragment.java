@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.inanhu.wenjiaosuo.R;
-import com.inanhu.wenjiaosuo.activity.ProfileCompleteOneActivity;
+import com.inanhu.wenjiaosuo.activity.ProfileCompleteRuleActivity;
 import com.inanhu.wenjiaosuo.adapter.OneKeyWJSListAdapter;
 import com.inanhu.wenjiaosuo.adapter.WJSListAdapter;
 import com.inanhu.wenjiaosuo.base.ApiResponse;
@@ -177,11 +177,11 @@ public class AccountFragment extends BaseFragment implements SwipeRefreshLayout.
     @OnClick(R.id.iv_wjs_promotion)
     public void onClick() {
         if (!AccountUtil.isLogin()) {
-            ToastUtil.showToast("登录才能成为高级文明哦");
+            ToastUtil.showToast("登录才能成为高级文民哦");
         } else if (AccountUtil.isUserProfileComplete()) {
             ToastUtil.showToast("您已经是高级文民啦");
         } else {// 登录用户但还未成为高级文民的去完善资料
-            startActivity(new Intent(getActivity(), ProfileCompleteOneActivity.class));
+            startActivity(new Intent(getActivity(), ProfileCompleteRuleActivity.class));
         }
     }
 }

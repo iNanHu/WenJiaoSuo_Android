@@ -36,7 +36,7 @@ public class WJSApplication extends Application {
         ImageLoader.init(this);
 
         // 日志开关
-        LogUtil.setPrintable(true);
+        LogUtil.setPrintable(false);
 
         // Toast工具初始化
         ToastUtil.init(this);
