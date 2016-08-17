@@ -2,6 +2,7 @@ package com.inanhu.wenjiaosuo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +45,7 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
     @BindView(R.id.wjs_status_container)
     CustomSwipeToRefresh wjsStatusContainer;
 
-    private List<WJSStatusBean> wjsStatusBeanList = new ArrayList<>();
+    //    private List<WJSStatusBean> wjsStatusBeanList = new ArrayList<>();
     private WJSStatusListAdapter mAdapter;
 
     private Intent intent;
@@ -67,10 +68,10 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
         getData(intent);
     }
 
-    private void getData(Intent intent){
-        if (intent != null){
+    private void getData(Intent intent) {
+        if (intent != null) {
             uid = intent.getStringExtra(MessageFlag.UID);
-            if (uid != null){ // 根据uid查询
+            if (uid != null) { // 根据uid查询
                 getDataByUid();
             } else { // 根据token查询
                 getDataByToken();
@@ -92,7 +93,7 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
                     ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
                     }.getType());
                     if (rsp != null && rsp.isSuccess()) {
-                        wjsStatusBeanList = rsp.getData();
+                        List<WJSStatusBean> wjsStatusBeanList = rsp.getData();
                         if (wjsStatusBeanList != null) {
                             mAdapter.setDatas(wjsStatusBeanList);
                         }
@@ -128,7 +129,7 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
                     ApiResponse<ArrayList<WJSStatusBean>> rsp = new Gson().fromJson(response, new TypeToken<ApiResponse<ArrayList<WJSStatusBean>>>() {
                     }.getType());
                     if (rsp != null && rsp.isSuccess()) {
-                        wjsStatusBeanList = rsp.getData();
+                        List<WJSStatusBean> wjsStatusBeanList = rsp.getData();
                         if (wjsStatusBeanList != null) {
                             mAdapter.setDatas(wjsStatusBeanList);
                         }
@@ -164,6 +165,11 @@ public class WJSApplyStatusActivity extends BaseActivity implements SwipeRefresh
 
     @Override
     public void onRefresh() {
-       getData(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wjsStatusContainer.setRefreshing(false);
+            }
+        }, 2000);
     }
 }
